@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>⚡ Dark Power — Social & Chat</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090d;
+  --card:#12121a;
+  --card2:#181824;
+  --line:#272738;
+  --tx:#f2f2f7;
+  --mut:#8e8ea6;
+  --ac:#ffd700;
+  --ac2:#ffe600;
+  --ac-tx:#09090d;
+  --danger:#f43f5e;
+  --warn:#f59e0b;
+  --ok:#10b981;
+  --r:16px;
+}
+[data-theme=light]{
+  --bg:#f4f4f9;
+  --card:#ffffff;
+  --card2:#ececf4;
+  --line:#dcdce8;
+  --tx:#111118;
+  --mut:#64647a;
+  --ac:#d9a400;
+  --ac2:#b8860b;
+  --ac-tx:#ffffff;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Cairo,system-ui,sans-serif;line-height:1.6}
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px}
+.bar{display:flex;gap:8px;align-items:center;max-width:900px;margin:auto;flex-wrap:wrap}
+.logo{margin:0;font-size:1.4rem;font-weight:800}
+.logo span{color:var(--ac)}
+input,textarea,select{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;width:100%}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--ac);border-color:transparent}
+#search{flex:1;min-width:130px;width:auto}
+button{font:inherit;cursor:pointer;transition:transform .1s,opacity .15s}
+button:active{transform:scale(0.97)}
+.ghost{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:7px 12px}
+.ghost:hover{border-color:var(--ac)}
+.btn{background:linear-gradient(90deg,var(--ac),var(--ac2));color:var(--ac-tx);border:0;border-radius:12px;padding:9px 16px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn.ghost{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
+.btn.danger{background:var(--danger);color:#fff}
+.btn.sm{padding:5px 12px;font-size:.85rem;border-radius:99px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.nav-tabs{display:flex;gap:8px;max-width:900px;margin:10px auto 0;overflow-x:auto;padding-bottom:4px}
+.tab-btn{flex:1;min-width:110px;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.tab-btn.on{background:var(--ac);color:var(--ac-tx);border-color:var(--ac)}
+.badge-cnt{background:var(--danger);color:#fff;font-size:.72rem;border-radius:99px;padding:0 6px;font-weight:800}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0;max-width:900px;margin:auto;scrollbar-width:none}
+.chip{white-space:nowrap;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:99px;padding:4px 14px;font-weight:600}
+.chip.on{background:var(--ac);color:var(--ac-tx);border-color:var(--ac);font-weight:700}
+main{max-width:900px;margin:16px auto;padding:0 14px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:14px}
+.composer .chips{padding-top:0}
+.composer textarea{margin:6px 0 10px;resize:vertical}
+#fileBox{margin-bottom:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#preview{width:100%}
+#preview img{max-width:100%;max-height:220px;border-radius:12px}
+#preview audio,.media audio{width:100%}
+.progress{height:6px;background:var(--line);border-radius:9px;margin-bottom:10px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
+.muted{color:var(--mut);font-size:.85rem}
+.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px}
+.user-row{display:flex;align-items:center;gap:10px}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--ac);color:#000;font-weight:800;display:grid;place-items:center;flex-shrink:0}
+.who{font-weight:700}
+.badge{font-size:.75rem;color:var(--ac);border:1px solid var(--line);border-radius:99px;padding:0 8px;margin-inline-start:6px}
+.body{white-space:pre-wrap;word-break:break-word;margin:8px 0 10px}
+.media img{width:100%;max-height:450px;object-fit:contain;background:#000;border-radius:12px;display:block}
+.media iframe{width:100%;height:420px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.file{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--card2);padding:8px 12px;border-radius:12px}
+.file a,.file button{color:var(--ac);text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:4px 12px;background:transparent}
+.acts{display:flex;gap:10px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;flex-wrap:wrap}
+.acts button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:99px;padding:4px 14px;font-size:.88rem}
+.acts .liked{color:#f43f5e;border-color:#f43f5e;font-weight:700}
+.comments{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.cm{background:var(--card2);border-radius:12px;padding:6px 12px;margin-bottom:6px;font-size:.92rem}
+.cm b{color:var(--ac)}
+.cform{display:flex;gap:6px;margin-top:6px}
+.empty{text-align:center;color:var(--mut);padding:40px 14px}
+.authwrap{min-height:100vh;display:grid;place-items:center;padding:16px}
+.authcard{width:min(100%,410px);display:grid;gap:10px;text-align:center}
+.authcard .chips{justify-content:center}
+.err{color:var(--danger);font-size:.9rem;min-height:1.4em}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:grid;place-items:center;padding:16px;z-index:99}
+.modal-box{width:min(100%,480px);display:grid;gap:10px;text-align:right;max-height:90vh;overflow-y:auto}
+.rules-box{background:var(--card2);border:1px solid var(--ac);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:.88rem;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.strike-badge{background:rgba(244,63,94,0.15);color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:2px 10px;font-weight:700;font-size:.8rem}
+.law-list{margin:0;padding-inline-start:20px;line-height:1.8;font-size:.92rem}
+.law-list li{margin-bottom:6px}
+
+/* قسم الأصدقاء والمحادثات الخاصة والكروبات */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.user-item{display:flex;justify-content:space-between;align-items:center;background:var(--card2);padding:10px 12px;border-radius:12px;margin-bottom:8px;border:1px solid var(--line);gap:8px;flex-wrap:wrap}
+.chat-layout{display:grid;grid-template-columns:280px 1fr;gap:14px;height:72vh;min-height:480px}
+.chat-side{background:var(--card);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+.chat-side-head{padding:12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:6px}
+.chat-list{flex:1;overflow-y:auto;padding:8px}
+.chat-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;cursor:pointer;margin-bottom:6px;border:1px solid transparent;transition:background .15s}
+.chat-item:hover{background:var(--card2)}
+.chat-item.active{background:color-mix(in srgb,var(--ac) 15%,var(--card2));border-color:var(--ac)}
+.chat-main{background:var(--card);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+.chat-header{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--card2)}
+.msg-list{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:78%;padding:8px 14px;border-radius:16px;background:var(--card2);border:1px solid var(--line);align-self:flex-start;position:relative}
+.msg.me{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#000;border-color:transparent;align-self:flex-end;font-weight:600}
+.msg .m-sender{font-size:.75rem;font-weight:800;color:var(--ac);margin-bottom:2px}
+.msg.me .m-sender{color:#222}
+.msg .m-time{font-size:.68rem;opacity:.7;margin-top:4px;text-align:left}
+.msg img{max-width:220px;border-radius:10px;display:block;margin-top:4px}
+.msg audio{max-width:220px;height:36px;margin-top:4px}
+.chat-input-bar{padding:10px;border-top:1px solid var(--line);display:flex;gap:6px;align-items:center;background:var(--card2);flex-wrap:wrap}
+.chat-input-bar input[type="text"]{flex:1;min-width:140px}
+.chk-list{max-height:200px;overflow-y:auto;display:grid;gap:6px;padding:6px;background:var(--card2);border-radius:12px;border:1px solid var(--line)}
+.chk-row{display:flex;align-items:center;gap:8px;padding:6px;cursor:pointer}
+.chk-row input{width:auto}
+
+@media(max-width:700px){
+  .grid-2{grid-template-columns:1fr}
+  .chat-layout{grid-template-columns:1fr;height:auto}
+  .chat-side{max-height:240px}
+  .chat-main{height:62vh}
+}
+</style>
+</head>
+<body>
+
+<!-- نافذة القوانين (Les Lois) ومكافحة السب والشتم -->
+<div id="lawsModal" class="modal" hidden>
+  <div class="card modal-box">
+    <h3 style="margin:0;color:var(--ac)">⚖️ قوانين مجتمع Dark Power (احترام متبادل)</h3>
+    <p class="muted" style="margin:0">هاد المنصة تجمعنا كأصدقاء وإخوة، وعليها خاصنا كاملين نحترمو هاد القوانين:</p>
+    <ul class="law-list">
+      <li>🚫 <b>ممنوع السب، الشتم، أو الكلام الساقط (تخصار الهضرة)</b> سواء فـ المنشورات، التعليقات، أو فـ الشات والـ كروبات.</li>
+      <li>🛡️ <b>فلتر ذكي أوتوماتيكي (Anti-Insult System):</b> الموقع فيه نظام مراقبة فوري؛ أي رسالة أو منشور فيه سب أو شتم غادي يتبلوكا وما غاديش يتنشر.</li>
+      <li>⚠️ <b>نظام الإنذارات (3 Strikes = Ban):</b>
+        <br>— المخالفة 1 و 2: كيتسجل عليك إنذار (Strike).
+        <br>— المخالفة 3: <b>حظر تلقائي من النشر والدردشة لمدة 15 دقيقة</b> (أو حظر الحساب).
+      </li>
+      <li>🤝 <b>الاحترام المتبادل:</b> ممنوع التنمر، التشهير، أو نشر شي حاجة تضر الأصدقاء.</li>
+    </ul>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button type="button" class="btn" id="acceptLawsBtn">فهمت وموافق على القوانين ✅</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة إنشاء مجموعة (Group) جديدة -->
+<div id="grpModal" class="modal" hidden>
+  <div class="card modal-box">
+    <h3 style="margin:0;color:var(--ac)">👥 إنشاء كروب جديد مع الدراري</h3>
+    <input id="grpName" placeholder="اسم الكروب (مثلاً: الدراري ديال لافاك ⚡)">
+    <label class="muted">اختار صحابك لي بغيتي تزيدهم فالكروب:</label>
+    <div id="grpFriendsList" class="chk-list"></div>
+    <div id="grpErr" class="err"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button type="button" class="ghost" id="closeGrpBtn">إلغاء</button>
+      <button type="button" class="btn" id="createGrpBtn">إنشاء الكروب ⚡</button>
+    </div>
+  </div>
+</div>
+
+<!-- شاشة الدخول -->
+<section id="auth" class="authwrap">
+  <form class="card authcard" id="authForm">
+    <h1 class="logo">⚡ Dark <span>Power</span></h1>
+    <p class="muted" style="margin:0">شبكة التواصل والدردشة الخاصة بالأصدقاء</p>
+    <div class="chips">
+      <button type="button" class="chip on" data-m="login">دخول</button>
+      <button type="button" class="chip" data-m="signup">حساب جديد</button>
+    </div>
+    <input id="u" dir="ltr" autocomplete="username" placeholder="Username (e.g. taoufik)">
+    <input id="pw" dir="ltr" type="password" autocomplete="current-password" placeholder="Password (6+ chars)">
+    <label class="muted" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:.82rem">
+      <input type="checkbox" id="agreeChk" checked style="width:auto"> أوافق على <a href="#" id="showLawsLink" style="color:var(--ac)">قوانين الاحترام وعدم السب</a>
+    </label>
+    <div id="authErr" class="err"></div>
+    <button type="submit" class="btn" id="authBtn">دخول إلى المنصة ⚡</button>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button type="button" class="ghost themeBtn">🌓 تبديل المظهر</button>
+      <button type="button" class="ghost" id="openLawsBtn">⚖️ قوانين المنصة</button>
+    </div>
+  </form>
+</section>
+
+<!-- التطبيق الرئيسي -->
+<div id="appRoot" hidden>
+  <header class="top">
+    <div class="bar">
+      <h1 class="logo">⚡ Dark <span>Power</span></h1>
+      <input id="search" type="search" placeholder="ابحث في المنشورات…">
+      <span class="muted">👤 <b id="nameLbl"></b></span>
+      <span id="strikeLbl" class="strike-badge" title="عدد الإنذارات بسبب مخالفة القوانين">🛡️ 0/3 إنذار</span>
+      <button type="button" class="ghost" id="topLawsBtn" title="قوانين المنصة">⚖️</button>
+      <button type="button" class="ghost themeBtn" title="تبديل الوضع">🌓</button>
+      <button type="button" id="outBtn" class="ghost" title="خروج">🚪</button>
+    </div>
+    <!-- أزرار التنقل -->
+    <div class="nav-tabs" id="mainTabs">
+      <button type="button" class="tab-btn on" data-tab="feed">🏠 المنشورات</button>
+      <button type="button" class="tab-btn" data-tab="friends">👥 الأصدقاء <span id="reqBadge" class="badge-cnt" hidden>0</span></button>
+      <button type="button" class="tab-btn" data-tab="chat">💬 الخواص والكروبات</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- شريط التذكير بالقوانين والاحترام -->
+    <div class="rules-box">
+      <span>⚖️ <b>قانون المنصة:</b> ممنوع السب والشتم أو الكلام الساقط. أي مخالفة كتعطي إنذار أوتوماتيكي (3 إنذارات = حظر مؤقت 🚫).</span>
+      <button type="button" class="ghost" id="bannerLawsBtn" style="padding:3px 10px;font-size:.8rem">اقرأ القوانين</button>
+    </div>
+
+    <!-- 1. قسم المنشورات العام -->
+    <div id="tab-feed">
+      <nav class="chips" id="filters" style="margin-bottom:10px">
+        <button type="button" class="chip on" data-f="all">الكل</button>
+        <button type="button" class="chip" data-f="text">📝 نصوص</button>
+        <button type="button" class="chip" data-f="image">🖼️ صور</button>
+        <button type="button" class="chip" data-f="audio">🎙️ صوتيات</button>
+        <button type="button" class="chip" data-f="pdf">📄 ملفات PDF</button>
+      </nav>
+
+      <section class="card composer">
+        <div class="chips" id="types">
+          <button type="button" class="chip on" data-t="text">📝 نص</button>
+          <button type="button" class="chip" data-t="image">🖼️ صورة</button>
+          <button type="button" class="chip" data-t="audio">🎙️ أوديو</button>
+          <button type="button" class="chip" data-t="pdf">📄 PDF</button>
+        </div>
+        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي مع الدراري؟ (مع احترام القوانين ⚡)"></textarea>
+        <div id="fileBox" hidden>
+          <label class="btn ghost" for="file">📎 اختر ملفًا</label>
+          <input id="file" type="file" hidden>
+          <button type="button" id="recBtn" class="btn ghost" hidden>⏺️ تسجيل أوديو</button>
+          <span id="fileName" class="muted"></span>
+          <div id="preview"></div>
+        </div>
+        <div class="progress" id="prog" hidden><i id="progBar"></i></div>
+        <button type="button" id="post" class="btn">نشر المنشور ⚡</button>
+      </section>
+
+      <section id="feed"></section>
+    </div>
+
+    <!-- 2. قسم إضافة الأصدقاء وطلبات الصداقة -->
+    <div id="tab-friends" hidden>
+      <div class="card">
+        <h3 style="margin:0 0 8px;color:var(--ac)">➕ إضافة صديق بالاسم (Username)</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input id="addFriendInp" dir="ltr" placeholder="اكتب اسم صاحبك (مثلاً: amine)" style="flex:1;min-width:180px">
+          <button type="button" id="addFriendBtn" class="btn">إرسال طلب صداقة ➕</button>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3 style="margin:0 0 10px;color:var(--ac)">🔔 طلبات الصداقة الواردة</h3>
+          <div id="incomingReqs"></div>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 10px;color:var(--ac)">🤝 قائمة أصدقائي</h3>
+          <div id="myFriendsList"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 10px;color:var(--ac)">🌍 كاع الدراري المسجلين فالموقع</h3>
+        <div id="allUsersList"></div>
+      </div>
+    </div>
+
+    <!-- 3. قسم الدردشة الخاصة (Privé) والكروبات (Groups) -->
+    <div id="tab-chat" hidden>
+      <div class="chat-layout">
+        <aside class="chat-side">
+          <div class="chat-side-head">
+            <b>💬 المحادثات</b>
+            <button type="button" id="openGrpBtn" class="btn sm">➕ كروب جديد</button>
+          </div>
+          <div id="roomsList" class="chat-list"></div>
+        </aside>
+
+        <section class="chat-main">
+          <div class="chat-header">
+            <div class="user-row">
+              <div class="avatar" id="chatAvatar">💬</div>
+              <div>
+                <div class="who" id="chatTitle">اختار صديق أو كروب للهضرة</div>
+                <div class="muted" id="chatSub">رسائل خاصة ومباشرة (Real-Time)</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="msgList" class="msg-list">
+            <div class="empty">👈 كليكي على شي صديق أو كروب من القائمة باش تبداو الهضرة فالـ Privé!</div>
+          </div>
+
+          <form id="chatForm" class="chat-input-bar" hidden>
+            <label class="ghost" for="chatImgInp" title="إرسال صورة" style="cursor:pointer;padding:6px 10px">🖼️</label>
+            <input id="chatImgInp" type="file" accept="image/*" hidden>
+            <button type="button" id="chatVocalBtn" class="ghost" title="تسجيل أوديو" style="padding:6px 10px">🎙️</button>
+            <input id="chatMsgInp" type="text" placeholder="كتب ميساج محترم لصاحبك أو للكروب…" autocomplete="off">
+            <button type="submit" class="btn">إرسال ➤</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- مكتبات Firebase الرسمية -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+<script>
+/* =================================================================
+   ✅ إعدادات مشروعك من Firebase مدمجة وجاهزة (بلا ما يعدل حتى واحد والو)
+   ================================================================= */
+const firebaseConfig = {
+  apiKey: "AIzaSyCTJ44jjKQg6Ph_Gv9l8WQjgopNE0TXLC4",
+  authDomain: "power-dark-v.firebaseapp.com",
+  projectId: "power-dark-v",
+  storageBucket: "power-dark-v.firebasestorage.app",
+  messagingSenderId: "81439980350",
+  appId: "1:81439980350:web:5fccbff40da05cc1beca6f",
+  measurementId: "G-MXMD6QMLZQ"
+};
+/* ================================================================= */
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const LS = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+
+// =====================================================
+// ⚖️ نظام القوانين ومكافحة السب والشتم (Anti-Insult & Strikes)
+// =====================================================
+const BAD_WORDS = [
+  // كلمات نابية بالدارجة والعربية والفرنسية والإنجليزية
+  "قحبة","قحاب","زامل","زوامل","حمار","كلب","حيوان","مكلخ","تافه","حقير","لعنة","ملعون",
+  "نيك","ينيك","منيوك","قواد","تقود","سير تقود","تبرهيش","ولد القحبة","ولد الحرام","بنت القحبة",
+  "شرموطة","عرص","خول","متناك","كس","زب","زبي","طيز","عير",
+  "9a7ba","9ahba","zamel","zaml","zwaml","mkelkh","9wad","t9awed","sir t9awed","wld l9a7ba","weld l9ahba","nik","zeb","zebi","tabon","taboun",
+  "fuck","fucking","bitch","asshole","motherfucker","dick","pussy","whore","slut","bastard",
+  "pute","putain","connard","salope","enculé","encule","merde","batard","bâtard","ntm","fdp"
+];
+
+function containsInsult(text) {
+  if (!text) return false;
+  const clean = text.toLowerCase().replace(/[._\-*+~`'"]/g, " ");
+  for (const w of BAD_WORDS) {
+    // مطابقة الكلمة كاملة أو واضحة وسط الجملة
+    const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const reg = new RegExp(`(^|\\s|[^a-zA-Z0-9\u0600-\u06FF])${escaped}($|\\s|[^a-zA-Z0-9\u0600-\u06FF])`, "i");
+    if (reg.test(clean)) return w;
+  }
+  return false;
+}
+
+// التحقق من حالة الحظر أو تسجيل مخالفة جديدة على الشخص اللي كيسب
+async function checkModerationAndStrike(text) {
+  // 1. فحص واش الشخص محظور حالياً
+  const bannedUntil = myUserDoc.bannedUntil || Number(LS("dp_ban_until") || 0);
+  if (Date.now() < bannedUntil) {
+    const minsLeft = Math.ceil((bannedUntil - Date.now()) / 60000);
+    alert(`🚫 حسابك موقوف مؤقتاً عن النشر والدردشة بسبب مخالفة القوانين (السب/الشتم).\nالوقت المتبقي لفك الحظر: ${minsLeft} دقيقة.`);
+    return false;
+  }
+
+  // 2. فحص النص من السب والشتم
+  const bad = containsInsult(text);
+  if (!bad) return true; // النص نقي ومحترم
+
+  // 3. تسجيل إنذار (Strike)
+  let strikes = (myUserDoc.strikes || 0) + 1;
+  let newBan = 0;
+
+  if (strikes >= 3) {
+    newBan = Date.now() + 15 * 60 * 1000; // حظر 15 دقيقة بعد 3 إنذارات
+    LS("dp_ban_until", String(newBan));
+  }
+
+  try {
+    if (ready && uid) {
+      await db.collection("users").doc(uid).set({
+        strikes: strikes,
+        bannedUntil: newBan || myUserDoc.bannedUntil || 0
+      }, { merge: true });
+    }
+  } catch (e) {}
+
+  myUserDoc.strikes = strikes;
+  if (newBan) myUserDoc.bannedUntil = newBan;
+  updateStrikeUI();
+
+  if (strikes >= 3) {
+    alert(`🚫 تم حظرك من النشر والدردشة لمدة 15 دقيقة!\nالسبب: وصلتي لـ 3 إنذارات بسبب استعمال كلام غير لائق أو سب.`);
+  } else {
+    alert(`⚠️ تحذير قانوني (الإنذار رقم ${strikes} من 3)!\nممنوع السب أو الكلام الساقط فـ المنصة. راه بقى ليك ${3 - strikes} إنذار قبل الحظر التلقائي!`);
+  }
+  return false;
+}
+
+function updateStrikeUI() {
+  const s = myUserDoc.strikes || 0;
+  const lbl = $("#strikeLbl");
+  if (!lbl) return;
+  lbl.textContent = `🛡️ ${s}/3 إنذار`;
+  lbl.style.background = s > 0 ? "rgba(244,63,94,0.22)" : "rgba(16,185,129,0.15)";
+  lbl.style.color = s > 0 ? "var(--danger)" : "var(--ok)";
+  lbl.style.borderColor = s > 0 ? "var(--danger)" : "var(--ok)";
+}
+
+// نافذة القوانين
+const showLaws = (e) => { if (e) e.preventDefault(); $("#lawsModal").hidden = false; };
+$("#openLawsBtn").onclick = showLaws;
+$("#topLawsBtn").onclick = showLaws;
+$("#bannerLawsBtn").onclick = showLaws;
+$("#showLawsLink").onclick = showLaws;
+$("#acceptLawsBtn").onclick = () => { $("#lawsModal").hidden = true; };
+
+// تحويل صورة صغيرة أو أوديو لـ Base64 باش يخدم حتى بلا Firebase Storage
+function fileToDataUrl(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ضغط الصور تلقائياً باش تتسجل خفيفة وسريعة فـ Firestore
+function compressImage(file, maxW = 900, quality = 0.72) {
+  return new Promise((res) => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const c = document.createElement("canvas");
+      c.width = img.width * scale;
+      c.height = img.height * scale;
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      res(c.toDataURL("image/jpeg", quality));
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+// تبديل المظهر
+document.documentElement.dataset.theme = LS("dp_theme") || "dark";
+document.querySelectorAll(".themeBtn").forEach(b => b.onclick = () => {
+  const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = t; LS("dp_theme", t);
+});
+
+// تهيئة Firebase مباشرة
+let auth = null, db = null, storage = null, ready = false;
+try {
+  firebase.initializeApp(firebaseConfig);
+  auth = firebase.auth();
+  db = firebase.firestore();
+  storage = firebase.storage();
+  ready = true;
+} catch (e) {
+  console.error("Firebase init error:", e);
+}
+
+// التنقل بين الأقسام
+let currentTab = "feed";
+function switchTab(tabName) {
+  currentTab = tabName;
+  document.querySelectorAll("#mainTabs .tab-btn").forEach(b => b.classList.toggle("on", b.dataset.tab === tabName));
+  $("#tab-feed").hidden = tabName !== "feed";
+  $("#tab-friends").hidden = tabName !== "friends";
+  $("#tab-chat").hidden = tabName !== "chat";
+}
+$("#mainTabs").onclick = e => {
+  const b = e.target.closest("[data-tab]");
+  if (b) switchTab(b.dataset.tab);
+};
+
+// ---- تسجيل الدخول وإنشاء الحساب ----
+let mode = "login", uid = "", name = "", unsubPosts = null, unsubUsers = null, unsubRooms = null, unsubMsgs = null;
+let allUsers = [], myUserDoc = { friends: [], requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0 }, rooms = [], activeRoom = null;
+
+document.querySelectorAll("[data-m]").forEach(b => b.onclick = () => {
+  mode = b.dataset.m;
+  document.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b));
+  $("#authBtn").textContent = mode === "login" ? "دخول إلى المنصة ⚡" : "إنشاء حساب جديد ⚡";
+  $("#authErr").textContent = "";
+});
+
+const AUTH_ERR = {
+  "auth/email-already-in-use": "هاد الاسم واخدو شي واحد من الدراري، اختار اسم آخر",
+  "auth/invalid-credential": "الاسم أو كلمة السر غالطة (إلا يلاه أول مرة كليكي على حساب جديد الفوق)",
+  "auth/user-not-found": "هاد الحساب ما كاينش، كليكي على (حساب جديد) أولاً",
+  "auth/wrong-password": "كلمة السر غالطة",
+  "auth/weak-password": "كلمة السر خاص تكون فيها 6 حروف أو أرقام على الأقل",
+  "auth/operation-not-allowed": "خاصك تفعل Email/Password في Firebase Authentication"
+};
+
+$("#authForm").onsubmit = async e => {
+  e.preventDefault();
+  const err = $("#authErr"); err.textContent = "";
+  if (!$("#agreeChk").checked) return err.textContent = "خاصك توافق على قوانين الاحترام وعدم السب أولاً!";
+  const u = $("#u").value.trim().toLowerCase();
+  const p = $("#pw").value;
+  if (!/^[a-z0-9_]{3,20}$/.test(u)) return err.textContent = "الاسم خاص يكون بالحروف الإنجليزية أو أرقام (من 3 لـ 20 حرف)";
+  if (containsInsult(u)) return err.textContent = "ممنوع اختيار اسم مستخدم فيه كلام غير لائق!";
+  if (p.length < 6) return err.textContent = "كلمة السر على الأقل 6 حروف أو أرقام";
+
+  const mail = u + "@darkpower.app";
+  $("#authBtn").disabled = true;
+  try {
+    if (mode === "signup") {
+      const c = await auth.createUserWithEmailAndPassword(mail, p);
+      await c.user.updateProfile({ displayName: u });
+      await db.collection("users").doc(c.user.uid).set({
+        uid: c.user.uid, username: u, friends: [], requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    } else {
+      await auth.signInWithEmailAndPassword(mail, p);
+    }
+  } catch (x) {
+    err.textContent = AUTH_ERR[x.code] || ("خطأ: " + x.message);
+  }
+  $("#authBtn").disabled = false;
+};
+
+$("#outBtn").onclick = () => auth && auth.signOut();
+
+if (auth) {
+  auth.onAuthStateChanged(async user => {
+    $("#auth").hidden = !!user;
+    $("#appRoot").hidden = !user;
+    if (user) {
+      uid = user.uid;
+      name = (user.displayName || user.email.split("@")[0]).toLowerCase();
+      $("#nameLbl").textContent = name;
+      try {
+        const uRef = db.collection("users").doc(uid);
+        const snap = await uRef.get();
+        if (!snap.exists) {
+          await uRef.set({ uid, username: name, friends: [], requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0 });
+        }
+      } catch (e) {}
+      listenAll();
+    } else {
+      unsubPosts?.(); unsubUsers?.(); unsubRooms?.(); unsubMsgs?.();
+      posts = []; allUsers = []; rooms = []; activeRoom = null; uid = ""; $("#pw").value = "";
+    }
+  });
+}
+
+// =====================================================
+// 👥 نظام الأصدقاء (Add Friend & Requests)
+// =====================================================
+async function sendFriendRequest(targetUser) {
+  if (!targetUser || targetUser.uid === uid) return alert("ما يمكنش تزيد راسك!");
+  if ((myUserDoc.friends || []).includes(targetUser.uid)) return alert("نتوما ديجا أصدقاء!");
+  await db.collection("users").doc(targetUser.uid).update({
+    requestsIn: firebase.firestore.FieldValue.arrayUnion(uid)
+  });
+  await db.collection("users").doc(uid).update({
+    requestsOut: firebase.firestore.FieldValue.arrayUnion(targetUser.uid)
+  });
+  alert("تم إرسال طلب الصداقة لـ " + targetUser.username + " ✅");
+}
+
+async function acceptFriend(fromUid) {
+  await db.collection("users").doc(uid).update({
+    requestsIn: firebase.firestore.FieldValue.arrayRemove(fromUid),
+    friends: firebase.firestore.FieldValue.arrayUnion(fromUid)
+  });
+  await db.collection("users").doc(fromUid).update({
+    requestsOut: firebase.firestore.FieldValue.arrayRemove(uid),
+    friends: firebase.firestore.FieldValue.arrayUnion(uid)
+  });
+}
+
+async function rejectFriend(fromUid) {
+  await db.collection("users").doc(uid).update({
+    requestsIn: firebase.firestore.FieldValue.arrayRemove(fromUid)
+  });
+  await db.collection("users").doc(fromUid).update({
+    requestsOut: firebase.firestore.FieldValue.arrayRemove(uid)
+  });
+}
+
+$("#addFriendBtn").onclick = () => {
+  const q = $("#addFriendInp").value.trim().toLowerCase();
+  if (!q) return;
+  const found = allUsers.find(u => u.username === q);
+  if (!found) return alert("ما لقيناش شي مستخدم بهاد السمية: " + q);
+  sendFriendRequest(found);
+  $("#addFriendInp").value = "";
+};
+
+function renderFriendsTab() {
+  const reqsIn = myUserDoc.requestsIn || [];
+  const friends = myUserDoc.friends || [];
+  const reqsOut = myUserDoc.requestsOut || [];
+
+  const badge = $("#reqBadge");
+  badge.textContent = reqsIn.length;
+  badge.hidden = reqsIn.length === 0;
+
+  const inHtml = reqsIn.map(id => {
+    const u = allUsers.find(x => x.uid === id) || { uid: id, username: "مستخدم" };
+    return `<div class="user-item">
+      <div class="user-row"><div class="avatar">${esc(u.username[0].toUpperCase())}</div><b>${esc(u.username)}</b></div>
+      <div style="display:flex;gap:6px">
+        <button type="button" class="btn sm" data-f-act="accept" data-uid="${u.uid}">✅ قبول</button>
+        <button type="button" class="ghost" data-f-act="reject" data-uid="${u.uid}">✖</button>
+      </div>
+    </div>`;
+  }).join("");
+  $("#incomingReqs").innerHTML = inHtml || `<div class="muted">ما عندك حتى طلب صداقة جديد دابا.</div>`;
+
+  const frHtml = friends.map(id => {
+    const u = allUsers.find(x => x.uid === id) || { uid: id, username: "صديق" };
+    return `<div class="user-item">
+      <div class="user-row"><div class="avatar">${esc(u.username[0].toUpperCase())}</div><b>${esc(u.username)}</b></div>
+      <button type="button" class="btn sm" data-f-act="dm" data-uid="${u.uid}">💬 هضر فـ Privé</button>
+    </div>`;
+  }).join("");
+  $("#myFriendsList").innerHTML = frHtml || `<div class="muted">مازال ما زدتي حتى صديق. ضيف صحابك من التحت!</div>`;
+
+  const others = allUsers.filter(u => u.uid !== uid);
+  $("#allUsersList").innerHTML = others.length ? others.map(u => {
+    const isFr = friends.includes(u.uid);
+    const isSent = reqsOut.includes(u.uid);
+    let actBtn = `<button type="button" class="btn sm" data-f-act="add" data-uid="${u.uid}">➕ إضافة صديق</button>`;
+    if (isFr) actBtn = `<button type="button" class="btn sm" data-f-act="dm" data-uid="${u.uid}">💬 هضر فـ Privé</button>`;
+    else if (isSent) actBtn = `<span class="muted">⏳ تم إرسال الطلب</span>`;
+    return `<div class="user-item">
+      <div class="user-row"><div class="avatar">${esc(u.username[0].toUpperCase())}</div><b>${esc(u.username)}</b></div>
+      ${actBtn}
+    </div>`;
+  }).join("") : `<div class="muted">غير نتا لي مسجل دابا، صيفط الليان لصحابك باش يتسجلو!</div>`;
+}
+
+$("#tab-friends").onclick = e => {
+  const btn = e.target.closest("[data-f-act]");
+  if (!btn) return;
+  const act = btn.dataset.fAct, targetUid = btn.dataset.uid;
+  const targetUser = allUsers.find(u => u.uid === targetUid);
+  if (act === "add" && targetUser) sendFriendRequest(targetUser);
+  if (act === "accept") acceptFriend(targetUid);
+  if (act === "reject") rejectFriend(targetUid);
+  if (act === "dm" && targetUser) openDirectChat(targetUser);
+};
+
+// =====================================================
+// 💬 نظام الدردشة الخاصة (Privé) والكروبات (Groups)
+// =====================================================
+async function openDirectChat(otherUser) {
+  switchTab("chat");
+  const pairId = "dm_" + [uid, otherUser.uid].sort().join("_");
+  const rRef = db.collection("rooms").doc(pairId);
+  const snap = await rRef.get();
+  if (!snap.exists) {
+    await rRef.set({
+      type: "dm",
+      members: [uid, otherUser.uid],
+      memberNames: { [uid]: name, [otherUser.uid]: otherUser.username },
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+  selectRoom(pairId);
+}
+
+$("#openGrpBtn").onclick = () => {
+  const friends = (myUserDoc.friends || []).map(id => allUsers.find(u => u.uid === id)).filter(Boolean);
+  const pool = friends.length ? friends : allUsers.filter(u => u.uid !== uid);
+  $("#grpFriendsList").innerHTML = pool.length ? pool.map(u => `
+    <label class="chk-row">
+      <input type="checkbox" value="${u.uid}" data-uname="${esc(u.username)}">
+      <b>${esc(u.username)}</b>
+    </label>
+  `).join("") : `<div class="muted">ما كاين حتى عضو آخر حالياً.</div>`;
+  $("#grpName").value = "";
+  $("#grpErr").textContent = "";
+  $("#grpModal").hidden = false;
+};
+$("#closeGrpBtn").onclick = () => { $("#grpModal").hidden = true; };
+
+$("#createGrpBtn").onclick = async () => {
+  const title = $("#grpName").value.trim();
+  if (!title) return $("#grpErr").textContent = "كتب سمية للكروب بعدا!";
+  if (!(await checkModerationAndStrike(title))) return;
+  const chks = [...document.querySelectorAll("#grpFriendsList input:checked")];
+  if (!chks.length) return $("#grpErr").textContent = "ختار على الأقل صديق واحد للكروب!";
+
+  const members = [uid, ...chks.map(c => c.value)];
+  const memberNames = { [uid]: name };
+  chks.forEach(c => { memberNames[c.value] = c.dataset.uname; });
+
+  const docRef = await db.collection("rooms").add({
+    type: "group",
+    name: title,
+    owner: uid,
+    members,
+    memberNames,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  $("#grpModal").hidden = true;
+  selectRoom(docRef.id);
+};
+
+function getRoomDisplay(r) {
+  if (r.type === "group") {
+    return { title: r.name || "كروب", sub: `👥 كروب (${(r.members || []).length} أعضاء)`, icon: "👥" };
+  }
+  const otherId = (r.members || []).find(m => m !== uid);
+  const otherUser = allUsers.find(u => u.uid === otherId);
+  const otherName = otherUser?.username || r.memberNames?.[otherId] || "صديق";
+  return { title: otherName, sub: "🔒 محادثة خاصة (Privé)", icon: otherName[0]?.toUpperCase() || "💬" };
+}
+
+function renderRoomsList() {
+  const friends = (myUserDoc.friends || []).map(id => allUsers.find(u => u.uid === id)).filter(Boolean);
+  let html = "";
+
+  if (rooms.length) {
+    html += rooms.map(r => {
+      const info = getRoomDisplay(r);
+      const on = activeRoom?.id === r.id ? "active" : "";
+      return `<div class="chat-item ${on}" data-room="${r.id}">
+        <div class="avatar">${esc(info.icon)}</div>
+        <div style="overflow:hidden">
+          <div class="who">${esc(info.title)}</div>
+          <div class="muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.lastText || info.sub)}</div>
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  const dmFriendIds = new Set(rooms.filter(r => r.type === "dm").flatMap(r => r.members || []));
+  const unchatted = friends.filter(f => !dmFriendIds.has(f.uid));
+  if (unchatted.length) {
+    html += `<div class="muted" style="padding:6px 8px">أصدقاء جاهزين للهضرة:</div>` + unchatted.map(f => `
+      <div class="chat-item" data-dm-uid="${f.uid}">
+        <div class="avatar">${esc(f.username[0].toUpperCase())}</div>
+        <div><div class="who">${esc(f.username)}</div><div class="muted">كليكي باش تهضرو فـ Privé</div></div>
+      </div>
+    `).join("");
+  }
+
+  $("#roomsList").innerHTML = html || `<div class="empty" style="padding:20px 10px">زيد صحابك من قسم (الأصدقاء) أو صاوب كروب باش تبداو الهضرة!</div>`;
+}
+
+$("#roomsList").onclick = e => {
+  const rItem = e.target.closest("[data-room]");
+  if (rItem) return selectRoom(rItem.dataset.room);
+  const dmItem = e.target.closest("[data-dm-uid]");
+  if (dmItem) {
+    const u = allUsers.find(x => x.uid === dmItem.dataset.dmUid);
+    if (u) openDirectChat(u);
+  }
+};
+
+function selectRoom(roomId) {
+  const r = rooms.find(x => x.id === roomId);
+  if (!r) return;
+  activeRoom = r;
+  const info = getRoomDisplay(r);
+  $("#chatAvatar").textContent = info.icon;
+  $("#chatTitle").textContent = info.title;
+  $("#chatSub").textContent = info.sub;
+  $("#chatForm").hidden = false;
+  renderRoomsList();
+
+  unsubMsgs?.();
+  unsubMsgs = db.collection("rooms").doc(roomId).collection("messages")
+    .orderBy("createdAt", "asc")
+    .onSnapshot(snap => {
+      const msgs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      if (!msgs.length) {
+        $("#msgList").innerHTML = `<div class="empty">ابدا الهضرة دابا مع ${esc(info.title)} ⚡</div>`;
+        return;
+      }
+      $("#msgList").innerHTML = msgs.map(m => {
+        const isMe = m.uid === uid;
+        const time = m.createdAt?.toDate ? m.createdAt.toDate().toLocaleTimeString("ar-MA", { hour: "2-digit", minute: "2-digit" }) : "";
+        let media = "";
+        if (m.imgUrl) media = `<img src="${esc(m.imgUrl)}" alt="">`;
+        if (m.audioUrl) media = `<audio controls src="${esc(m.audioUrl)}"></audio>`;
+        return `<div class="msg ${isMe ? "me" : ""}">
+          ${!isMe ? `<div class="m-sender">${esc(m.author)}</div>` : ""}
+          ${m.text ? `<div>${esc(m.text)}</div>` : ""}
+          ${media}
+          <div class="m-time">${time}</div>
+        </div>`;
+      }).join("");
+      $("#msgList").scrollTop = $("#msgList").scrollHeight;
+    });
+}
+
+async function sendChatMessage({ text = "", imgUrl = null, audioUrl = null }) {
+  if (!activeRoom) return;
+  if (!(await checkModerationAndStrike(text))) return;
+  await db.collection("rooms").doc(activeRoom.id).collection("messages").add({
+    text, imgUrl, audioUrl, author: name, uid,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  await db.collection("rooms").doc(activeRoom.id).update({
+    lastText: text || (imgUrl ? "🖼️ صورة" : "🎙️ أوديو"),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+$("#chatForm").onsubmit = async e => {
+  e.preventDefault();
+  const inp = $("#chatMsgInp"), t = inp.value.trim();
+  if (!t) return;
+  inp.value = "";
+  await sendChatMessage({ text: t });
+};
+
+$("#chatImgInp").onchange = async e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const dataUrl = await compressImage(f, 700, 0.7);
+  await sendChatMessage({ imgUrl: dataUrl });
+  e.target.value = "";
+};
+
+let chatRec = null;
+$("#chatVocalBtn").onclick = async () => {
+  if (chatRec && chatRec.state === "recording") return chatRec.stop();
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const chunks = [];
+    chatRec = new MediaRecorder(stream);
+    chatRec.ondataavailable = e => chunks.push(e.data);
+    chatRec.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());
+      const blob = new Blob(chunks, { type: chatRec.mimeType || "audio/webm" });
+      const dataUrl = await fileToDataUrl(blob);
+      $("#chatVocalBtn").textContent = "🎙️";
+      await sendChatMessage({ audioUrl: dataUrl });
+    };
+    chatRec.start();
+    $("#chatVocalBtn").textContent = "⏹️";
+  } catch (e) {
+    alert("عطي صلاحية الميكروفون للمتصفح باش تصيفط أوديو.");
+  }
+};
+
+// =====================================================
+// 🏠 نظام المنشورات العام (Feed)
+// =====================================================
+let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "";
+const ACCEPT = { pdf: "application/pdf", image: "image/*", audio: "audio/*" };
+const MAX = 25 * 1024 * 1024;
+
+function setType(t) {
+  type = t; file = null; stopRec();
+  document.querySelectorAll("#types .chip").forEach(b => b.classList.toggle("on", b.dataset.t === t));
+  $("#fileBox").hidden = (t === "text");
+  $("#recBtn").hidden = (t !== "audio");
+  $("#file").accept = ACCEPT[t] || "";
+  $("#file").value = ""; $("#fileName").textContent = ""; $("#preview").innerHTML = "";
+}
+$("#types").onclick = e => {
+  const b = e.target.closest("[data-t]");
+  if (b) setType(b.dataset.t);
+};
+
+function setFile(f) {
+  if (f.size > MAX) return alert("الحد الأقصى لحجم الملف 25MB");
+  file = f; $("#fileName").textContent = f.name;
+  const url = URL.createObjectURL(f);
+  $("#preview").innerHTML = type === "image" ? `<img src="${url}">` : type === "audio" ? `<audio controls src="${url}"></audio>` : "";
+}
+$("#file").onchange = e => e.target.files[0] && setFile(e.target.files[0]);
+
+function stopRec() { if (recorder && recorder.state !== "inactive") recorder.stop(); }
+$("#recBtn").onclick = async () => {
+  if (recorder && recorder.state === "recording") return recorder.stop();
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const chunks = [];
+    recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.onstop = () => {
+      stream.getTracks().forEach(t => t.stop());
+      const mime = recorder.mimeType || "audio/webm", ext = mime.includes("mp4") ? "m4a" : "webm";
+      setFile(new File([new Blob(chunks, { type: mime })], `vocal-${Date.now()}.${ext}`, { type: mime }));
+      $("#recBtn").textContent = "⏺️ تسجيل أوديو";
+    };
+    recorder.start();
+    $("#recBtn").textContent = "⏹️ إيقاف التسجيل";
+  } catch (e) {
+    alert("خاصك تعطي صلاحية الميكروفون للمتصفح باش تسجل أوديو.");
+  }
+};
+
+// نشر المنشور مع الفحص التلقائي للسب والشتم
+$("#post").onclick = async () => {
+  if (!ready || !uid) return;
+  const text = $("#text").value.trim();
+  if (type === "text" ? !text : !file) return alert(type === "text" ? "كتب شي حاجة بعدا!" : "ختار الملف أو سجل أوديو بعدا!");
+  if (!(await checkModerationAndStrike(text))) return;
+
+  const btn = $("#post"); btn.disabled = true;
+  try {
+    let fileUrl = null, fileName = file?.name || null;
+    if (file) {
+      if (type === "image") {
+        fileUrl = await compressImage(file, 900, 0.72);
+      } else if (type === "audio" && file.size < 750 * 1024) {
+        fileUrl = await fileToDataUrl(file);
+      } else {
+        const r = storage.ref(`uploads/${type}/${Date.now()}_${file.name.replace(/[^\w.\-]/g, "_")}`);
+        $("#prog").hidden = false;
+        await new Promise((ok, no) => {
+          const t = r.put(file);
+          t.on("state_changed", s => $("#progBar").style.width = (s.bytesTransferred / s.totalBytes * 100) + "%", no, ok);
+        });
+        fileUrl = await r.getDownloadURL();
+      }
+    }
+    await db.collection("posts").add({
+      type, text, fileUrl, fileName,
+      author: name, uid,
+      likes: [], comments: [],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    $("#text").value = ""; setType(type);
+  } catch (err) {
+    console.error(err);
+    alert("وقع مشكل فالنشر: تأكد أنك درتي Publish لـ Rules فـ Firestore.");
+  }
+  btn.disabled = false; $("#prog").hidden = true; $("#progBar").style.width = 0;
+};
+
+$("#filters").onclick = e => {
+  const b = e.target.closest("[data-f]");
+  if (!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll("#filters .chip").forEach(x => x.classList.toggle("on", x === b));
+  renderFeed();
+};
+$("#search").oninput = e => { term = e.target.value.trim().toLowerCase(); renderFeed(); };
+
+const BADGE = { text: "نص", pdf: "PDF", image: "صورة", audio: "أوديو" };
+const open = new Set();
+
+function card(p) {
+  const likes = p.likes || [], cms = p.comments || [];
+  const date = p.createdAt?.toDate ? p.createdAt.toDate().toLocaleString("ar-MA", { dateStyle: "medium", timeStyle: "short" }) : "الآن";
+  let media = "";
+  if (p.type === "image" && p.fileUrl) media = `<div class="media"><img loading="lazy" src="${esc(p.fileUrl)}" alt=""></div>`;
+  if (p.type === "audio" && p.fileUrl) media = `<div class="media"><audio controls preload="none" src="${esc(p.fileUrl)}"></audio></div>`;
+  if (p.type === "pdf" && p.fileUrl) media = `<div class="file">📄 <span>${esc(p.fileName)}</span>
+    <button type="button" data-a="pdf">👁️ معاينة</button><a href="${esc(p.fileUrl)}" target="_blank" rel="noopener">⬇️ تحميل</a></div><div class="media" data-pv hidden></div>`;
+
+  const liked = likes.includes(uid);
+  const initial = (p.author || "U")[0].toUpperCase();
+  const isMe = p.uid === uid;
+
+  return `<article class="card" data-id="${p.id}">
+    <div class="head">
+      <div class="user-row">
+        <div class="avatar">${esc(initial)}</div>
+        <div>
+          <span class="who">${esc(p.author)}</span>
+          <span class="badge">${BADGE[p.type] || "نص"}</span>
+          <div class="muted">${date}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        ${!isMe ? `<button type="button" class="ghost" data-a="dm-author" data-uid="${p.uid}" data-uname="${esc(p.author)}" title="هضر معاه فـ Privé">💬 خاص</button>` : ""}
+        ${!isMe ? `<button type="button" class="ghost" data-a="report" title="تبليغ عن سب أو مخالفة">🚩</button>` : ""}
+        ${isMe ? `<button type="button" class="ghost" data-a="del" title="حذف">🗑️</button>` : ""}
+      </div>
+    </div>
+    ${p.text ? `<div class="body">${esc(p.text)}</div>` : ""}${media}
+    <div class="acts">
+      <button type="button" data-a="like" class="${liked ? "liked" : ""}">${liked ? "❤️" : "🤍"} ${likes.length}</button>
+      <button type="button" data-a="cm">💬 تعليقات (${cms.length})</button>
+    </div>
+    <div class="comments" ${open.has(p.id) ? "" : "hidden"}>
+      ${cms.map(c => `<div class="cm"><b>${esc(c.author)}</b>: ${esc(c.text)}</div>`).join("")}
+      <div class="cform"><input data-ci placeholder="كتب تعليق محترم للدراري…" maxlength="500"><button type="button" class="btn" data-a="send">إرسال</button></div>
+    </div>
+  </article>`;
+}
+
+function renderFeed() {
+  const drafts = {};
+  document.querySelectorAll("[data-ci]").forEach(i => { if (i.value) drafts[i.closest("article").dataset.id] = i.value; });
+  const list = posts.filter(p => (filter === "all" || p.type === filter) && (!term || ((p.text || "") + " " + (p.fileName || "") + " " + p.author).toLowerCase().includes(term)));
+  $("#feed").innerHTML = list.length ? list.map(card).join("") : `<div class="empty">ما كاين حتى منشور دابا، كون نتا أول واحد يبارطاجي! ⚡</div>`;
+  for (const id in drafts) { const i = document.querySelector(`[data-id="${id}"] [data-ci]`); if (i) i.value = drafts[id]; }
+}
+
+$("#feed").onclick = async e => {
+  const a = e.target.closest("[data-a]")?.dataset.a; if (!a || !ready) return;
+  if (a === "dm-author") {
+    const btn = e.target.closest("[data-a]");
+    return openDirectChat({ uid: btn.dataset.uid, username: btn.dataset.uname });
+  }
+  const art = e.target.closest("article"), id = art.dataset.id, p = posts.find(x => x.id === id);
+  const d = db.collection("posts").doc(id);
+
+  if (a === "like") {
+    const hasLiked = (p.likes || []).includes(uid);
+    d.update({ likes: hasLiked ? firebase.firestore.FieldValue.arrayRemove(uid) : firebase.firestore.FieldValue.arrayUnion(uid) });
+  }
+  if (a === "cm") {
+    open.has(id) ? open.delete(id) : open.add(id);
+    art.querySelector(".comments").hidden = !open.has(id);
+  }
+  if (a === "report") {
+    if (confirm("واش متأكد باغي تبلغ على هاد المنشور بسبب مخالفة قوانين الاحترام؟")) {
+      const reps = p.reports || [];
+      if (!reps.includes(uid)) {
+        const nextReps = [...reps, uid];
+        if (nextReps.length >= 3) {
+          await d.delete();
+          alert("تم حذف المنشور تلقائياً بعد وصوله لـ 3 تبليغات من الأصدقاء ⚖️");
+        } else {
+          await d.update({ reports: firebase.firestore.FieldValue.arrayUnion(uid) });
+          alert("تم تسجيل التبليغ بنجاح (ملي كيوصل 3 تبليغات كيتمسح المنشور أوتوماتيكياً).");
+        }
+      } else {
+        alert("ديجا بلغتي على هاد المنشور.");
+      }
+    }
+  }
+  if (a === "del" && confirm("واش متأكد باغي تمسح هاد المنشور؟")) d.delete();
+  if (a === "pdf") {
+    const pv = art.querySelector("[data-pv]"); pv.hidden = !pv.hidden;
+    pv.innerHTML = pv.hidden ? "" : `<iframe src="https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(p.fileUrl)}"></iframe>`;
+  }
+  if (a === "send") {
+    const inp = art.querySelector("[data-ci]"), t = inp.value.trim(); if (!t) return;
+    if (!(await checkModerationAndStrike(t))) return;
+    open.add(id); inp.value = "";
+    d.update({ comments: firebase.firestore.FieldValue.arrayUnion({ author: name, text: t, ts: Date.now(), uid }) });
+  }
+};
+$("#feed").onkeydown = e => { if (e.key === "Enter" && e.target.matches("[data-ci]")) e.target.nextElementSibling.click(); };
+
+function listenAll() {
+  unsubPosts?.(); unsubUsers?.(); unsubRooms?.();
+
+  unsubPosts = db.collection("posts").orderBy("createdAt", "desc").onSnapshot(
+    s => { posts = s.docs.map(d => ({ id: d.id, ...d.data() })); renderFeed(); },
+    err => { console.error(err); $("#feed").innerHTML = `<div class="empty">تعذر جلب المنشورات — تأكد من تفعيل Rules فـ Firestore.</div>`; }
+  );
+
+  unsubUsers = db.collection("users").onSnapshot(s => {
+    allUsers = s.docs.map(d => ({ id: d.id, ...d.data() }));
+    myUserDoc = allUsers.find(u => u.uid === uid) || { friends: [], requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0 };
+    updateStrikeUI();
+    renderFriendsTab();
+    renderRoomsList();
+  });
+
+  unsubRooms = db.collection("rooms").where("members", "array-contains", uid).onSnapshot(s => {
+    rooms = s.docs.map(d => ({ id: d.id, ...d.data() }));
+    rooms.sort((a, b) => (b.updatedAt?.seconds || 0) - (a.updatedAt?.seconds || 0));
+    renderRoomsList();
+  });
+}
+
+setType("text");
+</script>
+</body>
+</html>
