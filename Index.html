@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>⚡ Dark Power — Social & Chat</title>
+<title>⚡ Dark Power — Social, Reels & Chat</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -52,7 +52,7 @@ button:active{transform:scale(0.97)}
 .btn.sm{padding:5px 12px;font-size:.85rem;border-radius:99px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .nav-tabs{display:flex;gap:8px;max-width:900px;margin:10px auto 0;overflow-x:auto;padding-bottom:4px}
-.tab-btn{flex:1;min-width:110px;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.tab-btn{flex:1;min-width:105px;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
 .tab-btn.on{background:var(--ac);color:var(--ac-tx);border-color:var(--ac)}
 .badge-cnt{background:var(--danger);color:#fff;font-size:.72rem;border-radius:99px;padding:0 6px;font-weight:800}
 .chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0;max-width:900px;margin:auto;scrollbar-width:none}
@@ -64,7 +64,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .composer textarea{margin:6px 0 10px;resize:vertical}
 #fileBox{margin-bottom:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 #preview{width:100%}
-#preview img{max-width:100%;max-height:220px;border-radius:12px}
+#preview img,#preview video{max-width:100%;max-height:240px;border-radius:12px;background:#000}
 #preview audio,.media audio{width:100%}
 .progress{height:6px;background:var(--line);border-radius:9px;margin-bottom:10px;overflow:hidden}
 .progress i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
@@ -74,8 +74,10 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--ac);color:#000;font-weight:800;display:grid;place-items:center;flex-shrink:0}
 .who{font-weight:700}
 .badge{font-size:.75rem;color:var(--ac);border:1px solid var(--line);border-radius:99px;padding:0 8px;margin-inline-start:6px}
+.admin-tag{font-size:.72rem;background:rgba(255,215,0,0.18);color:var(--ac);border:1px solid var(--ac);border-radius:99px;padding:1px 8px;font-weight:700}
 .body{white-space:pre-wrap;word-break:break-word;margin:8px 0 10px}
-.media img{width:100%;max-height:450px;object-fit:contain;background:#000;border-radius:12px;display:block}
+.media img,.media video{width:100%;max-height:480px;object-fit:contain;background:#000;border-radius:12px;display:block}
+.media video.reel-vid{max-width:340px;max-height:560px;aspect-ratio:9/16;object-fit:cover;margin:0 auto;border:1px solid var(--line)}
 .media iframe{width:100%;height:420px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .file{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--card2);padding:8px 12px;border-radius:12px}
 .file a,.file button{color:var(--ac);text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:4px 12px;background:transparent}
@@ -98,6 +100,16 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .law-list{margin:0;padding-inline-start:20px;line-height:1.8;font-size:.92rem}
 .law-list li{margin-bottom:6px}
 
+/* ستايل الريلز (Reels Vertical Feed) */
+.reels-wrap{display:flex;flex-direction:column;gap:20px;align-items:center;max-height:78vh;overflow-y:auto;scroll-snap-type:y mandatory;padding:8px 0;scrollbar-width:none}
+.reel-item{scroll-snap-align:start;width:min(100%,390px);background:#000;border:1px solid var(--line);border-radius:20px;overflow:hidden;position:relative;flex-shrink:0;display:flex;flex-direction:column}
+.reel-item video{width:100%;height:62vh;max-height:560px;object-fit:cover;background:#000;display:block}
+.reel-overlay{padding:12px;background:var(--card);border-top:1px solid var(--line)}
+
+/* ستايل QR Code */
+.qr-box{text-align:center;background:#fff;padding:16px;border-radius:16px;width:fit-content;margin:6px auto;border:3px solid var(--ac)}
+.qr-box img{display:block;width:210px;height:210px}
+
 /* قسم الأصدقاء والمحادثات الخاصة والكروبات */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .user-item{display:flex;justify-content:space-between;align-items:center;background:var(--card2);padding:10px 12px;border-radius:12px;margin-bottom:8px;border:1px solid var(--line);gap:8px;flex-wrap:wrap}
@@ -109,14 +121,14 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .chat-item:hover{background:var(--card2)}
 .chat-item.active{background:color-mix(in srgb,var(--ac) 15%,var(--card2));border-color:var(--ac)}
 .chat-main{background:var(--card);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
-.chat-header{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--card2)}
+.chat-header{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--card2);gap:8px;flex-wrap:wrap}
 .msg-list{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .msg{max-width:78%;padding:8px 14px;border-radius:16px;background:var(--card2);border:1px solid var(--line);align-self:flex-start;position:relative}
 .msg.me{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#000;border-color:transparent;align-self:flex-end;font-weight:600}
 .msg .m-sender{font-size:.75rem;font-weight:800;color:var(--ac);margin-bottom:2px}
 .msg.me .m-sender{color:#222}
 .msg .m-time{font-size:.68rem;opacity:.7;margin-top:4px;text-align:left}
-.msg img{max-width:220px;border-radius:10px;display:block;margin-top:4px}
+.msg img,.msg video{max-width:230px;border-radius:10px;display:block;margin-top:4px}
 .msg audio{max-width:220px;height:36px;margin-top:4px}
 .chat-input-bar{padding:10px;border-top:1px solid var(--line);display:flex;gap:6px;align-items:center;background:var(--card2);flex-wrap:wrap}
 .chat-input-bar input[type="text"]{flex:1;min-width:140px}
@@ -128,7 +140,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
   .grid-2{grid-template-columns:1fr}
   .chat-layout{grid-template-columns:1fr;height:auto}
   .chat-side{max-height:240px}
-  .chat-main{height:62vh}
+  .chat-main{height:64vh}
 }
 </style>
 </head>
@@ -157,9 +169,9 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 <!-- نافذة إنشاء مجموعة (Group) جديدة -->
 <div id="grpModal" class="modal" hidden>
   <div class="card modal-box">
-    <h3 style="margin:0;color:var(--ac)">👥 إنشاء كروب جديد مع الدراري</h3>
+    <h3 style="margin:0;color:var(--ac)">👥 إنشاء كروب جديد (نتا غادي تكون Admin 👑)</h3>
     <input id="grpName" placeholder="اسم الكروب (مثلاً: الدراري ديال لافاك ⚡)">
-    <label class="muted">اختار صحابك لي بغيتي تزيدهم فالكروب:</label>
+    <label class="muted">اختار صحابك لي بغيتي تزيدهم فالكروب (أو تقدر تعرض عليهم من بعد بـ QR):</label>
     <div id="grpFriendsList" class="chk-list"></div>
     <div id="grpErr" class="err"></div>
     <div style="display:flex;gap:8px;justify-content:flex-end">
@@ -169,11 +181,56 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
   </div>
 </div>
 
+<!-- نافذة إدارة الكروب للأدمن والأعضاء (Group Admin & Info Modal) -->
+<div id="grpInfoModal" class="modal" hidden>
+  <div class="card modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0;color:var(--ac)" id="giTitle">👑 إدارة الكروب</h3>
+      <button type="button" class="ghost" id="closeGiBtn">✖</button>
+    </div>
+    <div id="giRoleBadge" class="muted"></div>
+
+    <!-- إضافة عضو جديد للكروب (خاص بالأدمن) -->
+    <div id="giAdminAddBox" hidden style="border-top:1px solid var(--line);padding-top:10px">
+      <label class="muted">➕ إضافة صديق للكروب (بصفتك Admin):</label>
+      <div style="display:flex;gap:6px;margin-top:6px">
+        <select id="giAddSelect" style="flex:1"></select>
+        <button type="button" class="btn sm" id="giAddMemberBtn">إضافة</button>
+      </div>
+    </div>
+
+    <label class="muted" style="margin-top:6px">👥 أعضاء الكروب:</label>
+    <div id="giMembersList" class="chk-list" style="max-height:240px"></div>
+
+    <div style="display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px">
+      <button type="button" class="btn danger sm" id="giLeaveBtn">🚪 الخروج من الكروب</button>
+      <button type="button" class="btn danger sm" id="giDeleteGrpBtn" hidden>🗑️ حذف الكروب نهائياً (Admin)</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة دعوة الأصدقاء أو الكروب عبر QR Code -->
+<div id="qrModal" class="modal" hidden>
+  <div class="card modal-box" style="text-align:center">
+    <h3 style="margin:0;color:var(--ac)" id="qrTitle">📱 دعوة عبر رمز QR</h3>
+    <p class="muted" id="qrDesc" style="margin:0">خلي صاحبك يسكاني هاد الكود بالكاميرا أو بارطاجي معاه الرابط:</p>
+    <div class="qr-box">
+      <img id="qrImg" src="" alt="QR Code">
+    </div>
+    <input id="qrLinkInp" dir="ltr" readonly style="text-align:center;font-size:.85rem">
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button type="button" class="btn" id="copyQrLinkBtn">📋 نسخ رابط الدعوة</button>
+      <button type="button" class="ghost" id="downloadQrBtn">⬇️ تحميل صورة QR</button>
+      <button type="button" class="ghost" id="closeQrBtn">إغلاق</button>
+    </div>
+  </div>
+</div>
+
 <!-- شاشة الدخول -->
 <section id="auth" class="authwrap">
   <form class="card authcard" id="authForm">
     <h1 class="logo">⚡ Dark <span>Power</span></h1>
-    <p class="muted" style="margin:0">شبكة التواصل والدردشة الخاصة بالأصدقاء</p>
+    <p class="muted" style="margin:0">شبكة التواصل، الريلز والدردشة الخاصة بالأصدقاء</p>
     <div class="chips">
       <button type="button" class="chip on" data-m="login">دخول</button>
       <button type="button" class="chip" data-m="signup">حساب جديد</button>
@@ -200,6 +257,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
       <input id="search" type="search" placeholder="ابحث في المنشورات…">
       <span class="muted">👤 <b id="nameLbl"></b></span>
       <span id="strikeLbl" class="strike-badge" title="عدد الإنذارات بسبب مخالفة القوانين">🛡️ 0/3 إنذار</span>
+      <button type="button" class="ghost" id="myQrTopBtn" title="رمز QR ديالي للدعوة">📱 QR</button>
       <button type="button" class="ghost" id="topLawsBtn" title="قوانين المنصة">⚖️</button>
       <button type="button" class="ghost themeBtn" title="تبديل الوضع">🌓</button>
       <button type="button" id="outBtn" class="ghost" title="خروج">🚪</button>
@@ -207,6 +265,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
     <!-- أزرار التنقل -->
     <div class="nav-tabs" id="mainTabs">
       <button type="button" class="tab-btn on" data-tab="feed">🏠 المنشورات</button>
+      <button type="button" class="tab-btn" data-tab="reels">📱 الريلز (Reels)</button>
       <button type="button" class="tab-btn" data-tab="friends">👥 الأصدقاء <span id="reqBadge" class="badge-cnt" hidden>0</span></button>
       <button type="button" class="tab-btn" data-tab="chat">💬 الخواص والكروبات</button>
     </div>
@@ -225,6 +284,8 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
         <button type="button" class="chip on" data-f="all">الكل</button>
         <button type="button" class="chip" data-f="text">📝 نصوص</button>
         <button type="button" class="chip" data-f="image">🖼️ صور</button>
+        <button type="button" class="chip" data-f="video">🎬 فيديو</button>
+        <button type="button" class="chip" data-f="reel">📱 ريلز</button>
         <button type="button" class="chip" data-f="audio">🎙️ صوتيات</button>
         <button type="button" class="chip" data-f="pdf">📄 ملفات PDF</button>
       </nav>
@@ -233,10 +294,12 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
         <div class="chips" id="types">
           <button type="button" class="chip on" data-t="text">📝 نص</button>
           <button type="button" class="chip" data-t="image">🖼️ صورة</button>
+          <button type="button" class="chip" data-t="video">🎬 فيديو</button>
+          <button type="button" class="chip" data-t="reel">📱 Reel</button>
           <button type="button" class="chip" data-t="audio">🎙️ أوديو</button>
           <button type="button" class="chip" data-t="pdf">📄 PDF</button>
         </div>
-        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي مع الدراري؟ (مع احترام القوانين ⚡)"></textarea>
+        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي مع الدراري؟ (نص، صورة، فيديو أو Reel ⚡)"></textarea>
         <div id="fileBox" hidden>
           <label class="btn ghost" for="file">📎 اختر ملفًا</label>
           <input id="file" type="file" hidden>
@@ -251,10 +314,25 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
       <section id="feed"></section>
     </div>
 
-    <!-- 2. قسم إضافة الأصدقاء وطلبات الصداقة -->
+    <!-- 2. قسم الريلز (Reels Vertical Feed) -->
+    <div id="tab-reels" hidden>
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+        <div>
+          <h3 style="margin:0;color:var(--ac)">📱 ريلز وفيديوهات الدراري (Reels)</h3>
+          <span class="muted">طلع وهبط باش تتفرج فـ كاع الريلز والفيديوهات، أو لوح Reel جديد!</span>
+        </div>
+        <button type="button" class="btn sm" id="goPostReelBtn">➕ نشر Reel جديد</button>
+      </div>
+      <div id="reelsFeed" class="reels-wrap"></div>
+    </div>
+
+    <!-- 3. قسم إضافة الأصدقاء وطلبات الصداقة + دعوة QR -->
     <div id="tab-friends" hidden>
       <div class="card">
-        <h3 style="margin:0 0 8px;color:var(--ac)">➕ إضافة صديق بالاسم (Username)</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+          <h3 style="margin:0;color:var(--ac)">➕ إضافة صديق بالاسم أو عبر رمز QR</h3>
+          <button type="button" id="myQrFriendBtn" class="btn sm">📱 عرض QR ورابط الدعوة ديالي</button>
+        </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <input id="addFriendInp" dir="ltr" placeholder="اكتب اسم صاحبك (مثلاً: amine)" style="flex:1;min-width:180px">
           <button type="button" id="addFriendBtn" class="btn">إرسال طلب صداقة ➕</button>
@@ -278,7 +356,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
       </div>
     </div>
 
-    <!-- 3. قسم الدردشة الخاصة (Privé) والكروبات (Groups) -->
+    <!-- 4. قسم الدردشة الخاصة (Privé) والكروبات (Groups) -->
     <div id="tab-chat" hidden>
       <div class="chat-layout">
         <aside class="chat-side">
@@ -297,6 +375,12 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
                 <div class="who" id="chatTitle">اختار صديق أو كروب للهضرة</div>
                 <div class="muted" id="chatSub">رسائل خاصة ومباشرة (Real-Time)</div>
               </div>
+            </div>
+            <!-- أزرار التحكم فـ الكروب (QR، إدارة الأعضاء/الأدمن، والخروج) -->
+            <div id="grpActionsBar" hidden style="display:flex;gap:6px;flex-wrap:wrap">
+              <button type="button" class="ghost" id="grpQrBtn" title="دعوة صديق للكروب بـ QR" style="padding:5px 10px;font-size:.82rem">📱 دعوة بـ QR</button>
+              <button type="button" class="ghost" id="grpManageBtn" title="الأعضاء وإدارة الأدمن" style="padding:5px 10px;font-size:.82rem">👑 الأعضاء</button>
+              <button type="button" class="btn danger sm" id="grpQuickLeaveBtn" title="الخروج من الكروب">🚪 خروج</button>
             </div>
           </div>
 
@@ -325,7 +409,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 
 <script>
 /* =================================================================
-   ✅ إعدادات مشروعك من Firebase مدمجة وجاهزة (بلا ما يعدل حتى واحد والو)
+   ✅ إعدادات مشروعك من Firebase مدمجة وجاهزة
    ================================================================= */
 const firebaseConfig = {
   apiKey: "AIzaSyCTJ44jjKQg6Ph_Gv9l8WQjgopNE0TXLC4",
@@ -342,11 +426,15 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LS = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
 
+// حفظ أي دعوة جاية من رابط QR (صداقة أو كروب) باش تطبق بمجرد الدخول
+const urlParams = new URLSearchParams(location.search);
+if (urlParams.get("invite_user")) LS("dp_inv_user", urlParams.get("invite_user"));
+if (urlParams.get("join_group")) LS("dp_join_grp", urlParams.get("join_group"));
+
 // =====================================================
 // ⚖️ نظام القوانين ومكافحة السب والشتم (Anti-Insult & Strikes)
 // =====================================================
 const BAD_WORDS = [
-  // كلمات نابية بالدارجة والعربية والفرنسية والإنجليزية
   "قحبة","قحاب","زامل","زوامل","حمار","كلب","حيوان","مكلخ","تافه","حقير","لعنة","ملعون",
   "نيك","ينيك","منيوك","قواد","تقود","سير تقود","تبرهيش","ولد القحبة","ولد الحرام","بنت القحبة",
   "شرموطة","عرص","خول","متناك","كس","زب","زبي","طيز","عير",
@@ -359,7 +447,6 @@ function containsInsult(text) {
   if (!text) return false;
   const clean = text.toLowerCase().replace(/[._\-*+~`'"]/g, " ");
   for (const w of BAD_WORDS) {
-    // مطابقة الكلمة كاملة أو واضحة وسط الجملة
     const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const reg = new RegExp(`(^|\\s|[^a-zA-Z0-9\u0600-\u06FF])${escaped}($|\\s|[^a-zA-Z0-9\u0600-\u06FF])`, "i");
     if (reg.test(clean)) return w;
@@ -367,9 +454,7 @@ function containsInsult(text) {
   return false;
 }
 
-// التحقق من حالة الحظر أو تسجيل مخالفة جديدة على الشخص اللي كيسب
 async function checkModerationAndStrike(text) {
-  // 1. فحص واش الشخص محظور حالياً
   const bannedUntil = myUserDoc.bannedUntil || Number(LS("dp_ban_until") || 0);
   if (Date.now() < bannedUntil) {
     const minsLeft = Math.ceil((bannedUntil - Date.now()) / 60000);
@@ -377,16 +462,14 @@ async function checkModerationAndStrike(text) {
     return false;
   }
 
-  // 2. فحص النص من السب والشتم
   const bad = containsInsult(text);
-  if (!bad) return true; // النص نقي ومحترم
+  if (!bad) return true;
 
-  // 3. تسجيل إنذار (Strike)
   let strikes = (myUserDoc.strikes || 0) + 1;
   let newBan = 0;
 
   if (strikes >= 3) {
-    newBan = Date.now() + 15 * 60 * 1000; // حظر 15 دقيقة بعد 3 إنذارات
+    newBan = Date.now() + 15 * 60 * 1000;
     LS("dp_ban_until", String(newBan));
   }
 
@@ -421,7 +504,6 @@ function updateStrikeUI() {
   lbl.style.borderColor = s > 0 ? "var(--danger)" : "var(--ok)";
 }
 
-// نافذة القوانين
 const showLaws = (e) => { if (e) e.preventDefault(); $("#lawsModal").hidden = false; };
 $("#openLawsBtn").onclick = showLaws;
 $("#topLawsBtn").onclick = showLaws;
@@ -429,7 +511,6 @@ $("#bannerLawsBtn").onclick = showLaws;
 $("#showLawsLink").onclick = showLaws;
 $("#acceptLawsBtn").onclick = () => { $("#lawsModal").hidden = true; };
 
-// تحويل صورة صغيرة أو أوديو لـ Base64 باش يخدم حتى بلا Firebase Storage
 function fileToDataUrl(file) {
   return new Promise((res, rej) => {
     const r = new FileReader();
@@ -439,7 +520,6 @@ function fileToDataUrl(file) {
   });
 }
 
-// ضغط الصور تلقائياً باش تتسجل خفيفة وسريعة فـ Firestore
 function compressImage(file, maxW = 900, quality = 0.72) {
   return new Promise((res) => {
     const img = new Image();
@@ -462,7 +542,7 @@ document.querySelectorAll(".themeBtn").forEach(b => b.onclick = () => {
   document.documentElement.dataset.theme = t; LS("dp_theme", t);
 });
 
-// تهيئة Firebase مباشرة
+// تهيئة Firebase
 let auth = null, db = null, storage = null, ready = false;
 try {
   firebase.initializeApp(firebaseConfig);
@@ -480,13 +560,105 @@ function switchTab(tabName) {
   currentTab = tabName;
   document.querySelectorAll("#mainTabs .tab-btn").forEach(b => b.classList.toggle("on", b.dataset.tab === tabName));
   $("#tab-feed").hidden = tabName !== "feed";
+  $("#tab-reels").hidden = tabName !== "reels";
   $("#tab-friends").hidden = tabName !== "friends";
   $("#tab-chat").hidden = tabName !== "chat";
+  if (tabName === "reels") renderReelsFeed();
 }
 $("#mainTabs").onclick = e => {
   const b = e.target.closest("[data-tab]");
   if (b) switchTab(b.dataset.tab);
 };
+
+$("#goPostReelBtn").onclick = () => {
+  switchTab("feed");
+  setType("reel");
+  $("#text").focus();
+};
+
+// =====================================================
+// 📱 نظام الدعوة عبر QR Code (للصداقة وللكروبات)
+// =====================================================
+function showQrInvitation(title, desc, linkUrl) {
+  $("#qrTitle").textContent = title;
+  $("#qrDesc").textContent = desc;
+  $("#qrLinkInp").value = linkUrl;
+  const qrApi = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=${encodeURIComponent(linkUrl)}`;
+  $("#qrImg").src = qrApi;
+  $("#qrModal").hidden = false;
+}
+
+function openMyProfileQr() {
+  const baseUrl = location.origin + location.pathname;
+  const inviteLink = `${baseUrl}?invite_user=${encodeURIComponent(name)}`;
+  showQrInvitation(
+    `📱 رمز QR ديالك (@${name})`,
+    "خلي صاحبك يسكاني هاد الـ QR بالتليفون أو صيفط ليه الرابط باش يتزاد عندك صديق ديريكت!",
+    inviteLink
+  );
+}
+
+$("#myQrTopBtn").onclick = openMyProfileQr;
+$("#myQrFriendBtn").onclick = openMyProfileQr;
+$("#closeQrBtn").onclick = () => { $("#qrModal").hidden = true; };
+
+$("#copyQrLinkBtn").onclick = async () => {
+  try {
+    await navigator.clipboard.writeText($("#qrLinkInp").value);
+    alert("✅ تم نسخ رابط الدعوة! صيفطو لصاحبك دابا.");
+  } catch (e) {
+    $("#qrLinkInp").select();
+    document.execCommand("copy");
+    alert("✅ تم نسخ الرابط!");
+  }
+};
+
+$("#downloadQrBtn").onclick = () => {
+  window.open($("#qrImg").src, "_blank");
+};
+
+// معالجة الدعوات اللي جاية من QR Code تلقائياً بعد تسجيل الدخول
+async function handlePendingQrInvites() {
+  const invUser = LS("dp_inv_user");
+  const joinGrpId = LS("dp_join_grp");
+
+  if (invUser) {
+    localStorage.removeItem("dp_inv_user");
+    window.history.replaceState({}, document.title, location.pathname);
+    if (invUser.toLowerCase() !== name) {
+      const qSnap = await db.collection("users").where("username", "==", invUser.toLowerCase()).limit(1).get();
+      if (!qSnap.empty) {
+        const target = qSnap.docs[0].data();
+        await sendFriendRequest(target);
+        switchTab("friends");
+      }
+    }
+  }
+
+  if (joinGrpId) {
+    localStorage.removeItem("dp_join_grp");
+    window.history.replaceState({}, document.title, location.pathname);
+    try {
+      const rRef = db.collection("rooms").doc(joinGrpId);
+      const snap = await rRef.get();
+      if (snap.exists) {
+        const rData = snap.data();
+        if (rData.type === "group") {
+          await rRef.update({
+            members: firebase.firestore.FieldValue.arrayUnion(uid),
+            [`memberNames.${uid}`]: name,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          alert(`🎉 مرحبا بيك! راك دخلتي للكروب "${rData.name}" بنجاح عبر دعوة QR.`);
+          switchTab("chat");
+          setTimeout(() => selectRoom(joinGrpId), 400);
+        }
+      }
+    } catch (e) {
+      console.error("Join group error:", e);
+    }
+  }
+}
 
 // ---- تسجيل الدخول وإنشاء الحساب ----
 let mode = "login", uid = "", name = "", unsubPosts = null, unsubUsers = null, unsubRooms = null, unsubMsgs = null;
@@ -555,6 +727,7 @@ if (auth) {
         }
       } catch (e) {}
       listenAll();
+      setTimeout(handlePendingQrInvites, 900);
     } else {
       unsubPosts?.(); unsubUsers?.(); unsubRooms?.(); unsubMsgs?.();
       posts = []; allUsers = []; rooms = []; activeRoom = null; uid = ""; $("#pw").value = "";
@@ -634,7 +807,7 @@ function renderFriendsTab() {
       <button type="button" class="btn sm" data-f-act="dm" data-uid="${u.uid}">💬 هضر فـ Privé</button>
     </div>`;
   }).join("");
-  $("#myFriendsList").innerHTML = frHtml || `<div class="muted">مازال ما زدتي حتى صديق. ضيف صحابك من التحت!</div>`;
+  $("#myFriendsList").innerHTML = frHtml || `<div class="muted">مازال ما زدتي حتى صديق. ضيف صحابك أو صيفط ليهم QR!</div>`;
 
   const others = allUsers.filter(u => u.uid !== uid);
   $("#allUsersList").innerHTML = others.length ? others.map(u => {
@@ -647,7 +820,7 @@ function renderFriendsTab() {
       <div class="user-row"><div class="avatar">${esc(u.username[0].toUpperCase())}</div><b>${esc(u.username)}</b></div>
       ${actBtn}
     </div>`;
-  }).join("") : `<div class="muted">غير نتا لي مسجل دابا، صيفط الليان لصحابك باش يتسجلو!</div>`;
+  }).join("") : `<div class="muted">غير نتا لي مسجل دابا، صيفط QR ديالك لصحابك باش يتسجلو!</div>`;
 }
 
 $("#tab-friends").onclick = e => {
@@ -662,8 +835,14 @@ $("#tab-friends").onclick = e => {
 };
 
 // =====================================================
-// 💬 نظام الدردشة الخاصة (Privé) والكروبات (Groups)
+// 💬 نظام الدردشة الخاصة (Privé) والكروبات + Admin + Leave + QR
 // =====================================================
+function isRoomAdmin(room, userId = uid) {
+  if (!room || room.type !== "group") return false;
+  const admins = room.admins || (room.owner ? [room.owner] : []);
+  return admins.includes(userId) || room.owner === userId;
+}
+
 async function openDirectChat(otherUser) {
   switchTab("chat");
   const pairId = "dm_" + [uid, otherUser.uid].sort().join("_");
@@ -688,19 +867,19 @@ $("#openGrpBtn").onclick = () => {
       <input type="checkbox" value="${u.uid}" data-uname="${esc(u.username)}">
       <b>${esc(u.username)}</b>
     </label>
-  `).join("") : `<div class="muted">ما كاين حتى عضو آخر حالياً.</div>`;
+  `).join("") : `<div class="muted">تقدر تصاوب الكروب بوحدك دابا وتعرض على صحابك برابط QR!</div>`;
   $("#grpName").value = "";
   $("#grpErr").textContent = "";
   $("#grpModal").hidden = false;
 };
 $("#closeGrpBtn").onclick = () => { $("#grpModal").hidden = true; };
 
+// إنشاء الكروب وتعيين المنشئ كـ Admin 👑
 $("#createGrpBtn").onclick = async () => {
   const title = $("#grpName").value.trim();
   if (!title) return $("#grpErr").textContent = "كتب سمية للكروب بعدا!";
   if (!(await checkModerationAndStrike(title))) return;
   const chks = [...document.querySelectorAll("#grpFriendsList input:checked")];
-  if (!chks.length) return $("#grpErr").textContent = "ختار على الأقل صديق واحد للكروب!";
 
   const members = [uid, ...chks.map(c => c.value)];
   const memberNames = { [uid]: name };
@@ -710,17 +889,183 @@ $("#createGrpBtn").onclick = async () => {
     type: "group",
     name: title,
     owner: uid,
+    admins: [uid], // منشئ الكروب هو الأدمن الرئيسي
     members,
     memberNames,
+    lastText: `👑 تم إنشاء الكروب بواسطة ${name}`,
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   });
   $("#grpModal").hidden = true;
   selectRoom(docRef.id);
 };
 
+// دعوة صديق للكروب عبر QR Code
+$("#grpQrBtn").onclick = () => {
+  if (!activeRoom || activeRoom.type !== "group") return;
+  const baseUrl = location.origin + location.pathname;
+  const joinUrl = `${baseUrl}?join_group=${encodeURIComponent(activeRoom.id)}`;
+  showQrInvitation(
+    `📱 دعوة لكروب: ${activeRoom.name}`,
+    "أي صديق يسكاني هاد الـ QR Code أو يكليكي على الرابط غادي يدخل معاك للكروب مباشرة!",
+    joinUrl
+  );
+};
+
+// الخروج من الكروب (Leave Group)
+async function leaveCurrentGroup() {
+  if (!activeRoom || activeRoom.type !== "group") return;
+  if (!confirm(`واش متأكد باغي تخرج من كروب "${activeRoom.name}"؟`)) return;
+
+  const rRef = db.collection("rooms").doc(activeRoom.id);
+  const remaining = (activeRoom.members || []).filter(m => m !== uid);
+
+  if (remaining.length === 0) {
+    // إلا ما بقى حتى واحد فالكروب كيتحذف
+    await rRef.delete();
+  } else {
+    let nextAdmins = (activeRoom.admins || [activeRoom.owner]).filter(a => a !== uid && remaining.includes(a));
+    let nextOwner = activeRoom.owner === uid ? remaining[0] : activeRoom.owner;
+    if (nextAdmins.length === 0) nextAdmins = [remaining[0]]; // إعطاء الأدمن لعضو آخر تلقائياً
+
+    await rRef.update({
+      members: remaining,
+      admins: nextAdmins,
+      owner: nextOwner,
+      lastText: `🚪 خرج ${name} من الكروب`,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  $("#grpInfoModal").hidden = true;
+  unsubMsgs?.();
+  activeRoom = null;
+  $("#chatForm").hidden = true;
+  $("#grpActionsBar").hidden = true;
+  $("#chatTitle").textContent = "اختار صديق أو كروب للهضرة";
+  $("#chatSub").textContent = "رسائل خاصة ومباشرة (Real-Time)";
+  $("#msgList").innerHTML = `<div class="empty">لقد غادرت المجموعة بنجاح 👋</div>`;
+  renderRoomsList();
+}
+
+$("#grpQuickLeaveBtn").onclick = leaveCurrentGroup;
+$("#giLeaveBtn").onclick = leaveCurrentGroup;
+
+// نافذة إدارة الكروب والأعضاء (Admin Panel)
+function openGroupManageModal() {
+  if (!activeRoom || activeRoom.type !== "group") return;
+  const r = rooms.find(x => x.id === activeRoom.id) || activeRoom;
+  activeRoom = r;
+  const amIAdmin = isRoomAdmin(r, uid);
+
+  $("#giTitle").textContent = `👥 كروب: ${r.name}`;
+  $("#giRoleBadge").innerHTML = amIAdmin
+    ? `صلاحيتك فـ الكروب: <span class="admin-tag">👑 Admin (مدير الكروب)</span>`
+    : `صلاحيتك فـ الكروب: <b>عضو</b>`;
+
+  // خانة إضافة أعضاء جدد (تظهر للأدمن فقط)
+  $("#giAdminAddBox").hidden = !amIAdmin;
+  $("#giDeleteGrpBtn").hidden = !amIAdmin;
+
+  if (amIAdmin) {
+    const nonMembers = allUsers.filter(u => !(r.members || []).includes(u.uid));
+    $("#giAddSelect").innerHTML = nonMembers.length
+      ? nonMembers.map(u => `<option value="${u.uid}" data-uname="${esc(u.username)}">${esc(u.username)}</option>`).join("")
+      : `<option value="">كاع الدراري داخلين فالكروب</option>`;
+  }
+
+  // لائحة الأعضاء مع أزرار الطرد أو الترقية لـ Admin
+  const members = r.members || [];
+  $("#giMembersList").innerHTML = members.map(mId => {
+    const uObj = allUsers.find(x => x.uid === mId);
+    const mName = uObj?.username || r.memberNames?.[mId] || "عضو";
+    const mIsAdmin = isRoomAdmin(r, mId);
+    let btns = "";
+    if (amIAdmin && mId !== uid) {
+      if (!mIsAdmin) {
+        btns += `<button type="button" class="ghost" data-gi-act="promote" data-uid="${mId}" style="padding:3px 8px;font-size:.78rem">👑 ردّو Admin</button>`;
+      }
+      btns += `<button type="button" class="btn danger sm" data-gi-act="kick" data-uid="${mId}" data-uname="${esc(mName)}" style="padding:3px 8px;font-size:.78rem">طرد ✖</button>`;
+    }
+    return `<div class="user-item" style="margin-bottom:4px">
+      <div class="user-row">
+        <div class="avatar" style="width:30px;height:30px;font-size:.85rem">${esc(mName[0]?.toUpperCase() || "U")}</div>
+        <b>${esc(mName)}</b>
+        ${mIsAdmin ? `<span class="admin-tag">👑 Admin</span>` : ""}
+      </div>
+      <div style="display:flex;gap:4px">${btns}</div>
+    </div>`;
+  }).join("");
+
+  $("#grpInfoModal").hidden = false;
+}
+
+$("#grpManageBtn").onclick = openGroupManageModal;
+$("#closeGiBtn").onclick = () => { $("#grpInfoModal").hidden = true; };
+
+// إضافة عضو من طرف الـ Admin
+$("#giAddMemberBtn").onclick = async () => {
+  if (!activeRoom || !isRoomAdmin(activeRoom)) return;
+  const sel = $("#giAddSelect");
+  const targetUid = sel.value;
+  if (!targetUid) return;
+  const targetName = sel.options[sel.selectedIndex]?.dataset.uname || "عضو";
+
+  await db.collection("rooms").doc(activeRoom.id).update({
+    members: firebase.firestore.FieldValue.arrayUnion(targetUid),
+    [`memberNames.${targetUid}`]: targetName,
+    lastText: `➕ أضاف الأدمن ${name} العضو ${targetName}`,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  setTimeout(openGroupManageModal, 250);
+};
+
+// ترقية عضو لـ Admin أو طرده من الكروب
+$("#giMembersList").onclick = async e => {
+  const btn = e.target.closest("[data-gi-act]");
+  if (!btn || !activeRoom || !isRoomAdmin(activeRoom)) return;
+  const act = btn.dataset.giAct;
+  const targetUid = btn.dataset.uid;
+  const targetName = btn.dataset.uname || "العضو";
+  const rRef = db.collection("rooms").doc(activeRoom.id);
+
+  if (act === "promote") {
+    await rRef.update({
+      admins: firebase.firestore.FieldValue.arrayUnion(targetUid)
+    });
+    setTimeout(openGroupManageModal, 250);
+  }
+  if (act === "kick") {
+    if (!confirm(`واش متأكد باغي تطرد ${targetName} من الكروب؟`)) return;
+    await rRef.update({
+      members: firebase.firestore.FieldValue.arrayRemove(targetUid),
+      admins: firebase.firestore.FieldValue.arrayRemove(targetUid),
+      lastText: `🚫 قام الأدمن بإخراج ${targetName}`,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    setTimeout(openGroupManageModal, 250);
+  }
+};
+
+// حذف الكروب بالكامل من طرف الـ Admin
+$("#giDeleteGrpBtn").onclick = async () => {
+  if (!activeRoom || !isRoomAdmin(activeRoom)) return;
+  if (!confirm(`⚠️ واش متأكد باغي تمسح كروب "${activeRoom.name}" نهائياً على كاع الأعضاء؟`)) return;
+  await db.collection("rooms").doc(activeRoom.id).delete();
+  $("#grpInfoModal").hidden = true;
+  activeRoom = null;
+  $("#chatForm").hidden = true;
+  $("#grpActionsBar").hidden = true;
+  $("#msgList").innerHTML = `<div class="empty">تم حذف الكروب بنجاح.</div>`;
+};
+
 function getRoomDisplay(r) {
   if (r.type === "group") {
-    return { title: r.name || "كروب", sub: `👥 كروب (${(r.members || []).length} أعضاء)`, icon: "👥" };
+    const myAdminBadge = isRoomAdmin(r, uid) ? " • 👑 نتا Admin" : "";
+    return {
+      title: r.name || "كروب",
+      sub: `👥 كروب (${(r.members || []).length} أعضاء${myAdminBadge})`,
+      icon: "👥"
+    };
   }
   const otherId = (r.members || []).find(m => m !== uid);
   const otherUser = allUsers.find(u => u.uid === otherId);
@@ -736,10 +1081,11 @@ function renderRoomsList() {
     html += rooms.map(r => {
       const info = getRoomDisplay(r);
       const on = activeRoom?.id === r.id ? "active" : "";
+      const admTag = (r.type === "group" && isRoomAdmin(r, uid)) ? `<span class="admin-tag" style="margin-inline-start:4px">👑 Admin</span>` : "";
       return `<div class="chat-item ${on}" data-room="${r.id}">
         <div class="avatar">${esc(info.icon)}</div>
-        <div style="overflow:hidden">
-          <div class="who">${esc(info.title)}</div>
+        <div style="overflow:hidden;flex:1">
+          <div class="who">${esc(info.title)} ${admTag}</div>
           <div class="muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(r.lastText || info.sub)}</div>
         </div>
       </div>`;
@@ -779,6 +1125,7 @@ function selectRoom(roomId) {
   $("#chatTitle").textContent = info.title;
   $("#chatSub").textContent = info.sub;
   $("#chatForm").hidden = false;
+  $("#grpActionsBar").hidden = (r.type !== "group");
   renderRoomsList();
 
   unsubMsgs?.();
@@ -792,12 +1139,13 @@ function selectRoom(roomId) {
       }
       $("#msgList").innerHTML = msgs.map(m => {
         const isMe = m.uid === uid;
+        const senderIsAdm = activeRoom?.type === "group" && isRoomAdmin(activeRoom, m.uid);
         const time = m.createdAt?.toDate ? m.createdAt.toDate().toLocaleTimeString("ar-MA", { hour: "2-digit", minute: "2-digit" }) : "";
         let media = "";
         if (m.imgUrl) media = `<img src="${esc(m.imgUrl)}" alt="">`;
         if (m.audioUrl) media = `<audio controls src="${esc(m.audioUrl)}"></audio>`;
         return `<div class="msg ${isMe ? "me" : ""}">
-          ${!isMe ? `<div class="m-sender">${esc(m.author)}</div>` : ""}
+          ${!isMe ? `<div class="m-sender">${esc(m.author)} ${senderIsAdm ? "👑" : ""}</div>` : ""}
           ${m.text ? `<div>${esc(m.text)}</div>` : ""}
           ${media}
           <div class="m-time">${time}</div>
@@ -859,11 +1207,11 @@ $("#chatVocalBtn").onclick = async () => {
 };
 
 // =====================================================
-// 🏠 نظام المنشورات العام (Feed)
+// 🏠 نظام المنشورات العام + الفيديوهات والـ Reels
 // =====================================================
 let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "";
-const ACCEPT = { pdf: "application/pdf", image: "image/*", audio: "audio/*" };
-const MAX = 25 * 1024 * 1024;
+const ACCEPT = { pdf: "application/pdf", image: "image/*", video: "video/*", reel: "video/*", audio: "audio/*" };
+const MAX = 40 * 1024 * 1024; // 40MB للفيديوهات والريلز
 
 function setType(t) {
   type = t; file = null; stopRec();
@@ -879,10 +1227,18 @@ $("#types").onclick = e => {
 };
 
 function setFile(f) {
-  if (f.size > MAX) return alert("الحد الأقصى لحجم الملف 25MB");
+  if (f.size > MAX) return alert("الحد الأقصى لحجم الملف هو 40MB");
   file = f; $("#fileName").textContent = f.name;
   const url = URL.createObjectURL(f);
-  $("#preview").innerHTML = type === "image" ? `<img src="${url}">` : type === "audio" ? `<audio controls src="${url}"></audio>` : "";
+  if (type === "image") {
+    $("#preview").innerHTML = `<img src="${url}">`;
+  } else if (type === "video" || type === "reel") {
+    $("#preview").innerHTML = `<video controls playsinline src="${url}"></video>`;
+  } else if (type === "audio") {
+    $("#preview").innerHTML = `<audio controls src="${url}"></audio>`;
+  } else {
+    $("#preview").innerHTML = "";
+  }
 }
 $("#file").onchange = e => e.target.files[0] && setFile(e.target.files[0]);
 
@@ -907,11 +1263,11 @@ $("#recBtn").onclick = async () => {
   }
 };
 
-// نشر المنشور مع الفحص التلقائي للسب والشتم
+// نشر المنشور (نص، صورة، فيديو، ريلز، أوديو، PDF)
 $("#post").onclick = async () => {
   if (!ready || !uid) return;
   const text = $("#text").value.trim();
-  if (type === "text" ? !text : !file) return alert(type === "text" ? "كتب شي حاجة بعدا!" : "ختار الملف أو سجل أوديو بعدا!");
+  if (type === "text" ? !text : !file) return alert(type === "text" ? "كتب شي حاجة بعدا!" : "ختار الملف أو الفيديو بعدا!");
   if (!(await checkModerationAndStrike(text))) return;
 
   const btn = $("#post"); btn.disabled = true;
@@ -920,7 +1276,8 @@ $("#post").onclick = async () => {
     if (file) {
       if (type === "image") {
         fileUrl = await compressImage(file, 900, 0.72);
-      } else if (type === "audio" && file.size < 750 * 1024) {
+      } else if ((type === "audio" || type === "video" || type === "reel") && file.size < 720 * 1024) {
+        // إلا كان المقطع خفيف بزاف كيتحول مباشرة بلا ما يتسنى Storage
         fileUrl = await fileToDataUrl(file);
       } else {
         const r = storage.ref(`uploads/${type}/${Date.now()}_${file.name.replace(/[^\w.\-]/g, "_")}`);
@@ -941,7 +1298,7 @@ $("#post").onclick = async () => {
     $("#text").value = ""; setType(type);
   } catch (err) {
     console.error(err);
-    alert("وقع مشكل فالنشر: تأكد أنك درتي Publish لـ Rules فـ Firestore.");
+    alert("وقع مشكل فالنشر: تأكد أنك درتي Publish لـ Rules فـ Firestore و Storage.");
   }
   btn.disabled = false; $("#prog").hidden = true; $("#progBar").style.width = 0;
 };
@@ -955,7 +1312,7 @@ $("#filters").onclick = e => {
 };
 $("#search").oninput = e => { term = e.target.value.trim().toLowerCase(); renderFeed(); };
 
-const BADGE = { text: "نص", pdf: "PDF", image: "صورة", audio: "أوديو" };
+const BADGE = { text: "نص", pdf: "PDF", image: "صورة", video: "🎬 فيديو", reel: "📱 Reel", audio: "أوديو" };
 const open = new Set();
 
 function card(p) {
@@ -963,6 +1320,8 @@ function card(p) {
   const date = p.createdAt?.toDate ? p.createdAt.toDate().toLocaleString("ar-MA", { dateStyle: "medium", timeStyle: "short" }) : "الآن";
   let media = "";
   if (p.type === "image" && p.fileUrl) media = `<div class="media"><img loading="lazy" src="${esc(p.fileUrl)}" alt=""></div>`;
+  if (p.type === "video" && p.fileUrl) media = `<div class="media"><video controls playsinline preload="metadata" src="${esc(p.fileUrl)}"></video></div>`;
+  if (p.type === "reel" && p.fileUrl) media = `<div class="media"><video class="reel-vid" controls loop playsinline preload="metadata" src="${esc(p.fileUrl)}"></video></div>`;
   if (p.type === "audio" && p.fileUrl) media = `<div class="media"><audio controls preload="none" src="${esc(p.fileUrl)}"></audio></div>`;
   if (p.type === "pdf" && p.fileUrl) media = `<div class="file">📄 <span>${esc(p.fileName)}</span>
     <button type="button" data-a="pdf">👁️ معاينة</button><a href="${esc(p.fileUrl)}" target="_blank" rel="noopener">⬇️ تحميل</a></div><div class="media" data-pv hidden></div>`;
@@ -1005,15 +1364,47 @@ function renderFeed() {
   const list = posts.filter(p => (filter === "all" || p.type === filter) && (!term || ((p.text || "") + " " + (p.fileName || "") + " " + p.author).toLowerCase().includes(term)));
   $("#feed").innerHTML = list.length ? list.map(card).join("") : `<div class="empty">ما كاين حتى منشور دابا، كون نتا أول واحد يبارطاجي! ⚡</div>`;
   for (const id in drafts) { const i = document.querySelector(`[data-id="${id}"] [data-ci]`); if (i) i.value = drafts[id]; }
+  if (currentTab === "reels") renderReelsFeed();
 }
 
-$("#feed").onclick = async e => {
+// عرض قسم الريلز العمودي (Reels Tab)
+function renderReelsFeed() {
+  const reelsList = posts.filter(p => (p.type === "reel" || p.type === "video") && p.fileUrl);
+  if (!reelsList.length) {
+    $("#reelsFeed").innerHTML = `<div class="empty">مازال ما تلاح حتى Reel أو فيديو! كليكي الفوق على (نشر Reel جديد) وكون نتا الأول 🎬⚡</div>`;
+    return;
+  }
+  $("#reelsFeed").innerHTML = reelsList.map(p => {
+    const likes = p.likes || [], cms = p.comments || [];
+    const liked = likes.includes(uid);
+    return `<article class="reel-item" data-id="${p.id}">
+      <video controls loop playsinline preload="metadata" src="${esc(p.fileUrl)}"></video>
+      <div class="reel-overlay">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <b>@${esc(p.author)} <span class="badge">${BADGE[p.type]}</span></b>
+          <div style="display:flex;gap:6px">
+            <button type="button" class="ghost" data-a="like" style="padding:4px 12px">${liked ? "❤️" : "🤍"} ${likes.length}</button>
+            <button type="button" class="ghost" data-a="cm" style="padding:4px 12px">💬 ${cms.length}</button>
+          </div>
+        </div>
+        ${p.text ? `<div style="margin-top:6px;font-size:.92rem">${esc(p.text)}</div>` : ""}
+        <div class="comments" ${open.has(p.id) ? "" : "hidden"}>
+          ${cms.map(c => `<div class="cm"><b>${esc(c.author)}</b>: ${esc(c.text)}</div>`).join("")}
+          <div class="cform"><input data-ci placeholder="تعليق على الـ Reel…" maxlength="400"><button type="button" class="btn sm" data-a="send">إرسال</button></div>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+async function handlePostAction(e) {
   const a = e.target.closest("[data-a]")?.dataset.a; if (!a || !ready) return;
   if (a === "dm-author") {
     const btn = e.target.closest("[data-a]");
     return openDirectChat({ uid: btn.dataset.uid, username: btn.dataset.uname });
   }
   const art = e.target.closest("article"), id = art.dataset.id, p = posts.find(x => x.id === id);
+  if (!p) return;
   const d = db.collection("posts").doc(id);
 
   if (a === "like") {
@@ -1052,8 +1443,12 @@ $("#feed").onclick = async e => {
     open.add(id); inp.value = "";
     d.update({ comments: firebase.firestore.FieldValue.arrayUnion({ author: name, text: t, ts: Date.now(), uid }) });
   }
-};
+}
+
+$("#feed").onclick = handlePostAction;
+$("#reelsFeed").onclick = handlePostAction;
 $("#feed").onkeydown = e => { if (e.key === "Enter" && e.target.matches("[data-ci]")) e.target.nextElementSibling.click(); };
+$("#reelsFeed").onkeydown = e => { if (e.key === "Enter" && e.target.matches("[data-ci]")) e.target.nextElementSibling.click(); };
 
 function listenAll() {
   unsubPosts?.(); unsubUsers?.(); unsubRooms?.();
@@ -1074,6 +1469,15 @@ function listenAll() {
   unsubRooms = db.collection("rooms").where("members", "array-contains", uid).onSnapshot(s => {
     rooms = s.docs.map(d => ({ id: d.id, ...d.data() }));
     rooms.sort((a, b) => (b.updatedAt?.seconds || 0) - (a.updatedAt?.seconds || 0));
+    if (activeRoom) {
+      const updatedActive = rooms.find(r => r.id === activeRoom.id);
+      if (updatedActive) {
+        activeRoom = updatedActive;
+        const info = getRoomDisplay(activeRoom);
+        $("#chatTitle").textContent = info.title;
+        $("#chatSub").textContent = info.sub;
+      }
+    }
     renderRoomsList();
   });
 }
