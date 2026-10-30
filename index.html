@@ -299,7 +299,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
           <button type="button" class="chip" data-t="audio">🎙️ أوديو</button>
           <button type="button" class="chip" data-t="pdf">📄 PDF</button>
         </div>
-        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي مع الدراري؟ (نص، صورة، فيديو أو Reel ⚡)"></textarea>
+        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي مع الدراري؟ (نص، صورة، فيديو أو Reel عبر Cloudinary ⚡)"></textarea>
         <div id="fileBox" hidden>
           <label class="btn ghost" for="file">📎 اختر ملفًا</label>
           <input id="file" type="file" hidden>
@@ -405,11 +405,10 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
 <script>
 /* =================================================================
-   ✅ إعدادات مشروعك من Firebase مدمجة وجاهزة
+   ✅ 1. إعدادات مشروعك من Firebase (للحسابات، الشات، والمنشورات)
    ================================================================= */
 const firebaseConfig = {
   apiKey: "AIzaSyCTJ44jjKQg6Ph_Gv9l8WQjgopNE0TXLC4",
@@ -420,6 +419,44 @@ const firebaseConfig = {
   appId: "1:81439980350:web:5fccbff40da05cc1beca6f",
   measurementId: "G-MXMD6QMLZQ"
 };
+
+/* =================================================================
+   ✅ 2. إعدادات حسابك Cloudinary المجاني (لرفع الفيديوهات والريلز)
+   ================================================================= */
+const CLOUDINARY_CLOUD_NAME = "jxxdayqe"; // اسم الـ Cloud ديالك اللي فـ الصورة
+const CLOUDINARY_PRESET = "dark_power_preset"; // تأكد أنك درتي ليه Save فـ Cloudinary بوضع Unsigned
+
+// دالة رفع الفيديوهات والريلز والملفات إلى Cloudinary مع تتبع شريط التحميل (Progress Bar)
+function uploadToCloudinary(fileObj, onProgress) {
+  return new Promise((resolve, reject) => {
+    const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`;
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append("file", fileObj);
+    formData.append("upload_preset", CLOUDINARY_PRESET);
+
+    xhr.open("POST", url, true);
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable && onProgress) {
+        onProgress((e.loaded / e.total) * 100);
+      }
+    };
+    xhr.onload = () => {
+      try {
+        const res = JSON.parse(xhr.responseText);
+        if (xhr.status >= 200 && xhr.status < 300 && res.secure_url) {
+          resolve(res.secure_url);
+        } else {
+          reject(new Error(res.error?.message || "فشل الرفع إلى Cloudinary"));
+        }
+      } catch (err) {
+        reject(err);
+      }
+    };
+    xhr.onerror = () => reject(new Error("مشكل فالاتصال بـ Cloudinary"));
+    xhr.send(formData);
+  });
+}
 /* ================================================================= */
 
 const $ = s => document.querySelector(s);
@@ -543,12 +580,11 @@ document.querySelectorAll(".themeBtn").forEach(b => b.onclick = () => {
 });
 
 // تهيئة Firebase
-let auth = null, db = null, storage = null, ready = false;
+let auth = null, db = null, ready = false;
 try {
   firebase.initializeApp(firebaseConfig);
   auth = firebase.auth();
   db = firebase.firestore();
-  storage = firebase.storage();
   ready = true;
 } catch (e) {
   console.error("Firebase init error:", e);
@@ -920,12 +956,11 @@ async function leaveCurrentGroup() {
   const remaining = (activeRoom.members || []).filter(m => m !== uid);
 
   if (remaining.length === 0) {
-    // إلا ما بقى حتى واحد فالكروب كيتحذف
     await rRef.delete();
   } else {
     let nextAdmins = (activeRoom.admins || [activeRoom.owner]).filter(a => a !== uid && remaining.includes(a));
     let nextOwner = activeRoom.owner === uid ? remaining[0] : activeRoom.owner;
-    if (nextAdmins.length === 0) nextAdmins = [remaining[0]]; // إعطاء الأدمن لعضو آخر تلقائياً
+    if (nextAdmins.length === 0) nextAdmins = [remaining[0]];
 
     await rRef.update({
       members: remaining,
@@ -962,7 +997,6 @@ function openGroupManageModal() {
     ? `صلاحيتك فـ الكروب: <span class="admin-tag">👑 Admin (مدير الكروب)</span>`
     : `صلاحيتك فـ الكروب: <b>عضو</b>`;
 
-  // خانة إضافة أعضاء جدد (تظهر للأدمن فقط)
   $("#giAdminAddBox").hidden = !amIAdmin;
   $("#giDeleteGrpBtn").hidden = !amIAdmin;
 
@@ -973,7 +1007,6 @@ function openGroupManageModal() {
       : `<option value="">كاع الدراري داخلين فالكروب</option>`;
   }
 
-  // لائحة الأعضاء مع أزرار الطرد أو الترقية لـ Admin
   const members = r.members || [];
   $("#giMembersList").innerHTML = members.map(mId => {
     const uObj = allUsers.find(x => x.uid === mId);
@@ -1207,11 +1240,11 @@ $("#chatVocalBtn").onclick = async () => {
 };
 
 // =====================================================
-// 🏠 نظام المنشورات العام + الفيديوهات والـ Reels
+// 🏠 نظام المنشورات العام + الفيديوهات والـ Reels عبر Cloudinary
 // =====================================================
 let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "";
 const ACCEPT = { pdf: "application/pdf", image: "image/*", video: "video/*", reel: "video/*", audio: "audio/*" };
-const MAX = 40 * 1024 * 1024; // 40MB للفيديوهات والريلز
+const MAX = 60 * 1024 * 1024; // 60MB للفيديوهات والريلز عبر Cloudinary
 
 function setType(t) {
   type = t; file = null; stopRec();
@@ -1227,7 +1260,7 @@ $("#types").onclick = e => {
 };
 
 function setFile(f) {
-  if (f.size > MAX) return alert("الحد الأقصى لحجم الملف هو 40MB");
+  if (f.size > MAX) return alert("الحد الأقصى لحجم الملف هو 60MB");
   file = f; $("#fileName").textContent = f.name;
   const url = URL.createObjectURL(f);
   if (type === "image") {
@@ -1263,7 +1296,7 @@ $("#recBtn").onclick = async () => {
   }
 };
 
-// نشر المنشور (نص، صورة، فيديو، ريلز، أوديو، PDF)
+// نشر المنشور (الصور الخفيفة بـ ضغط مباشر، والفيديوهات/الريلز/الملفات عبر Cloudinary مجاناً)
 $("#post").onclick = async () => {
   if (!ready || !uid) return;
   const text = $("#text").value.trim();
@@ -1274,19 +1307,16 @@ $("#post").onclick = async () => {
   try {
     let fileUrl = null, fileName = file?.name || null;
     if (file) {
-      if (type === "image") {
+      if (type === "image" && file.size < 4 * 1024 * 1024) {
         fileUrl = await compressImage(file, 900, 0.72);
-      } else if ((type === "audio" || type === "video" || type === "reel") && file.size < 720 * 1024) {
-        // إلا كان المقطع خفيف بزاف كيتحول مباشرة بلا ما يتسنى Storage
+      } else if (type === "audio" && file.size < 650 * 1024) {
         fileUrl = await fileToDataUrl(file);
       } else {
-        const r = storage.ref(`uploads/${type}/${Date.now()}_${file.name.replace(/[^\w.\-]/g, "_")}`);
+        // رفع الفيديوهات، الريلز، PDF، والأوديو الكبير إلى Cloudinary مجاناً
         $("#prog").hidden = false;
-        await new Promise((ok, no) => {
-          const t = r.put(file);
-          t.on("state_changed", s => $("#progBar").style.width = (s.bytesTransferred / s.totalBytes * 100) + "%", no, ok);
+        fileUrl = await uploadToCloudinary(file, (pct) => {
+          $("#progBar").style.width = pct + "%";
         });
-        fileUrl = await r.getDownloadURL();
       }
     }
     await db.collection("posts").add({
@@ -1298,7 +1328,7 @@ $("#post").onclick = async () => {
     $("#text").value = ""; setType(type);
   } catch (err) {
     console.error(err);
-    alert("وقع مشكل فالنشر: تأكد أنك درتي Publish لـ Rules فـ Firestore و Storage.");
+    alert("وقع مشكل فالنشر: " + err.message + "\nتأكد أنك سميتي الـ Preset فـ Cloudinary بـ dark_power_preset ودرتي ليه Unsigned.");
   }
   btn.disabled = false; $("#prog").hidden = true; $("#progBar").style.width = 0;
 };
