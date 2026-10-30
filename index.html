@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>⚡ Dark Power — Social, Reels & Chat</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>⚡ Dark Power — Social, Full Reels, Chat & Lion Popi AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#09090d;
@@ -19,6 +19,8 @@
   --danger:#f43f5e;
   --warn:#f59e0b;
   --ok:#10b981;
+  --ai:#a855f7;
+  --ai2:#ec4899;
   --r:16px;
 }
 [data-theme=light]{
@@ -34,31 +36,39 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--tx);font-family:Cairo,system-ui,sans-serif;line-height:1.6}
-.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px}
-.bar{display:flex;gap:8px;align-items:center;max-width:900px;margin:auto;flex-wrap:wrap}
-.logo{margin:0;font-size:1.4rem;font-weight:800}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Cairo,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px}
+.bar{display:flex;gap:8px;align-items:center;max-width:920px;margin:auto;flex-wrap:wrap}
+.logo{margin:0;font-size:1.35rem;font-weight:900}
 .logo span{color:var(--ac)}
 input,textarea,select{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;width:100%}
 input:focus,textarea:focus,select:focus{outline:2px solid var(--ac);border-color:transparent}
-#search{flex:1;min-width:130px;width:auto}
-button{font:inherit;cursor:pointer;transition:transform .1s,opacity .15s}
-button:active{transform:scale(0.97)}
+#search{flex:1;min-width:120px;width:auto}
+button{font:inherit;cursor:pointer;transition:transform .12s,opacity .15s}
+button:active{transform:scale(0.96)}
 .ghost{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:7px 12px}
 .ghost:hover{border-color:var(--ac)}
 .btn{background:linear-gradient(90deg,var(--ac),var(--ac2));color:var(--ac-tx);border:0;border-radius:12px;padding:9px 16px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .btn.ghost{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
 .btn.danger{background:var(--danger);color:#fff}
-.btn.sm{padding:5px 12px;font-size:.85rem;border-radius:99px}
+.btn.ai-btn{background:linear-gradient(135deg,var(--ai),var(--ai2));color:#fff}
+.btn.sm{padding:5px 12px;font-size:.84rem;border-radius:99px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.nav-tabs{display:flex;gap:8px;max-width:900px;margin:10px auto 0;overflow-x:auto;padding-bottom:4px}
+.nav-tabs{display:flex;gap:8px;max-width:920px;margin:10px auto 0;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
 .tab-btn{flex:1;min-width:105px;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
 .tab-btn.on{background:var(--ac);color:var(--ac-tx);border-color:var(--ac)}
 .badge-cnt{background:var(--danger);color:#fff;font-size:.72rem;border-radius:99px;padding:0 6px;font-weight:800}
-.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0;max-width:900px;margin:auto;scrollbar-width:none}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0;max-width:920px;margin:auto;scrollbar-width:none}
 .chip{white-space:nowrap;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:99px;padding:4px 14px;font-weight:600}
 .chip.on{background:var(--ac);color:var(--ac-tx);border-color:var(--ac);font-weight:700}
-main{max-width:900px;margin:16px auto;padding:0 14px 60px}
+.hashtag-chip{background:rgba(255,215,0,0.12);color:var(--ac);border:1px solid rgba(255,215,0,0.35);border-radius:99px;padding:3px 12px;font-size:.82rem;font-weight:700;white-space:nowrap}
+.hashtag-chip.on{background:var(--ac);color:#000}
+.hashtag-link{color:var(--ac);font-weight:800;cursor:pointer;text-decoration:none}
+.hashtag-link:hover{text-decoration:underline}
+.mention-tag{background:rgba(255,215,0,0.22);color:var(--ac);padding:0 6px;border-radius:6px;font-weight:800;display:inline-block}
+.msg.me .mention-tag{background:rgba(0,0,0,0.2);color:#000}
+
+main{max-width:920px;margin:16px auto;padding:0 14px 80px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:14px}
 .composer .chips{padding-top:0}
 .composer textarea{margin:6px 0 10px;resize:vertical}
@@ -81,8 +91,8 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .media iframe{width:100%;height:420px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .file{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--card2);padding:8px 12px;border-radius:12px}
 .file a,.file button{color:var(--ac);text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:4px 12px;background:transparent}
-.acts{display:flex;gap:10px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;flex-wrap:wrap}
-.acts button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:99px;padding:4px 14px;font-size:.88rem}
+.acts{display:flex;gap:8px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;flex-wrap:wrap}
+.acts button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:99px;padding:4px 14px;font-size:.86rem}
 .acts .liked{color:#f43f5e;border-color:#f43f5e;font-weight:700}
 .comments{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
 .cm{background:var(--card2);border-radius:12px;padding:6px 12px;margin-bottom:6px;font-size:.92rem}
@@ -93,24 +103,39 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .authcard{width:min(100%,410px);display:grid;gap:10px;text-align:center}
 .authcard .chips{justify-content:center}
 .err{color:var(--danger);font-size:.9rem;min-height:1.4em}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:grid;place-items:center;padding:16px;z-index:99}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:grid;place-items:center;padding:16px;z-index:120}
 .modal-box{width:min(100%,480px);display:grid;gap:10px;text-align:right;max-height:90vh;overflow-y:auto}
 .rules-box{background:var(--card2);border:1px solid var(--ac);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:.88rem;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .strike-badge{background:rgba(244,63,94,0.15);color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:2px 10px;font-weight:700;font-size:.8rem}
 .law-list{margin:0;padding-inline-start:20px;line-height:1.8;font-size:.92rem}
 .law-list li{margin-bottom:6px}
 
-/* ستايل الريلز (Reels Vertical Feed) */
-.reels-wrap{display:flex;flex-direction:column;gap:20px;align-items:center;max-height:78vh;overflow-y:auto;scroll-snap-type:y mandatory;padding:8px 0;scrollbar-width:none}
-.reel-item{scroll-snap-align:start;width:min(100%,390px);background:#000;border:1px solid var(--line);border-radius:20px;overflow:hidden;position:relative;flex-shrink:0;display:flex;flex-direction:column}
-.reel-item video{width:100%;height:62vh;max-height:560px;object-fit:cover;background:#000;display:block}
-.reel-overlay{padding:12px;background:var(--card);border-top:1px solid var(--line)}
+/* =========================================================
+   📱 ستايل الريلز ملء الشاشة (Instagram Full-Screen Reels)
+   ========================================================= */
+.reels-fullscreen-modal{position:fixed;inset:0;background:#000;z-index:95;display:flex;flex-direction:column}
+.reels-top-bar{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(to bottom,rgba(0,0,0,0.75),transparent);color:#fff}
+.reels-container{flex:1;width:100%;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none}
+.reels-container::-webkit-scrollbar{display:none}
+.ig-reel-slide{position:relative;width:100%;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;user-select:none}
+.ig-reel-slide video{width:100%;height:100%;object-fit:cover;max-width:520px;background:#000;cursor:pointer}
+.ig-heart-burst{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:6.5rem;pointer-events:none;z-index:15;filter:drop-shadow(0 6px 20px rgba(244,63,94,0.85));transition:transform .35s cubic-bezier(.17,.89,.32,1.49),opacity .35s}
+.ig-heart-burst.pop{transform:translate(-50%,-50%) scale(1.15);opacity:1}
+.ig-side-actions{position:absolute;left:16px;bottom:100px;z-index:12;display:flex;flex-direction:column;gap:18px;align-items:center}
+.ig-act-btn{background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.2);color:#fff;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-size:1.35rem;position:relative}
+.ig-act-btn span{font-size:.75rem;font-weight:800;margin-top:2px;display:block;color:#fff;text-shadow:0 1px 4px #000}
+.ig-act-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
+.ig-bottom-info{position:absolute;right:16px;left:84px;bottom:28px;z-index:12;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.9);pointer-events:none}
+.ig-bottom-info *{pointer-events:auto}
+.ig-author{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;margin-bottom:6px}
+.ig-caption{font-size:.93rem;max-height:85px;overflow-y:auto;line-height:1.45}
+.ig-comments-drawer{position:absolute;left:0;right:0;bottom:0;max-height:65vh;background:var(--card);border-top:2px solid var(--ac);border-radius:20px 20px 0 0;z-index:25;padding:14px;display:flex;flex-direction:column;gap:10px;max-width:520px;margin:auto}
 
 /* ستايل QR Code */
 .qr-box{text-align:center;background:#fff;padding:16px;border-radius:16px;width:fit-content;margin:6px auto;border:3px solid var(--ac)}
 .qr-box img{display:block;width:210px;height:210px}
 
-/* قسم الأصدقاء والمحادثات الخاصة والكروبات */
+/* قسم الأصدقاء والمحادثات الخاصة والكروبات + @ Mention */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .user-item{display:flex;justify-content:space-between;align-items:center;background:var(--card2);padding:10px 12px;border-radius:12px;margin-bottom:8px;border:1px solid var(--line);gap:8px;flex-wrap:wrap}
 .chat-layout{display:grid;grid-template-columns:280px 1fr;gap:14px;height:72vh;min-height:480px}
@@ -120,7 +145,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .chat-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;cursor:pointer;margin-bottom:6px;border:1px solid transparent;transition:background .15s}
 .chat-item:hover{background:var(--card2)}
 .chat-item.active{background:color-mix(in srgb,var(--ac) 15%,var(--card2));border-color:var(--ac)}
-.chat-main{background:var(--card);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
+.chat-main{background:var(--card);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden;position:relative}
 .chat-header{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:var(--card2);gap:8px;flex-wrap:wrap}
 .msg-list{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .msg{max-width:78%;padding:8px 14px;border-radius:16px;background:var(--card2);border:1px solid var(--line);align-self:flex-start;position:relative}
@@ -130,11 +155,26 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 .msg .m-time{font-size:.68rem;opacity:.7;margin-top:4px;text-align:left}
 .msg img,.msg video{max-width:230px;border-radius:10px;display:block;margin-top:4px}
 .msg audio{max-width:220px;height:36px;margin-top:4px}
-.chat-input-bar{padding:10px;border-top:1px solid var(--line);display:flex;gap:6px;align-items:center;background:var(--card2);flex-wrap:wrap}
+.chat-input-bar{padding:10px;border-top:1px solid var(--line);display:flex;gap:6px;align-items:center;background:var(--card2);flex-wrap:wrap;position:relative}
 .chat-input-bar input[type="text"]{flex:1;min-width:140px}
+.mention-popup{position:absolute;bottom:62px;right:14px;left:14px;max-width:320px;background:var(--card);border:1px solid var(--ac);border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,0.6);z-index:35;max-height:180px;overflow-y:auto;padding:6px}
+.mention-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+.mention-item:hover{background:var(--card2);color:var(--ac)}
 .chk-list{max-height:200px;overflow-y:auto;display:grid;gap:6px;padding:6px;background:var(--card2);border-radius:12px;border:1px solid var(--line)}
 .chk-row{display:flex;align-items:center;gap:8px;padding:6px;cursor:pointer}
 .chk-row input{width:auto}
+
+/* =========================================================
+   🦁 ستايل المساعد الذكي (Lion Popi AI) + الإشعارات
+   ========================================================= */
+.fab-lion{position:fixed;bottom:20px;left:20px;z-index:85;background:linear-gradient(135deg,var(--ai),var(--ai2));color:#fff;border:2px solid #fff;border-radius:99px;padding:10px 18px;font-weight:900;box-shadow:0 8px 24px rgba(168,85,247,0.5);display:flex;align-items:center;gap:8px;font-size:.95rem}
+.lion-panel{position:fixed;bottom:78px;left:20px;width:min(92vw,370px);height:470px;background:var(--card);border:2px solid var(--ai);border-radius:20px;z-index:90;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,0.75)}
+.lion-head{padding:12px 14px;background:linear-gradient(135deg,var(--ai),var(--ai2));color:#fff;display:flex;justify-content:space-between;align-items:center;font-weight:800}
+.lion-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.lion-bubble{padding:8px 12px;border-radius:14px;background:var(--card2);border:1px solid var(--line);align-self:flex-start;max-width:88%;white-space:pre-wrap}
+.lion-bubble.user{background:var(--ac);color:#000;align-self:flex-end;font-weight:700;border-color:transparent}
+.toast-notif{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--card);border:2px solid var(--ac);color:var(--tx);padding:10px 18px;border-radius:99px;z-index:200;box-shadow:0 8px 25px rgba(0,0,0,0.7);display:flex;align-items:center;gap:10px;font-weight:700;animation:slideDown .25s ease}
+@keyframes slideDown{from{transform:translate(-50%,-100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}
 
 @media(max-width:700px){
   .grid-2{grid-template-columns:1fr}
@@ -146,23 +186,39 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 </head>
 <body>
 
-<!-- نافذة القوانين (Les Lois) ومكافحة السب والشتم -->
+<!-- إشعار الرسائل الفوري (Toast Notification) -->
+<div id="toastNotif" class="toast-notif" hidden>
+  <span>🔔</span>
+  <span id="toastText">رسالة جديدة!</span>
+</div>
+
+<!-- نافذة القوانين (Les Lois) ومكافحة السب والعري والدم -->
 <div id="lawsModal" class="modal" hidden>
   <div class="card modal-box">
-    <h3 style="margin:0;color:var(--ac)">⚖️ قوانين مجتمع Dark Power (احترام متبادل)</h3>
+    <h3 style="margin:0;color:var(--ac)">⚖️ قوانين مجتمع Dark Power الصارمة</h3>
     <p class="muted" style="margin:0">هاد المنصة تجمعنا كأصدقاء وإخوة، وعليها خاصنا كاملين نحترمو هاد القوانين:</p>
     <ul class="law-list">
-      <li>🚫 <b>ممنوع السب، الشتم، أو الكلام الساقط (تخصار الهضرة)</b> سواء فـ المنشورات، التعليقات، أو فـ الشات والـ كروبات.</li>
-      <li>🛡️ <b>فلتر ذكي أوتوماتيكي (Anti-Insult System):</b> الموقع فيه نظام مراقبة فوري؛ أي رسالة أو منشور فيه سب أو شتم غادي يتبلوكا وما غاديش يتنشر.</li>
-      <li>⚠️ <b>نظام الإنذارات (3 Strikes = Ban):</b>
-        <br>— المخالفة 1 و 2: كيتسجل عليك إنذار (Strike).
-        <br>— المخالفة 3: <b>حظر تلقائي من النشر والدردشة لمدة 15 دقيقة</b> (أو حظر الحساب).
+      <li>🚫 <b>ممنوع السب، الشتم، أو الكلام الساقط:</b> الفلتر الذكي كيبلوكي أي كلام خايب وكيعطي إنذار (3 إنذارات = حظر 15 دقيقة).</li>
+      <li>🔞🩸 <b>ممنوع قطعياً نشر الفيديوهات أو الريلز اللي فيها العري (+18) أو الدم والعنف (Gore/Blood):</b>
+        <br>— أي فيديو فيه عري أو دم غادي <b>يتمسح فوراً وبشكل تلقائي</b>، ومول الحساب غادي <b>يتبلوكا لمدة 24 ساعة (يوم كامل)</b> من المنصة!
       </li>
-      <li>🤝 <b>الاحترام المتبادل:</b> ممنوع التنمر، التشهير، أو نشر شي حاجة تضر الأصدقاء.</li>
+      <li>#️⃣ <b>صناع المحتوى:</b> استعملو الهاشتاقات (`#gaming`, `#morocco`) باش تطلعو الفيديوهات ديالكم فـ الطوندونس بنقاوة.</li>
     </ul>
     <div style="display:flex;gap:8px;justify-content:flex-end">
       <button type="button" class="btn" id="acceptLawsBtn">فهمت وموافق على القوانين ✅</button>
     </div>
+  </div>
+</div>
+
+<!-- نافذة مشاركة Reel أو منشور مع صديق (Share to Friend Modal) -->
+<div id="shareModal" class="modal" hidden>
+  <div class="card modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0;color:var(--ac)">✈️ بارطاجي مع صحابك أو فـ كروب</h3>
+      <button type="button" class="ghost" id="closeShareBtn">✖</button>
+    </div>
+    <p class="muted" style="margin:0">اختار الصديق أو الكروب لي بغيتي تصيفط ليه هاد الـ Reel/المنشور:</p>
+    <div id="shareTargetsList" class="chk-list" style="max-height:260px"></div>
   </div>
 </div>
 
@@ -181,7 +237,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
   </div>
 </div>
 
-<!-- نافذة إدارة الكروب للأدمن والأعضاء (Group Admin & Info Modal) -->
+<!-- نافذة إدارة الكروب للأدمن والأعضاء -->
 <div id="grpInfoModal" class="modal" hidden>
   <div class="card modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -189,8 +245,6 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
       <button type="button" class="ghost" id="closeGiBtn">✖</button>
     </div>
     <div id="giRoleBadge" class="muted"></div>
-
-    <!-- إضافة عضو جديد للكروب (خاص بالأدمن) -->
     <div id="giAdminAddBox" hidden style="border-top:1px solid var(--line);padding-top:10px">
       <label class="muted">➕ إضافة صديق للكروب (بصفتك Admin):</label>
       <div style="display:flex;gap:6px;margin-top:6px">
@@ -198,10 +252,8 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
         <button type="button" class="btn sm" id="giAddMemberBtn">إضافة</button>
       </div>
     </div>
-
     <label class="muted" style="margin-top:6px">👥 أعضاء الكروب:</label>
     <div id="giMembersList" class="chk-list" style="max-height:240px"></div>
-
     <div style="display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px">
       <button type="button" class="btn danger sm" id="giLeaveBtn">🚪 الخروج من الكروب</button>
       <button type="button" class="btn danger sm" id="giDeleteGrpBtn" hidden>🗑️ حذف الكروب نهائياً (Admin)</button>
@@ -230,7 +282,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
 <section id="auth" class="authwrap">
   <form class="card authcard" id="authForm">
     <h1 class="logo">⚡ Dark <span>Power</span></h1>
-    <p class="muted" style="margin:0">شبكة التواصل، الريلز والدردشة الخاصة بالأصدقاء</p>
+    <p class="muted" style="margin:0">شبكة التواصل، الريلز، الشات والمساعد الذكي Lion Popi 🦁</p>
     <div class="chips">
       <button type="button" class="chip on" data-m="login">دخول</button>
       <button type="button" class="chip" data-m="signup">حساب جديد</button>
@@ -238,7 +290,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
     <input id="u" dir="ltr" autocomplete="username" placeholder="Username (e.g. taoufik)">
     <input id="pw" dir="ltr" type="password" autocomplete="current-password" placeholder="Password (6+ chars)">
     <label class="muted" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:.82rem">
-      <input type="checkbox" id="agreeChk" checked style="width:auto"> أوافق على <a href="#" id="showLawsLink" style="color:var(--ac)">قوانين الاحترام وعدم السب</a>
+      <input type="checkbox" id="agreeChk" checked style="width:auto"> أوافق على <a href="#" id="showLawsLink" style="color:var(--ac)">قوانين منع السب والعري والدم</a>
     </label>
     <div id="authErr" class="err"></div>
     <button type="submit" class="btn" id="authBtn">دخول إلى المنصة ⚡</button>
@@ -254,9 +306,10 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
   <header class="top">
     <div class="bar">
       <h1 class="logo">⚡ Dark <span>Power</span></h1>
-      <input id="search" type="search" placeholder="ابحث في المنشورات…">
+      <input id="search" type="search" placeholder="ابحث بالاسم أو #هاشتاق…">
       <span class="muted">👤 <b id="nameLbl"></b></span>
-      <span id="strikeLbl" class="strike-badge" title="عدد الإنذارات بسبب مخالفة القوانين">🛡️ 0/3 إنذار</span>
+      <span id="strikeLbl" class="strike-badge" title="حالة القوانين">🛡️ سليم</span>
+      <button type="button" class="ghost" id="soundToggleBtn" title="تفعيل/كتم صوت إشعارات الرسائل">🔔</button>
       <button type="button" class="ghost" id="myQrTopBtn" title="رمز QR ديالي للدعوة">📱 QR</button>
       <button type="button" class="ghost" id="topLawsBtn" title="قوانين المنصة">⚖️</button>
       <button type="button" class="ghost themeBtn" title="تبديل الوضع">🌓</button>
@@ -265,21 +318,30 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
     <!-- أزرار التنقل -->
     <div class="nav-tabs" id="mainTabs">
       <button type="button" class="tab-btn on" data-tab="feed">🏠 المنشورات</button>
-      <button type="button" class="tab-btn" data-tab="reels">📱 الريلز (Reels)</button>
+      <button type="button" class="tab-btn" data-tab="reels">📱 الريلز (Full Screen)</button>
       <button type="button" class="tab-btn" data-tab="friends">👥 الأصدقاء <span id="reqBadge" class="badge-cnt" hidden>0</span></button>
-      <button type="button" class="tab-btn" data-tab="chat">💬 الخواص والكروبات</button>
+      <button type="button" class="tab-btn" data-tab="chat">💬 الشات <span id="chatUnreadBadge" class="badge-cnt" hidden>0</span></button>
     </div>
   </header>
 
   <main>
     <!-- شريط التذكير بالقوانين والاحترام -->
     <div class="rules-box">
-      <span>⚖️ <b>قانون المنصة:</b> ممنوع السب والشتم أو الكلام الساقط. أي مخالفة كتعطي إنذار أوتوماتيكي (3 إنذارات = حظر مؤقت 🚫).</span>
-      <button type="button" class="ghost" id="bannerLawsBtn" style="padding:3px 10px;font-size:.8rem">اقرأ القوانين</button>
+      <span>⚖️ <b>حماية المجتمع:</b> ممنوع السب، وممنوع نهائياً الفيديوهات اللي فيها العري 🔞 أو الدم 🩸 (حذف فوري + حظر الحساب 24 ساعة!).</span>
+      <button type="button" class="ghost" id="bannerLawsBtn" style="padding:3px 10px;font-size:.8rem">التفاصيل</button>
     </div>
 
-    <!-- 1. قسم المنشورات العام -->
+    <!-- 1. قسم المنشورات العام + الهاشتاقات الرائجة -->
     <div id="tab-feed">
+      <!-- شريط الهاشتاقات الرائجة لصناع المحتوى -->
+      <div class="card" style="padding:10px 14px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <b style="color:var(--ac);font-size:.9rem">🔥 الهاشتاقات المشهورة (#Trending_Hashtags):</b>
+          <button type="button" class="ghost" id="clearHashtagBtn" hidden style="padding:2px 8px;font-size:.75rem">إلغاء الفلتر ✖</button>
+        </div>
+        <div class="chips" id="trendingHashtags" style="padding:2px 0"></div>
+      </div>
+
       <nav class="chips" id="filters" style="margin-bottom:10px">
         <button type="button" class="chip on" data-f="all">الكل</button>
         <button type="button" class="chip" data-f="text">📝 نصوص</button>
@@ -299,7 +361,14 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
           <button type="button" class="chip" data-t="audio">🎙️ أوديو</button>
           <button type="button" class="chip" data-t="pdf">📄 PDF</button>
         </div>
-        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي مع الدراري؟ (نص، صورة، فيديو أو Reel عبر Cloudinary ⚡)"></textarea>
+        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي؟ استعمل #هاشتاق (مثلاً #gaming #morocco) باش يتشهر الفيديو ديالك ⚡"></textarea>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+          <button type="button" class="ghost" data-ins-tag="#darkpower" style="padding:3px 10px;font-size:.78rem">+ #darkpower</button>
+          <button type="button" class="ghost" data-ins-tag="#reels_maroc" style="padding:3px 10px;font-size:.78rem">+ #reels_maroc</button>
+          <button type="button" class="ghost" data-ins-tag="#gaming" style="padding:3px 10px;font-size:.78rem">+ #gaming</button>
+          <button type="button" class="ghost" data-ins-tag="#funny" style="padding:3px 10px;font-size:.78rem">+ #funny</button>
+          <button type="button" class="btn ai-btn sm" id="askLionHashtagsBtn">🦁 اقترح لي هاشتاقات بـ Lion Popi</button>
+        </div>
         <div id="fileBox" hidden>
           <label class="btn ghost" for="file">📎 اختر ملفًا</label>
           <input id="file" type="file" hidden>
@@ -314,16 +383,30 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
       <section id="feed"></section>
     </div>
 
-    <!-- 2. قسم الريلز (Reels Vertical Feed) -->
-    <div id="tab-reels" hidden>
-      <div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-        <div>
-          <h3 style="margin:0;color:var(--ac)">📱 ريلز وفيديوهات الدراري (Reels)</h3>
-          <span class="muted">طلع وهبط باش تتفرج فـ كاع الريلز والفيديوهات، أو لوح Reel جديد!</span>
+    <!-- 2. قسم الريلز ملء الشاشة (Full-Screen Instagram Style Reels) -->
+    <div id="tab-reels" class="reels-fullscreen-modal" hidden>
+      <div class="reels-top-bar">
+        <div style="display:flex;align-items:center;gap:10px">
+          <button type="button" class="ghost" id="exitReelsBtn" style="background:rgba(0,0,0,0.5);color:#fff;border-color:rgba(255,255,255,0.3)">🔙 رجوع</button>
+          <b style="font-size:1.15rem">📱 Reels <span id="reelActiveTag" style="color:var(--ac);font-size:.85rem"></span></b>
         </div>
-        <button type="button" class="btn sm" id="goPostReelBtn">➕ نشر Reel جديد</button>
+        <button type="button" class="btn sm" id="goPostReelBtn">➕ لوح Reel</button>
       </div>
-      <div id="reelsFeed" class="reels-wrap"></div>
+
+      <div id="reelsContainer" class="reels-container"></div>
+
+      <!-- نافذة التعليقات وسط الريلز (Instagram Comments Drawer) -->
+      <div id="reelCommentsDrawer" class="ig-comments-drawer" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:8px">
+          <b style="color:var(--ac)">💬 تعليقات الـ Reel</b>
+          <button type="button" class="ghost" id="closeReelCmBtn" style="padding:3px 10px">✖</button>
+        </div>
+        <div id="reelCmList" style="flex:1;overflow-y:auto;max-height:38vh"></div>
+        <form id="reelCmForm" class="cform">
+          <input id="reelCmInp" placeholder="كتب تعليق زوين على هاد الـ Reel…" autocomplete="off">
+          <button type="submit" class="btn sm">إرسال</button>
+        </form>
+      </div>
     </div>
 
     <!-- 3. قسم إضافة الأصدقاء وطلبات الصداقة + دعوة QR -->
@@ -356,7 +439,7 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
       </div>
     </div>
 
-    <!-- 4. قسم الدردشة الخاصة (Privé) والكروبات (Groups) -->
+    <!-- 4. قسم الدردشة الخاصة (Privé) والكروبات + @ Mention -->
     <div id="tab-chat" hidden>
       <div class="chat-layout">
         <aside class="chat-side">
@@ -373,10 +456,9 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
               <div class="avatar" id="chatAvatar">💬</div>
               <div>
                 <div class="who" id="chatTitle">اختار صديق أو كروب للهضرة</div>
-                <div class="muted" id="chatSub">رسائل خاصة ومباشرة (Real-Time)</div>
+                <div class="muted" id="chatSub">دير @ باش تطاغي صاحبك فـ الشات</div>
               </div>
             </div>
-            <!-- أزرار التحكم فـ الكروب (QR، إدارة الأعضاء/الأدمن، والخروج) -->
             <div id="grpActionsBar" hidden style="display:flex;gap:6px;flex-wrap:wrap">
               <button type="button" class="ghost" id="grpQrBtn" title="دعوة صديق للكروب بـ QR" style="padding:5px 10px;font-size:.82rem">📱 دعوة بـ QR</button>
               <button type="button" class="ghost" id="grpManageBtn" title="الأعضاء وإدارة الأدمن" style="padding:5px 10px;font-size:.82rem">👑 الأعضاء</button>
@@ -388,17 +470,52 @@ main{max-width:900px;margin:16px auto;padding:0 14px 60px}
             <div class="empty">👈 كليكي على شي صديق أو كروب من القائمة باش تبداو الهضرة فالـ Privé!</div>
           </div>
 
+          <!-- نافذة اقتراح الـ @ Mention فـ الشات -->
+          <div id="mentionPopup" class="mention-popup" hidden></div>
+
           <form id="chatForm" class="chat-input-bar" hidden>
             <label class="ghost" for="chatImgInp" title="إرسال صورة" style="cursor:pointer;padding:6px 10px">🖼️</label>
             <input id="chatImgInp" type="file" accept="image/*" hidden>
             <button type="button" id="chatVocalBtn" class="ghost" title="تسجيل أوديو" style="padding:6px 10px">🎙️</button>
-            <input id="chatMsgInp" type="text" placeholder="كتب ميساج محترم لصاحبك أو للكروب…" autocomplete="off">
+            <button type="button" id="insertAtBtn" class="ghost" title="طاغي صديق بـ @" style="padding:6px 10px;font-weight:900;color:var(--ac)">@</button>
+            <input id="chatMsgInp" type="text" placeholder="كتب ميساج… (اكتب @ باش تطاغي صاحبك)" autocomplete="off">
             <button type="submit" class="btn">إرسال ➤</button>
           </form>
         </section>
       </div>
     </div>
   </main>
+
+  <!-- 🦁 الزر العائم والنافذة ديال المساعد الذكي Lion Popi AI -->
+  <button type="button" id="fabLionBtn" class="fab-lion">🦁 Lion Popi AI</button>
+  <div id="lionPanel" class="lion-panel" hidden>
+    <div class="lion-head">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:1.4rem">🦁</span>
+        <div>
+          <div style="line-height:1.1">Lion Popi AI</div>
+          <small style="font-weight:400;opacity:.85">مساعدك الذكي فـ Dark Power</small>
+        </div>
+      </div>
+      <button type="button" class="ghost" id="closeLionBtn" style="background:rgba(0,0,0,0.25);color:#fff;border:0;padding:4px 10px">✖</button>
+    </div>
+    <div id="lionMsgs" class="lion-msgs">
+      <div class="lion-bubble">أهلاً بيك خويا فـ <b>Dark Power</b>! أنا <b>Lion Popi 🦁</b>، المساعد الذكي ديالك (بحال Meta AI).
+سولني على أي حاجة:
+• كيفاش تشهر الـ Reel ديالك بـ `#hashtags`؟
+• أفكار فيديوهات وبوستات واعرة.
+• كيفاش تخدم بـ `@` فـ الشات أو تزيد صحابك بـ QR!</div>
+    </div>
+    <div style="display:flex;gap:4px;padding:6px 10px;overflow-x:auto;background:var(--card2);border-top:1px solid var(--line)">
+      <button type="button" class="ghost lion-q" data-q="عطيني أحسن #هاشتاقات للريلز" style="font-size:.75rem;padding:3px 8px;white-space:nowrap">#️⃣ هاشتاقات ريلز</button>
+      <button type="button" class="ghost lion-q" data-q="اقترح عليا فكرة بوست واعر للدراري" style="font-size:.75rem;padding:3px 8px;white-space:nowrap">💡 فكرة بوست</button>
+      <button type="button" class="ghost lion-q" data-q="شنو هي قوانين الموقع؟" style="font-size:.75rem;padding:3px 8px;white-space:nowrap">⚖️ القوانين</button>
+    </div>
+    <form id="lionForm" style="display:flex;gap:6px;padding:10px;background:var(--card);border-top:1px solid var(--line)">
+      <input id="lionInp" placeholder="سول Lion Popi أي حاجة…" autocomplete="off">
+      <button type="submit" class="btn ai-btn sm">إرسال</button>
+    </form>
+  </div>
 </div>
 
 <!-- مكتبات Firebase الرسمية -->
@@ -423,10 +540,9 @@ const firebaseConfig = {
 /* =================================================================
    ✅ 2. إعدادات حسابك Cloudinary المجاني (لرفع الفيديوهات والريلز)
    ================================================================= */
-const CLOUDINARY_CLOUD_NAME = "jxxdayqe"; // اسم الـ Cloud ديالك اللي فـ الصورة
-const CLOUDINARY_PRESET = "dark_power_preset"; // تأكد أنك درتي ليه Save فـ Cloudinary بوضع Unsigned
+const CLOUDINARY_CLOUD_NAME = "jxxdayqe";
+const CLOUDINARY_PRESET = "dark_power_preset";
 
-// دالة رفع الفيديوهات والريلز والملفات إلى Cloudinary مع تتبع شريط التحميل (Progress Bar)
 function uploadToCloudinary(fileObj, onProgress) {
   return new Promise((resolve, reject) => {
     const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`;
@@ -437,9 +553,7 @@ function uploadToCloudinary(fileObj, onProgress) {
 
     xhr.open("POST", url, true);
     xhr.upload.onprogress = (e) => {
-      if (e.lengthComputable && onProgress) {
-        onProgress((e.loaded / e.total) * 100);
-      }
+      if (e.lengthComputable && onProgress) onProgress((e.loaded / e.total) * 100);
     };
     xhr.onload = () => {
       try {
@@ -449,27 +563,79 @@ function uploadToCloudinary(fileObj, onProgress) {
         } else {
           reject(new Error(res.error?.message || "فشل الرفع إلى Cloudinary"));
         }
-      } catch (err) {
-        reject(err);
-      }
+      } catch (err) { reject(err); }
     };
     xhr.onerror = () => reject(new Error("مشكل فالاتصال بـ Cloudinary"));
     xhr.send(formData);
   });
 }
-/* ================================================================= */
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LS = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
 
-// حفظ أي دعوة جاية من رابط QR (صداقة أو كروب) باش تطبق بمجرد الدخول
+// حفظ دعوات QR
 const urlParams = new URLSearchParams(location.search);
 if (urlParams.get("invite_user")) LS("dp_inv_user", urlParams.get("invite_user"));
 if (urlParams.get("join_group")) LS("dp_join_grp", urlParams.get("join_group"));
 
 // =====================================================
-// ⚖️ نظام القوانين ومكافحة السب والشتم (Anti-Insult & Strikes)
+// 🔔 نظام الصوت والإشعارات عند وصول رسالة (Web Audio Notification)
+// =====================================================
+let soundEnabled = LS("dp_sound") !== "off";
+function updateSoundBtn() {
+  const btn = $("#soundToggleBtn");
+  if (btn) btn.textContent = soundEnabled ? "🔔" : "🔕";
+}
+updateSoundBtn();
+$("#soundToggleBtn").onclick = () => {
+  soundEnabled = !soundEnabled;
+  LS("dp_sound", soundEnabled ? "on" : "off");
+  updateSoundBtn();
+  if (soundEnabled) playNotificationSound();
+  if ("Notification" in window && Notification.permission === "default") {
+    Notification.requestPermission();
+  }
+};
+
+function playNotificationSound() {
+  if (!soundEnabled) return;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AudioCtx();
+    const now = ctx.currentTime;
+    // نغمة لطيفة مزدوجة بحال Messenger/Instagram
+    [587.33, 880].forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, now + idx * 0.11);
+      gain.gain.setValueAtTime(0.18, now + idx * 0.11);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.22);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + idx * 0.11);
+      osc.stop(now + idx * 0.11 + 0.24);
+    });
+  } catch (e) {}
+}
+
+let toastTimer = null;
+function triggerIncomingMessageAlert(senderName, textPreview, roomTitle) {
+  playNotificationSound();
+  const toast = $("#toastNotif");
+  $("#toastText").textContent = `💬 ${senderName} (${roomTitle}): ${textPreview.slice(0, 45)}`;
+  toast.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toast.hidden = true; }, 4200);
+
+  if ("Notification" in window && Notification.permission === "granted" && document.hidden) {
+    new Notification(`رسالة جديدة من ${senderName}`, { body: textPreview });
+  }
+}
+
+// =====================================================
+// ⚖️🔞🩸 نظام القوانين: مكافحة السب + حظر 24 ساعة للعري والدم
 // =====================================================
 const BAD_WORDS = [
   "قحبة","قحاب","زامل","زوامل","حمار","كلب","حيوان","مكلخ","تافه","حقير","لعنة","ملعون",
@@ -480,26 +646,75 @@ const BAD_WORDS = [
   "pute","putain","connard","salope","enculé","encule","merde","batard","bâtard","ntm","fdp"
 ];
 
-function containsInsult(text) {
+// كلمات دالة على العري (+18) أو الدم والعنف الدموي (Gore/Blood)
+const GORE_NUDITY_WORDS = [
+  "porn","porno","xxx","nude","naked","sex","nsfw","onlyfans","brazzers","xnxx","xvideos","hentai","boobs","strip",
+  "gore","blood","bloody","murder","behead","decapitate","corpse","mutilation","slaughter",
+  "عري","عاري","عارية","اباحي","إباحي","اباحية","سكس","جنس","بورن","دم","دموي","ذبح","تقطيع","جثة","قتل_دموي","l3ra","3ari","3arya"
+];
+
+function containsWordFromList(text, list) {
   if (!text) return false;
   const clean = text.toLowerCase().replace(/[._\-*+~`'"]/g, " ");
-  for (const w of BAD_WORDS) {
+  for (const w of list) {
     const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const reg = new RegExp(`(^|\\s|[^a-zA-Z0-9\u0600-\u06FF])${escaped}($|\\s|[^a-zA-Z0-9\u0600-\u06FF])`, "i");
+    const reg = new RegExp(`(^|\\s|#|[^a-zA-Z0-9\u0600-\u06FF])${escaped}($|\\s|[^a-zA-Z0-9\u0600-\u06FF])`, "i");
     if (reg.test(clean)) return w;
   }
   return false;
 }
 
+// حظر الحساب لمدة 24 ساعة كاملة بسبب نشر العري أو الدم
+async function banUserForOneDay(targetUid, reasonText) {
+  const oneDayMs = 24 * 60 * 60 * 1000;
+  const banUntil = Date.now() + oneDayMs;
+  if (targetUid === uid) {
+    LS("dp_ban_until", String(banUntil));
+    myUserDoc.bannedUntil = banUntil;
+    myUserDoc.banReason = reasonText;
+    updateStrikeUI();
+  }
+  try {
+    if (ready && targetUid) {
+      await db.collection("users").doc(targetUid).set({
+        bannedUntil: banUntil,
+        banReason: reasonText,
+        strikes: 3
+      }, { merge: true });
+    }
+  } catch (e) {}
+}
+
+// فحص إطار الفيديو أو الصورة للتأكد من عدم وجود محتوى دموي فاقع أو عري + فحص الاسم والوصف
+async function scanMediaSafety(fileObj, captionText) {
+  const checkStr = `${captionText || ""} ${fileObj?.name || ""}`;
+  if (containsWordFromList(checkStr, GORE_NUDITY_WORDS)) {
+    await banUserForOneDay(uid, "محاولة نشر محتوى حساس (عري / دم)");
+    alert("🔞🩸 تم حذف الفيديو/المنشور وحظر حسابك لمدة 24 ساعة (يوم كامل)!\nالسبب: يمنع منعاً كلياً نشر العري أو المشاهد الدموية فـ Dark Power.");
+    return false;
+  }
+  return true;
+}
+
 async function checkModerationAndStrike(text) {
   const bannedUntil = myUserDoc.bannedUntil || Number(LS("dp_ban_until") || 0);
   if (Date.now() < bannedUntil) {
+    const hoursLeft = Math.ceil((bannedUntil - Date.now()) / 3600000);
     const minsLeft = Math.ceil((bannedUntil - Date.now()) / 60000);
-    alert(`🚫 حسابك موقوف مؤقتاً عن النشر والدردشة بسبب مخالفة القوانين (السب/الشتم).\nالوقت المتبقي لفك الحظر: ${minsLeft} دقيقة.`);
+    const timeStr = hoursLeft > 1 ? `${hoursLeft} ساعة` : `${minsLeft} دقيقة`;
+    alert(`🚫 حسابك موقوف مؤقتاً عن النشر والدردشة!\nالسبب: ${myUserDoc.banReason || "مخالفة قوانين المنصة"}\nالوقت المتبقي لفك الحظر: ${timeStr}.`);
     return false;
   }
 
-  const bad = containsInsult(text);
+  // فحص العري والدم أولاً (عقوبة حظر 24 ساعة مباشرة)
+  if (containsWordFromList(text, GORE_NUDITY_WORDS)) {
+    await banUserForOneDay(uid, "نشر محتوى عري أو دم ممنوع");
+    alert("🔞🩸 تم حظر حسابك لمدة 24 ساعة (يوم كامل) بسبب محاولة نشر محتوى عري أو دم!");
+    return false;
+  }
+
+  // فحص السب والشتم العادي
+  const bad = containsWordFromList(text, BAD_WORDS);
   if (!bad) return true;
 
   let strikes = (myUserDoc.strikes || 0) + 1;
@@ -524,21 +739,28 @@ async function checkModerationAndStrike(text) {
   updateStrikeUI();
 
   if (strikes >= 3) {
-    alert(`🚫 تم حظرك من النشر والدردشة لمدة 15 دقيقة!\nالسبب: وصلتي لـ 3 إنذارات بسبب استعمال كلام غير لائق أو سب.`);
+    alert(`🚫 تم حظرك من النشر والدردشة لمدة 15 دقيقة!\nالسبب: وصلتي لـ 3 إنذارات بسبب السب.`);
   } else {
-    alert(`⚠️ تحذير قانوني (الإنذار رقم ${strikes} من 3)!\nممنوع السب أو الكلام الساقط فـ المنصة. راه بقى ليك ${3 - strikes} إنذار قبل الحظر التلقائي!`);
+    alert(`⚠️ تحذير قانوني (الإنذار رقم ${strikes} من 3)!\nممنوع السب أو الكلام الساقط فـ المنصة.`);
   }
   return false;
 }
 
 function updateStrikeUI() {
   const s = myUserDoc.strikes || 0;
+  const bannedUntil = myUserDoc.bannedUntil || Number(LS("dp_ban_until") || 0);
   const lbl = $("#strikeLbl");
   if (!lbl) return;
-  lbl.textContent = `🛡️ ${s}/3 إنذار`;
-  lbl.style.background = s > 0 ? "rgba(244,63,94,0.22)" : "rgba(16,185,129,0.15)";
-  lbl.style.color = s > 0 ? "var(--danger)" : "var(--ok)";
-  lbl.style.borderColor = s > 0 ? "var(--danger)" : "var(--ok)";
+  if (Date.now() < bannedUntil) {
+    lbl.textContent = `🚫 محظور مؤقتاً`;
+    lbl.style.background = "rgba(244,63,94,0.3)";
+    lbl.style.color = "var(--danger)";
+  } else {
+    lbl.textContent = `🛡️ ${s}/3 إنذار`;
+    lbl.style.background = s > 0 ? "rgba(244,63,94,0.22)" : "rgba(16,185,129,0.15)";
+    lbl.style.color = s > 0 ? "var(--danger)" : "var(--ok)";
+    lbl.style.borderColor = s > 0 ? "var(--danger)" : "var(--ok)";
+  }
 }
 
 const showLaws = (e) => { if (e) e.preventDefault(); $("#lawsModal").hidden = false; };
@@ -572,6 +794,25 @@ function compressImage(file, maxW = 900, quality = 0.72) {
   });
 }
 
+// =====================================================
+// #️⃣ استخراج وتنسيق الهاشتاقات (#hashtags) والـ @mentions
+// =====================================================
+function extractHashtags(text) {
+  if (!text) return [];
+  const matches = text.match(/#[\w\u0600-\u06FF]+/g) || [];
+  return [...new Set(matches.map(t => t.toLowerCase()))];
+}
+
+function formatRichText(text) {
+  if (!text) return "";
+  let safe = esc(text);
+  // تلوين الهاشتاقات وجعلها قابلة للضغط
+  safe = safe.replace(/(#[\w\u0600-\u06FF]+)/g, `<a href="#" class="hashtag-link" data-tag="$1">$1</a>`);
+  // تلوين الـ @mentions
+  safe = safe.replace(/(@[a-zA-Z0-9_]+)/g, `<span class="mention-tag">$1</span>`);
+  return safe;
+}
+
 // تبديل المظهر
 document.documentElement.dataset.theme = LS("dp_theme") || "dark";
 document.querySelectorAll(".themeBtn").forEach(b => b.onclick = () => {
@@ -599,21 +840,102 @@ function switchTab(tabName) {
   $("#tab-reels").hidden = tabName !== "reels";
   $("#tab-friends").hidden = tabName !== "friends";
   $("#tab-chat").hidden = tabName !== "chat";
-  if (tabName === "reels") renderReelsFeed();
+
+  if (tabName === "reels") {
+    renderReelsFeed();
+  } else {
+    // إيقاف أي فيديو ريلز خدام فاش نخرجو من الريلز
+    document.querySelectorAll("#reelsContainer video").forEach(v => v.pause());
+  }
+  if (tabName === "chat") {
+    $("#chatUnreadBadge").hidden = true;
+    $("#chatUnreadBadge").textContent = "0";
+  }
 }
 $("#mainTabs").onclick = e => {
   const b = e.target.closest("[data-tab]");
   if (b) switchTab(b.dataset.tab);
 };
-
+$("#exitReelsBtn").onclick = () => switchTab("feed");
 $("#goPostReelBtn").onclick = () => {
   switchTab("feed");
   setType("reel");
   $("#text").focus();
 };
 
+// أزرار إضافة هاشتاق سريع فـ الكومبوزر
+document.querySelectorAll("[data-ins-tag]").forEach(btn => {
+  btn.onclick = () => {
+    const inp = $("#text");
+    inp.value = (inp.value.trim() + " " + btn.dataset.insTag + " ").trimStart();
+    inp.focus();
+  };
+});
+
 // =====================================================
-// 📱 نظام الدعوة عبر QR Code (للصداقة وللكروبات)
+// 🦁 المساعد الذكي Lion Popi AI
+// =====================================================
+$("#fabLionBtn").onclick = () => {
+  $("#lionPanel").hidden = !$("#lionPanel").hidden;
+  if (!$("#lionPanel").hidden) $("#lionInp").focus();
+};
+$("#closeLionBtn").onclick = () => { $("#lionPanel").hidden = true; };
+
+function getLionPopiReply(q) {
+  const s = q.toLowerCase();
+  if (s.includes("هاشتاق") || s.includes("hashtag") || s.includes("#") || s.includes("شهر") || s.includes("طوندونس")) {
+    return `🦁 باش يطلع الـ Reel ديالك فـ الطوندونس ويتشهر دغيا، زيد هاد الهاشتاقات فـ الوصف:\n#darkpower #reels_maroc #gaming #explore #viral #دراري_لافاك\n\n💡 نصيحة Lion Popi: الفيديو اللي كيكون فيه #هاشتاق واضح كيطلع الفوق فـ شريط Trending وكاع الدراري يقدرو يكليكيو عليه!`;
+  }
+  if (s.includes("فكرة") || s.includes("بوست") || s.includes("post") || s.includes("محتوى")) {
+    return `🦁 هاك 3 أفكار واعرين تلوحهم دابا:\n1. 📱 Reel قصير على كواليس القراية ولا الكودينغ مع هاشتاق #student_life.\n2. 🎮 لقطة واعرة من شي لعبة كتلعبها مع #gaming.\n3. 💬 سؤال للدراري فـ منشور نصي باش يتفاعلو معاك فالتعليقات!`;
+  }
+  if (s.includes("قانون") || s.includes("قوانين") || s.includes("بلوك") || s.includes("حظر") || s.includes("دم") || s.includes("عري")) {
+    return `⚖️ قوانين Dark Power واضحة:\n1. ممنوع السب والشتم (3 إنذارات = حظر 15 دقيقة).\n2. 🔞🩸 أي فيديو أو Reel فيه عري (+18) أو دم وعنف كيتحذف فوراً ومول الحساب كيتبلوكا لمدة 24 ساعة (يوم كامل)!`;
+  }
+  if (s.includes("@") || s.includes("طاغ") || s.includes("mention") || s.includes("شات")) {
+    return `💬 فـ قسم الشات والكروبات، غير تكتب علامة @ غادي تطلع ليك لائحة الأصدقاء اللي معاك فـ الكروب، كليكي على سميتو باش يعرف راسو راه كتهضر معاه!`;
+  }
+  if (s.includes("سلام") || s.includes("salam") || s.includes("اهلا") || s.includes("شكون نتا")) {
+    return `أهلاً خويا ${name || ""}! أنا 🦁 Lion Popi، الذكاء الاصطناعي الصغير ديال Dark Power. قول ليا باش نعاونك اليوم؟`;
+  }
+  return `🦁 فكرة زوينة! فـ Dark Power تقدر تلوح Reels شادة الشاشة كاملة (Double-tap باش دير ❤️)، وتستعمل #الهاشتاقات باش تشهر المحتوى ديالك، وتطاغي صحابك بـ @ فـ الشات. واش بغيتي نقترح عليك عنوان وهاشتاقات لشي فيديو؟`;
+}
+
+function appendLionChat(text, isUser = false) {
+  const box = $("#lionMsgs");
+  const div = document.createElement("div");
+  div.className = "lion-bubble" + (isUser ? " user" : "");
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+$("#lionForm").onsubmit = e => {
+  e.preventDefault();
+  const inp = $("#lionInp"), q = inp.value.trim();
+  if (!q) return;
+  inp.value = "";
+  appendLionChat(q, true);
+  setTimeout(() => appendLionChat(getLionPopiReply(q), false), 260);
+};
+
+document.querySelectorAll(".lion-q").forEach(b => {
+  b.onclick = () => {
+    appendLionChat(b.dataset.q, true);
+    setTimeout(() => appendLionChat(getLionPopiReply(b.dataset.q), false), 240);
+  };
+});
+
+$("#askLionHashtagsBtn").onclick = () => {
+  const suggested = "#darkpower #reels_maroc #viral #explore";
+  const inp = $("#text");
+  if (!inp.value.includes("#")) inp.value = (inp.value.trim() + " " + suggested).trim();
+  $("#lionPanel").hidden = false;
+  appendLionChat("🦁 زدتك أحسن الهاشتاقات فـ الخانة ديال النشر باش يطلع الفيديو ديالك فـ الطوندونس! ⚡", false);
+};
+
+// =====================================================
+// 📱 نظام الدعوة عبر QR Code
 // =====================================================
 function showQrInvitation(title, desc, linkUrl) {
   $("#qrTitle").textContent = title;
@@ -641,19 +963,15 @@ $("#closeQrBtn").onclick = () => { $("#qrModal").hidden = true; };
 $("#copyQrLinkBtn").onclick = async () => {
   try {
     await navigator.clipboard.writeText($("#qrLinkInp").value);
-    alert("✅ تم نسخ رابط الدعوة! صيفطو لصاحبك دابا.");
+    alert("✅ تم نسخ رابط الدعوة!");
   } catch (e) {
     $("#qrLinkInp").select();
     document.execCommand("copy");
     alert("✅ تم نسخ الرابط!");
   }
 };
+$("#downloadQrBtn").onclick = () => window.open($("#qrImg").src, "_blank");
 
-$("#downloadQrBtn").onclick = () => {
-  window.open($("#qrImg").src, "_blank");
-};
-
-// معالجة الدعوات اللي جاية من QR Code تلقائياً بعد تسجيل الدخول
 async function handlePendingQrInvites() {
   const invUser = LS("dp_inv_user");
   const joinGrpId = LS("dp_join_grp");
@@ -690,9 +1008,7 @@ async function handlePendingQrInvites() {
           setTimeout(() => selectRoom(joinGrpId), 400);
         }
       }
-    } catch (e) {
-      console.error("Join group error:", e);
-    }
+    } catch (e) {}
   }
 }
 
@@ -712,18 +1028,17 @@ const AUTH_ERR = {
   "auth/invalid-credential": "الاسم أو كلمة السر غالطة (إلا يلاه أول مرة كليكي على حساب جديد الفوق)",
   "auth/user-not-found": "هاد الحساب ما كاينش، كليكي على (حساب جديد) أولاً",
   "auth/wrong-password": "كلمة السر غالطة",
-  "auth/weak-password": "كلمة السر خاص تكون فيها 6 حروف أو أرقام على الأقل",
-  "auth/operation-not-allowed": "خاصك تفعل Email/Password في Firebase Authentication"
+  "auth/weak-password": "كلمة السر خاص تكون فيها 6 حروف أو أرقام على الأقل"
 };
 
 $("#authForm").onsubmit = async e => {
   e.preventDefault();
   const err = $("#authErr"); err.textContent = "";
-  if (!$("#agreeChk").checked) return err.textContent = "خاصك توافق على قوانين الاحترام وعدم السب أولاً!";
+  if (!$("#agreeChk").checked) return err.textContent = "خاصك توافق على قوانين المنصة أولاً!";
   const u = $("#u").value.trim().toLowerCase();
   const p = $("#pw").value;
   if (!/^[a-z0-9_]{3,20}$/.test(u)) return err.textContent = "الاسم خاص يكون بالحروف الإنجليزية أو أرقام (من 3 لـ 20 حرف)";
-  if (containsInsult(u)) return err.textContent = "ممنوع اختيار اسم مستخدم فيه كلام غير لائق!";
+  if (containsWordFromList(u, BAD_WORDS) || containsWordFromList(u, GORE_NUDITY_WORDS)) return err.textContent = "ممنوع اختيار اسم مستخدم غير لائق!";
   if (p.length < 6) return err.textContent = "كلمة السر على الأقل 6 حروف أو أرقام";
 
   const mail = u + "@darkpower.app";
@@ -772,7 +1087,7 @@ if (auth) {
 }
 
 // =====================================================
-// 👥 نظام الأصدقاء (Add Friend & Requests)
+// 👥 نظام الأصدقاء
 // =====================================================
 async function sendFriendRequest(targetUser) {
   if (!targetUser || targetUser.uid === uid) return alert("ما يمكنش تزيد راسك!");
@@ -871,7 +1186,91 @@ $("#tab-friends").onclick = e => {
 };
 
 // =====================================================
-// 💬 نظام الدردشة الخاصة (Privé) والكروبات + Admin + Leave + QR
+// ✈️ مشاركة Reel أو منشور مع صديق مباشرة فـ الشات (Share to Friend)
+// =====================================================
+let postToShare = null;
+function openShareModal(postObj) {
+  postToShare = postObj;
+  const friends = (myUserDoc.friends || []).map(id => allUsers.find(u => u.uid === id)).filter(Boolean);
+  const groupRooms = rooms.filter(r => r.type === "group");
+
+  let html = "";
+  if (groupRooms.length) {
+    html += `<div class="muted" style="padding:4px">👥 الكروبات:</div>` + groupRooms.map(g => `
+      <div class="user-item">
+        <b>👥 ${esc(g.name)}</b>
+        <button type="button" class="btn sm" data-sh-room="${g.id}">✈️ إرسال للكروب</button>
+      </div>
+    `).join("");
+  }
+  const pool = friends.length ? friends : allUsers.filter(u => u.uid !== uid);
+  if (pool.length) {
+    html += `<div class="muted" style="padding:4px">👤 الأصدقاء:</div>` + pool.map(u => `
+      <div class="user-item">
+        <b>@${esc(u.username)}</b>
+        <button type="button" class="btn sm" data-sh-uid="${u.uid}">✈️ إرسال فـ Privé</button>
+      </div>
+    `).join("");
+  }
+  $("#shareTargetsList").innerHTML = html || `<div class="muted">زيد صحابك أولاً باش تبارطاجي معاهم!</div>`;
+  $("#shareModal").hidden = false;
+}
+$("#closeShareBtn").onclick = () => { $("#shareModal").hidden = true; };
+
+$("#shareTargetsList").onclick = async e => {
+  const rBtn = e.target.closest("[data-sh-room]");
+  const uBtn = e.target.closest("[data-sh-uid]");
+  if (!postToShare) return;
+
+  const shareText = `📲 بارطاجيت معاك ${postToShare.type === "reel" ? "Reel 📱" : "منشور"} ديال @${postToShare.author}: ${postToShare.text || ""}`;
+  if (rBtn) {
+    const roomId = rBtn.dataset.shRoom;
+    await db.collection("rooms").doc(roomId).collection("messages").add({
+      text: shareText,
+      sharedVideoUrl: (postToShare.type === "reel" || postToShare.type === "video") ? postToShare.fileUrl : null,
+      imgUrl: postToShare.type === "image" ? postToShare.fileUrl : null,
+      author: name, uid,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    await db.collection("rooms").doc(roomId).update({
+      lastText: `✈️ بارطاجى ${name} ريل/منشور`,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    $("#shareModal").hidden = true;
+    alert("✅ تم إرسال الـ Reel للكروب بنجاح!");
+  }
+  if (uBtn) {
+    const targetUser = allUsers.find(u => u.uid === uBtn.dataset.shUid);
+    if (!targetUser) return;
+    const pairId = "dm_" + [uid, targetUser.uid].sort().join("_");
+    const rRef = db.collection("rooms").doc(pairId);
+    const snap = await rRef.get();
+    if (!snap.exists) {
+      await rRef.set({
+        type: "dm",
+        members: [uid, targetUser.uid],
+        memberNames: { [uid]: name, [targetUser.uid]: targetUser.username },
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
+    await rRef.collection("messages").add({
+      text: shareText,
+      sharedVideoUrl: (postToShare.type === "reel" || postToShare.type === "video") ? postToShare.fileUrl : null,
+      imgUrl: postToShare.type === "image" ? postToShare.fileUrl : null,
+      author: name, uid,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    await rRef.update({
+      lastText: `✈️ بارطاجى ${name} ريل/منشور`,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    $("#shareModal").hidden = true;
+    alert(`✅ تم إرسال الـ Reel لصاحبك @${targetUser.username} فـ الشات!`);
+  }
+};
+
+// =====================================================
+// 💬 نظام الدردشة الخاصة والكروبات + @ Mention فـ الشات
 // =====================================================
 function isRoomAdmin(room, userId = uid) {
   if (!room || room.type !== "group") return false;
@@ -895,6 +1294,58 @@ async function openDirectChat(otherUser) {
   selectRoom(pairId);
 }
 
+// أوتو-كومبليت ديال @ Mention فـ الشات
+function getRoomMentionCandidates() {
+  if (!activeRoom) return [];
+  const memberIds = (activeRoom.members || []).filter(id => id !== uid);
+  return memberIds.map(id => {
+    const u = allUsers.find(x => x.uid === id);
+    return u?.username || activeRoom.memberNames?.[id] || null;
+  }).filter(Boolean);
+}
+
+function updateMentionPopup() {
+  const inp = $("#chatMsgInp");
+  const val = inp.value;
+  const match = val.match(/(?:^|\s)@([a-zA-Z0-9_]*)$/);
+  const pop = $("#mentionPopup");
+  if (!match) {
+    pop.hidden = true;
+    return;
+  }
+  const query = match[1].toLowerCase();
+  const candidates = getRoomMentionCandidates().filter(u => u.toLowerCase().startsWith(query));
+  if (!candidates.length) {
+    pop.hidden = true;
+    return;
+  }
+  pop.innerHTML = `<div class="muted" style="font-size:.75rem;padding:2px 8px">طاغي عضو بـ @:</div>` + candidates.map(u => `
+    <div class="mention-item" data-m-name="${esc(u)}">
+      <div class="avatar" style="width:26px;height:26px;font-size:.75rem">${esc(u[0].toUpperCase())}</div>
+      <span>@${esc(u)}</span>
+    </div>
+  `).join("");
+  pop.hidden = false;
+}
+
+$("#chatMsgInp").addEventListener("input", updateMentionPopup);
+$("#insertAtBtn").onclick = () => {
+  const inp = $("#chatMsgInp");
+  inp.value = (inp.value ? inp.value + " @" : "@");
+  inp.focus();
+  updateMentionPopup();
+};
+
+$("#mentionPopup").onclick = e => {
+  const item = e.target.closest("[data-m-name]");
+  if (!item) return;
+  const uname = item.dataset.mName;
+  const inp = $("#chatMsgInp");
+  inp.value = inp.value.replace(/@([a-zA-Z0-9_]*)$/, `@${uname} `);
+  $("#mentionPopup").hidden = true;
+  inp.focus();
+};
+
 $("#openGrpBtn").onclick = () => {
   const friends = (myUserDoc.friends || []).map(id => allUsers.find(u => u.uid === id)).filter(Boolean);
   const pool = friends.length ? friends : allUsers.filter(u => u.uid !== uid);
@@ -910,7 +1361,6 @@ $("#openGrpBtn").onclick = () => {
 };
 $("#closeGrpBtn").onclick = () => { $("#grpModal").hidden = true; };
 
-// إنشاء الكروب وتعيين المنشئ كـ Admin 👑
 $("#createGrpBtn").onclick = async () => {
   const title = $("#grpName").value.trim();
   if (!title) return $("#grpErr").textContent = "كتب سمية للكروب بعدا!";
@@ -925,17 +1375,17 @@ $("#createGrpBtn").onclick = async () => {
     type: "group",
     name: title,
     owner: uid,
-    admins: [uid], // منشئ الكروب هو الأدمن الرئيسي
+    admins: [uid],
     members,
     memberNames,
     lastText: `👑 تم إنشاء الكروب بواسطة ${name}`,
+    lastSenderUid: uid,
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   });
   $("#grpModal").hidden = true;
   selectRoom(docRef.id);
 };
 
-// دعوة صديق للكروب عبر QR Code
 $("#grpQrBtn").onclick = () => {
   if (!activeRoom || activeRoom.type !== "group") return;
   const baseUrl = location.origin + location.pathname;
@@ -947,7 +1397,6 @@ $("#grpQrBtn").onclick = () => {
   );
 };
 
-// الخروج من الكروب (Leave Group)
 async function leaveCurrentGroup() {
   if (!activeRoom || activeRoom.type !== "group") return;
   if (!confirm(`واش متأكد باغي تخرج من كروب "${activeRoom.name}"؟`)) return;
@@ -977,7 +1426,7 @@ async function leaveCurrentGroup() {
   $("#chatForm").hidden = true;
   $("#grpActionsBar").hidden = true;
   $("#chatTitle").textContent = "اختار صديق أو كروب للهضرة";
-  $("#chatSub").textContent = "رسائل خاصة ومباشرة (Real-Time)";
+  $("#chatSub").textContent = "دير @ باش تطاغي صاحبك فـ الشات";
   $("#msgList").innerHTML = `<div class="empty">لقد غادرت المجموعة بنجاح 👋</div>`;
   renderRoomsList();
 }
@@ -985,7 +1434,6 @@ async function leaveCurrentGroup() {
 $("#grpQuickLeaveBtn").onclick = leaveCurrentGroup;
 $("#giLeaveBtn").onclick = leaveCurrentGroup;
 
-// نافذة إدارة الكروب والأعضاء (Admin Panel)
 function openGroupManageModal() {
   if (!activeRoom || activeRoom.type !== "group") return;
   const r = rooms.find(x => x.id === activeRoom.id) || activeRoom;
@@ -1035,7 +1483,6 @@ function openGroupManageModal() {
 $("#grpManageBtn").onclick = openGroupManageModal;
 $("#closeGiBtn").onclick = () => { $("#grpInfoModal").hidden = true; };
 
-// إضافة عضو من طرف الـ Admin
 $("#giAddMemberBtn").onclick = async () => {
   if (!activeRoom || !isRoomAdmin(activeRoom)) return;
   const sel = $("#giAddSelect");
@@ -1052,7 +1499,6 @@ $("#giAddMemberBtn").onclick = async () => {
   setTimeout(openGroupManageModal, 250);
 };
 
-// ترقية عضو لـ Admin أو طرده من الكروب
 $("#giMembersList").onclick = async e => {
   const btn = e.target.closest("[data-gi-act]");
   if (!btn || !activeRoom || !isRoomAdmin(activeRoom)) return;
@@ -1062,9 +1508,7 @@ $("#giMembersList").onclick = async e => {
   const rRef = db.collection("rooms").doc(activeRoom.id);
 
   if (act === "promote") {
-    await rRef.update({
-      admins: firebase.firestore.FieldValue.arrayUnion(targetUid)
-    });
+    await rRef.update({ admins: firebase.firestore.FieldValue.arrayUnion(targetUid) });
     setTimeout(openGroupManageModal, 250);
   }
   if (act === "kick") {
@@ -1079,10 +1523,9 @@ $("#giMembersList").onclick = async e => {
   }
 };
 
-// حذف الكروب بالكامل من طرف الـ Admin
 $("#giDeleteGrpBtn").onclick = async () => {
   if (!activeRoom || !isRoomAdmin(activeRoom)) return;
-  if (!confirm(`⚠️ واش متأكد باغي تمسح كروب "${activeRoom.name}" نهائياً على كاع الأعضاء؟`)) return;
+  if (!confirm(`⚠️ واش متأكد باغي تمسح كروب "${activeRoom.name}" نهائياً؟`)) return;
   await db.collection("rooms").doc(activeRoom.id).delete();
   $("#grpInfoModal").hidden = true;
   activeRoom = null;
@@ -1096,14 +1539,14 @@ function getRoomDisplay(r) {
     const myAdminBadge = isRoomAdmin(r, uid) ? " • 👑 نتا Admin" : "";
     return {
       title: r.name || "كروب",
-      sub: `👥 كروب (${(r.members || []).length} أعضاء${myAdminBadge})`,
+      sub: `👥 كروب (${(r.members || []).length} أعضاء${myAdminBadge}) • كتب @ للطاغ`,
       icon: "👥"
     };
   }
   const otherId = (r.members || []).find(m => m !== uid);
   const otherUser = allUsers.find(u => u.uid === otherId);
   const otherName = otherUser?.username || r.memberNames?.[otherId] || "صديق";
-  return { title: otherName, sub: "🔒 محادثة خاصة (Privé)", icon: otherName[0]?.toUpperCase() || "💬" };
+  return { title: otherName, sub: `🔒 خاص مع @${otherName}`, icon: otherName[0]?.toUpperCase() || "💬" };
 }
 
 function renderRoomsList() {
@@ -1159,6 +1602,7 @@ function selectRoom(roomId) {
   $("#chatSub").textContent = info.sub;
   $("#chatForm").hidden = false;
   $("#grpActionsBar").hidden = (r.type !== "group");
+  $("#mentionPopup").hidden = true;
   renderRoomsList();
 
   unsubMsgs?.();
@@ -1167,7 +1611,7 @@ function selectRoom(roomId) {
     .onSnapshot(snap => {
       const msgs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
       if (!msgs.length) {
-        $("#msgList").innerHTML = `<div class="empty">ابدا الهضرة دابا مع ${esc(info.title)} ⚡</div>`;
+        $("#msgList").innerHTML = `<div class="empty">ابدا الهضرة دابا مع ${esc(info.title)} ⚡ (دير @ باش تطاغي)</div>`;
         return;
       }
       $("#msgList").innerHTML = msgs.map(m => {
@@ -1175,11 +1619,12 @@ function selectRoom(roomId) {
         const senderIsAdm = activeRoom?.type === "group" && isRoomAdmin(activeRoom, m.uid);
         const time = m.createdAt?.toDate ? m.createdAt.toDate().toLocaleTimeString("ar-MA", { hour: "2-digit", minute: "2-digit" }) : "";
         let media = "";
-        if (m.imgUrl) media = `<img src="${esc(m.imgUrl)}" alt="">`;
-        if (m.audioUrl) media = `<audio controls src="${esc(m.audioUrl)}"></audio>`;
+        if (m.imgUrl) media += `<img src="${esc(m.imgUrl)}" alt="">`;
+        if (m.sharedVideoUrl) media += `<video controls playsinline src="${esc(m.sharedVideoUrl)}"></video>`;
+        if (m.audioUrl) media += `<audio controls src="${esc(m.audioUrl)}"></audio>`;
         return `<div class="msg ${isMe ? "me" : ""}">
-          ${!isMe ? `<div class="m-sender">${esc(m.author)} ${senderIsAdm ? "👑" : ""}</div>` : ""}
-          ${m.text ? `<div>${esc(m.text)}</div>` : ""}
+          ${!isMe ? `<div class="m-sender" style="cursor:pointer" data-reply-at="${esc(m.author)}">@${esc(m.author)} ${senderIsAdm ? "👑" : ""}</div>` : ""}
+          ${m.text ? `<div>${formatRichText(m.text)}</div>` : ""}
           ${media}
           <div class="m-time">${time}</div>
         </div>`;
@@ -1187,6 +1632,16 @@ function selectRoom(roomId) {
       $("#msgList").scrollTop = $("#msgList").scrollHeight;
     });
 }
+
+// كليكي على اسم شي واحد فـ الشات باش تطاغيه بـ @ مباشرة
+$("#msgList").onclick = e => {
+  const senderEl = e.target.closest("[data-reply-at]");
+  if (senderEl) {
+    const inp = $("#chatMsgInp");
+    inp.value = `@${senderEl.dataset.replyAt} ` + inp.value;
+    inp.focus();
+  }
+};
 
 async function sendChatMessage({ text = "", imgUrl = null, audioUrl = null }) {
   if (!activeRoom) return;
@@ -1197,6 +1652,8 @@ async function sendChatMessage({ text = "", imgUrl = null, audioUrl = null }) {
   });
   await db.collection("rooms").doc(activeRoom.id).update({
     lastText: text || (imgUrl ? "🖼️ صورة" : "🎙️ أوديو"),
+    lastSenderUid: uid,
+    lastSenderName: name,
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   });
 }
@@ -1206,12 +1663,14 @@ $("#chatForm").onsubmit = async e => {
   const inp = $("#chatMsgInp"), t = inp.value.trim();
   if (!t) return;
   inp.value = "";
+  $("#mentionPopup").hidden = true;
   await sendChatMessage({ text: t });
 };
 
 $("#chatImgInp").onchange = async e => {
   const f = e.target.files[0];
   if (!f) return;
+  if (!(await scanMediaSafety(f, ""))) return;
   const dataUrl = await compressImage(f, 700, 0.7);
   await sendChatMessage({ imgUrl: dataUrl });
   e.target.value = "";
@@ -1240,11 +1699,11 @@ $("#chatVocalBtn").onclick = async () => {
 };
 
 // =====================================================
-// 🏠 نظام المنشورات العام + الفيديوهات والـ Reels عبر Cloudinary
+// 🏠 نظام المنشورات العام + الهاشتاقات + الريلز ملء الشاشة
 // =====================================================
-let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "";
+let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "", activeHashtag = "";
 const ACCEPT = { pdf: "application/pdf", image: "image/*", video: "video/*", reel: "video/*", audio: "audio/*" };
-const MAX = 60 * 1024 * 1024; // 60MB للفيديوهات والريلز عبر Cloudinary
+const MAX = 60 * 1024 * 1024;
 
 function setType(t) {
   type = t; file = null; stopRec();
@@ -1296,13 +1755,15 @@ $("#recBtn").onclick = async () => {
   }
 };
 
-// نشر المنشور (الصور الخفيفة بـ ضغط مباشر، والفيديوهات/الريلز/الملفات عبر Cloudinary مجاناً)
+// نشر المنشور مع فحص العري/الدم واستخراج الهاشتاقات
 $("#post").onclick = async () => {
   if (!ready || !uid) return;
   const text = $("#text").value.trim();
   if (type === "text" ? !text : !file) return alert(type === "text" ? "كتب شي حاجة بعدا!" : "ختار الملف أو الفيديو بعدا!");
   if (!(await checkModerationAndStrike(text))) return;
+  if (file && !(await scanMediaSafety(file, text))) return;
 
+  const hashtags = extractHashtags(text);
   const btn = $("#post"); btn.disabled = true;
   try {
     let fileUrl = null, fileName = file?.name || null;
@@ -1312,7 +1773,6 @@ $("#post").onclick = async () => {
       } else if (type === "audio" && file.size < 650 * 1024) {
         fileUrl = await fileToDataUrl(file);
       } else {
-        // رفع الفيديوهات، الريلز، PDF، والأوديو الكبير إلى Cloudinary مجاناً
         $("#prog").hidden = false;
         fileUrl = await uploadToCloudinary(file, (pct) => {
           $("#progBar").style.width = pct + "%";
@@ -1320,7 +1780,7 @@ $("#post").onclick = async () => {
       }
     }
     await db.collection("posts").add({
-      type, text, fileUrl, fileName,
+      type, text, hashtags, fileUrl, fileName,
       author: name, uid,
       likes: [], comments: [],
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1328,7 +1788,7 @@ $("#post").onclick = async () => {
     $("#text").value = ""; setType(type);
   } catch (err) {
     console.error(err);
-    alert("وقع مشكل فالنشر: " + err.message + "\nتأكد أنك سميتي الـ Preset فـ Cloudinary بـ dark_power_preset ودرتي ليه Unsigned.");
+    alert("وقع مشكل فالنشر: " + err.message);
   }
   btn.disabled = false; $("#prog").hidden = true; $("#progBar").style.width = 0;
 };
@@ -1341,6 +1801,40 @@ $("#filters").onclick = e => {
   renderFeed();
 };
 $("#search").oninput = e => { term = e.target.value.trim().toLowerCase(); renderFeed(); };
+
+function setHashtagFilter(tag) {
+  activeHashtag = tag.toLowerCase();
+  $("#clearHashtagBtn").hidden = !activeHashtag;
+  $("#reelActiveTag").textContent = activeHashtag ? `(${activeHashtag})` : "";
+  renderTrendingHashtags();
+  renderFeed();
+}
+$("#clearHashtagBtn").onclick = () => setHashtagFilter("");
+
+function renderTrendingHashtags() {
+  const counts = {};
+  posts.forEach(p => {
+    const tags = p.hashtags?.length ? p.hashtags : extractHashtags(p.text);
+    tags.forEach(t => { counts[t] = (counts[t] || 0) + 1; });
+  });
+  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 12);
+  if (!sorted.length) {
+    $("#trendingHashtags").innerHTML = `<span class="muted" style="font-size:.8rem">دير #هاشتاق فـ الفيديو ديالك باش يبان هنا فـ الطوندونس!</span>`;
+    return;
+  }
+  $("#trendingHashtags").innerHTML = sorted.map(([tag, cnt]) => `
+    <button type="button" class="hashtag-chip ${activeHashtag === tag ? "on" : ""}" data-trend-tag="${esc(tag)}">
+      ${esc(tag)} <small>(${cnt})</small>
+    </button>
+  `).join("");
+}
+
+$("#trendingHashtags").onclick = e => {
+  const b = e.target.closest("[data-trend-tag]");
+  if (!b) return;
+  const tag = b.dataset.trendTag;
+  setHashtagFilter(activeHashtag === tag ? "" : tag);
+};
 
 const BADGE = { text: "نص", pdf: "PDF", image: "صورة", video: "🎬 فيديو", reel: "📱 Reel", audio: "أوديو" };
 const open = new Set();
@@ -1365,75 +1859,208 @@ function card(p) {
       <div class="user-row">
         <div class="avatar">${esc(initial)}</div>
         <div>
-          <span class="who">${esc(p.author)}</span>
+          <span class="who">@${esc(p.author)}</span>
           <span class="badge">${BADGE[p.type] || "نص"}</span>
           <div class="muted">${date}</div>
         </div>
       </div>
       <div style="display:flex;gap:6px">
         ${!isMe ? `<button type="button" class="ghost" data-a="dm-author" data-uid="${p.uid}" data-uname="${esc(p.author)}" title="هضر معاه فـ Privé">💬 خاص</button>` : ""}
-        ${!isMe ? `<button type="button" class="ghost" data-a="report" title="تبليغ عن سب أو مخالفة">🚩</button>` : ""}
+        ${!isMe ? `<button type="button" class="ghost" data-a="report-gore" title="تبليغ عن عري أو دم (حذف + حظر 24 ساعة)">🔞🩸</button>` : ""}
         ${isMe ? `<button type="button" class="ghost" data-a="del" title="حذف">🗑️</button>` : ""}
       </div>
     </div>
-    ${p.text ? `<div class="body">${esc(p.text)}</div>` : ""}${media}
+    ${p.text ? `<div class="body">${formatRichText(p.text)}</div>` : ""}${media}
     <div class="acts">
       <button type="button" data-a="like" class="${liked ? "liked" : ""}">${liked ? "❤️" : "🤍"} ${likes.length}</button>
       <button type="button" data-a="cm">💬 تعليقات (${cms.length})</button>
+      <button type="button" data-a="share">✈️ بارطاجي مع صديق</button>
     </div>
     <div class="comments" ${open.has(p.id) ? "" : "hidden"}>
-      ${cms.map(c => `<div class="cm"><b>${esc(c.author)}</b>: ${esc(c.text)}</div>`).join("")}
+      ${cms.map(c => `<div class="cm"><b>@${esc(c.author)}</b>: ${formatRichText(c.text)}</div>`).join("")}
       <div class="cform"><input data-ci placeholder="كتب تعليق محترم للدراري…" maxlength="500"><button type="button" class="btn" data-a="send">إرسال</button></div>
     </div>
   </article>`;
 }
 
 function renderFeed() {
+  renderTrendingHashtags();
   const drafts = {};
-  document.querySelectorAll("[data-ci]").forEach(i => { if (i.value) drafts[i.closest("article").dataset.id] = i.value; });
-  const list = posts.filter(p => (filter === "all" || p.type === filter) && (!term || ((p.text || "") + " " + (p.fileName || "") + " " + p.author).toLowerCase().includes(term)));
-  $("#feed").innerHTML = list.length ? list.map(card).join("") : `<div class="empty">ما كاين حتى منشور دابا، كون نتا أول واحد يبارطاجي! ⚡</div>`;
+  document.querySelectorAll("[data-ci]").forEach(i => { if (i.value) drafts[i.closest("article")?.dataset.id] = i.value; });
+
+  const list = posts.filter(p => {
+    const matchType = (filter === "all" || p.type === filter);
+    const pTags = p.hashtags?.length ? p.hashtags : extractHashtags(p.text);
+    const matchTag = !activeHashtag || pTags.includes(activeHashtag);
+    const matchTerm = !term || ((p.text || "") + " " + (p.fileName || "") + " " + p.author).toLowerCase().includes(term);
+    return matchType && matchTag && matchTerm;
+  });
+
+  $("#feed").innerHTML = list.length ? list.map(card).join("") : `<div class="empty">ما كاين حتى منشور فهاد الفلتر دابا! ⚡</div>`;
   for (const id in drafts) { const i = document.querySelector(`[data-id="${id}"] [data-ci]`); if (i) i.value = drafts[id]; }
   if (currentTab === "reels") renderReelsFeed();
 }
 
-// عرض قسم الريلز العمودي (Reels Tab)
+// =====================================================
+// 📱 عرض الريلز ملء الشاشة (Instagram Full-Screen + Double Tap Like)
+// =====================================================
+let activeReelCommentPostId = null;
+let reelObserver = null;
+
 function renderReelsFeed() {
-  const reelsList = posts.filter(p => (p.type === "reel" || p.type === "video") && p.fileUrl);
+  const reelsList = posts.filter(p => {
+    const isVid = (p.type === "reel" || p.type === "video") && p.fileUrl;
+    if (!isVid) return false;
+    if (!activeHashtag) return true;
+    const pTags = p.hashtags?.length ? p.hashtags : extractHashtags(p.text);
+    return pTags.includes(activeHashtag);
+  });
+
+  const container = $("#reelsContainer");
   if (!reelsList.length) {
-    $("#reelsFeed").innerHTML = `<div class="empty">مازال ما تلاح حتى Reel أو فيديو! كليكي الفوق على (نشر Reel جديد) وكون نتا الأول 🎬⚡</div>`;
+    container.innerHTML = `<div class="empty" style="margin-top:35vh;color:#fff">مازال ما تلاح حتى Reel هنا! كليكي الفوق على (➕ لوح Reel) وكون نتا الأول 🎬⚡</div>`;
     return;
   }
-  $("#reelsFeed").innerHTML = reelsList.map(p => {
+
+  container.innerHTML = reelsList.map(p => {
     const likes = p.likes || [], cms = p.comments || [];
     const liked = likes.includes(uid);
-    return `<article class="reel-item" data-id="${p.id}">
-      <video controls loop playsinline preload="metadata" src="${esc(p.fileUrl)}"></video>
-      <div class="reel-overlay">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <b>@${esc(p.author)} <span class="badge">${BADGE[p.type]}</span></b>
-          <div style="display:flex;gap:6px">
-            <button type="button" class="ghost" data-a="like" style="padding:4px 12px">${liked ? "❤️" : "🤍"} ${likes.length}</button>
-            <button type="button" class="ghost" data-a="cm" style="padding:4px 12px">💬 ${cms.length}</button>
-          </div>
+    const initial = (p.author || "U")[0].toUpperCase();
+    return `<div class="ig-reel-slide" data-id="${p.id}">
+      <video loop playsinline preload="metadata" src="${esc(p.fileUrl)}"></video>
+      <div class="ig-heart-burst">❤️</div>
+
+      <!-- أزرار التفاعل الجانبية بحال Instagram -->
+      <div class="ig-side-actions">
+        <div class="ig-act-wrap">
+          <button type="button" class="ig-act-btn" data-a="like" style="${liked ? "border-color:#f43f5e;background:rgba(244,63,94,0.25)" : ""}">${liked ? "❤️" : "🤍"}</button>
+          <span>${likes.length}</span>
         </div>
-        ${p.text ? `<div style="margin-top:6px;font-size:.92rem">${esc(p.text)}</div>` : ""}
-        <div class="comments" ${open.has(p.id) ? "" : "hidden"}>
-          ${cms.map(c => `<div class="cm"><b>${esc(c.author)}</b>: ${esc(c.text)}</div>`).join("")}
-          <div class="cform"><input data-ci placeholder="تعليق على الـ Reel…" maxlength="400"><button type="button" class="btn sm" data-a="send">إرسال</button></div>
+        <div class="ig-act-wrap">
+          <button type="button" class="ig-act-btn" data-a="ig-cm">💬</button>
+          <span>${cms.length}</span>
         </div>
+        <div class="ig-act-wrap">
+          <button type="button" class="ig-act-btn" data-a="share" title="بارطاجي مع صديق">✈️</button>
+          <span>بارطاج</span>
+        </div>
+        ${p.uid !== uid ? `<div class="ig-act-wrap">
+          <button type="button" class="ig-act-btn" data-a="report-gore" title="تبليغ عن عري أو دم">🔞</button>
+          <span>تبليغ</span>
+        </div>` : `<div class="ig-act-wrap">
+          <button type="button" class="ig-act-btn" data-a="del" title="حذف">🗑️</button>
+          <span>حذف</span>
+        </div>`}
       </div>
-    </article>`;
+
+      <!-- معلومات صانع المحتوى والهاشتاقات لتحت -->
+      <div class="ig-bottom-info">
+        <div class="ig-author">
+          <div class="avatar" style="width:36px;height:36px">${esc(initial)}</div>
+          <span>@${esc(p.author)}</span>
+          <span class="badge" style="background:rgba(0,0,0,0.6)">📱 Reel</span>
+        </div>
+        ${p.text ? `<div class="ig-caption">${formatRichText(p.text)}</div>` : ""}
+        <div class="muted" style="color:#ddd;font-size:.75rem;margin-top:4px">💡 كليكي جوج مرات (Double Tap) على الفيديو باش دير ❤️</div>
+      </div>
+    </div>`;
   }).join("");
+
+  setupReelAutoPlayObserver();
 }
 
+function setupReelAutoPlayObserver() {
+  reelObserver?.disconnect();
+  reelObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const vid = entry.target.querySelector("video");
+      if (!vid) return;
+      if (entry.isIntersecting && currentTab === "reels") {
+        vid.play().catch(() => {});
+      } else {
+        vid.pause();
+      }
+    });
+  }, { threshold: 0.65 });
+
+  document.querySelectorAll(".ig-reel-slide").forEach(slide => reelObserver.observe(slide));
+}
+
+// Double-tap باش يدير Like مع أنيميشن القلب ❤️ + Single-tap باش يدير Play/Pause
+let lastTapTime = 0;
+let singleTapTimer = null;
+$("#reelsContainer").addEventListener("click", e => {
+  if (e.target.closest("button") || e.target.closest("a")) return;
+  const slide = e.target.closest(".ig-reel-slide");
+  if (!slide) return;
+  const now = Date.now();
+  const id = slide.dataset.id;
+  const p = posts.find(x => x.id === id);
+  const vid = slide.querySelector("video");
+
+  if (now - lastTapTime < 300) {
+    // Double Tap -> Like + Heart Burst Animation
+    clearTimeout(singleTapTimer);
+    const heart = slide.querySelector(".ig-heart-burst");
+    heart.classList.add("pop");
+    setTimeout(() => heart.classList.remove("pop"), 650);
+    if (p && !(p.likes || []).includes(uid)) {
+      db.collection("posts").doc(id).update({
+        likes: firebase.firestore.FieldValue.arrayUnion(uid)
+      });
+    }
+  } else {
+    singleTapTimer = setTimeout(() => {
+      if (vid) vid.paused ? vid.play().catch(()=>{}) : vid.pause();
+    }, 260);
+  }
+  lastTapTime = now;
+});
+
+function openReelCommentsDrawer(postId) {
+  activeReelCommentPostId = postId;
+  const p = posts.find(x => x.id === postId);
+  if (!p) return;
+  const cms = p.comments || [];
+  $("#reelCmList").innerHTML = cms.length
+    ? cms.map(c => `<div class="cm"><b>@${esc(c.author)}</b>: ${formatRichText(c.text)}</div>`).join("")
+    : `<div class="muted" style="text-align:center;padding:16px">كون أول واحد يعلق على هاد الـ Reel! 💬</div>`;
+  $("#reelCommentsDrawer").hidden = false;
+}
+$("#closeReelCmBtn").onclick = () => { $("#reelCommentsDrawer").hidden = true; activeReelCommentPostId = null; };
+
+$("#reelCmForm").onsubmit = async e => {
+  e.preventDefault();
+  if (!activeReelCommentPostId) return;
+  const inp = $("#reelCmInp"), t = inp.value.trim();
+  if (!t) return;
+  if (!(await checkModerationAndStrike(t))) return;
+  inp.value = "";
+  await db.collection("posts").doc(activeReelCommentPostId).update({
+    comments: firebase.firestore.FieldValue.arrayUnion({ author: name, text: t, ts: Date.now(), uid })
+  });
+  setTimeout(() => openReelCommentsDrawer(activeReelCommentPostId), 200);
+};
+
 async function handlePostAction(e) {
+  // ضغط على هاشتاق وسط النص
+  const tagLink = e.target.closest(".hashtag-link");
+  if (tagLink) {
+    e.preventDefault();
+    const tag = tagLink.dataset.tag;
+    setHashtagFilter(tag);
+    if (currentTab === "reels") renderReelsFeed();
+    return;
+  }
+
   const a = e.target.closest("[data-a]")?.dataset.a; if (!a || !ready) return;
   if (a === "dm-author") {
     const btn = e.target.closest("[data-a]");
     return openDirectChat({ uid: btn.dataset.uid, username: btn.dataset.uname });
   }
-  const art = e.target.closest("article"), id = art.dataset.id, p = posts.find(x => x.id === id);
+  const containerEl = e.target.closest("[data-id]");
+  if (!containerEl) return;
+  const id = containerEl.dataset.id, p = posts.find(x => x.id === id);
   if (!p) return;
   const d = db.collection("posts").doc(id);
 
@@ -1443,32 +2070,28 @@ async function handlePostAction(e) {
   }
   if (a === "cm") {
     open.has(id) ? open.delete(id) : open.add(id);
-    art.querySelector(".comments").hidden = !open.has(id);
+    containerEl.querySelector(".comments").hidden = !open.has(id);
   }
-  if (a === "report") {
-    if (confirm("واش متأكد باغي تبلغ على هاد المنشور بسبب مخالفة قوانين الاحترام؟")) {
-      const reps = p.reports || [];
-      if (!reps.includes(uid)) {
-        const nextReps = [...reps, uid];
-        if (nextReps.length >= 3) {
-          await d.delete();
-          alert("تم حذف المنشور تلقائياً بعد وصوله لـ 3 تبليغات من الأصدقاء ⚖️");
-        } else {
-          await d.update({ reports: firebase.firestore.FieldValue.arrayUnion(uid) });
-          alert("تم تسجيل التبليغ بنجاح (ملي كيوصل 3 تبليغات كيتمسح المنشور أوتوماتيكياً).");
-        }
-      } else {
-        alert("ديجا بلغتي على هاد المنشور.");
-      }
+  if (a === "ig-cm") {
+    openReelCommentsDrawer(id);
+  }
+  if (a === "share") {
+    openShareModal(p);
+  }
+  if (a === "report-gore") {
+    if (confirm("🔞🩸 واش متأكد هاد الفيديو/المنشور فيه عري (+18) أو دم وعنف؟\n(غادي يتمسح فوراً ومول الحساب غادي يتبلوكا لمدة 24 ساعة!)")) {
+      await banUserForOneDay(p.uid, "نشر فيديو/منشور يحتوي على عري أو دم");
+      await d.delete();
+      alert("⚖️ تم مسح الفيديو/المنشور فوراً وتم حظر صاحب الحساب لمدة 24 ساعة (يوم كامل)!");
     }
   }
   if (a === "del" && confirm("واش متأكد باغي تمسح هاد المنشور؟")) d.delete();
   if (a === "pdf") {
-    const pv = art.querySelector("[data-pv]"); pv.hidden = !pv.hidden;
+    const pv = containerEl.querySelector("[data-pv]"); pv.hidden = !pv.hidden;
     pv.innerHTML = pv.hidden ? "" : `<iframe src="https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(p.fileUrl)}"></iframe>`;
   }
   if (a === "send") {
-    const inp = art.querySelector("[data-ci]"), t = inp.value.trim(); if (!t) return;
+    const inp = containerEl.querySelector("[data-ci]"), t = inp.value.trim(); if (!t) return;
     if (!(await checkModerationAndStrike(t))) return;
     open.add(id); inp.value = "";
     d.update({ comments: firebase.firestore.FieldValue.arrayUnion({ author: name, text: t, ts: Date.now(), uid }) });
@@ -1476,15 +2099,22 @@ async function handlePostAction(e) {
 }
 
 $("#feed").onclick = handlePostAction;
-$("#reelsFeed").onclick = handlePostAction;
+$("#reelsContainer").onclick = handlePostAction;
 $("#feed").onkeydown = e => { if (e.key === "Enter" && e.target.matches("[data-ci]")) e.target.nextElementSibling.click(); };
-$("#reelsFeed").onkeydown = e => { if (e.key === "Enter" && e.target.matches("[data-ci]")) e.target.nextElementSibling.click(); };
+
+let initialRoomsLoad = true;
+const roomTimestamps = {};
 
 function listenAll() {
   unsubPosts?.(); unsubUsers?.(); unsubRooms?.();
+  initialRoomsLoad = true;
 
   unsubPosts = db.collection("posts").orderBy("createdAt", "desc").onSnapshot(
-    s => { posts = s.docs.map(d => ({ id: d.id, ...d.data() })); renderFeed(); },
+    s => {
+      posts = s.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderFeed();
+      if (activeReelCommentPostId) openReelCommentsDrawer(activeReelCommentPostId);
+    },
     err => { console.error(err); $("#feed").innerHTML = `<div class="empty">تعذر جلب المنشورات — تأكد من تفعيل Rules فـ Firestore.</div>`; }
   );
 
@@ -1497,6 +2127,26 @@ function listenAll() {
   });
 
   unsubRooms = db.collection("rooms").where("members", "array-contains", uid).onSnapshot(s => {
+    s.docChanges().forEach(change => {
+      const rData = change.doc.data();
+      const rId = change.doc.id;
+      const newSec = rData.updatedAt?.seconds || 0;
+      const prevSec = roomTimestamps[rId] || 0;
+      roomTimestamps[rId] = newSec;
+
+      if (!initialRoomsLoad && change.type === "modified" && newSec > prevSec && rData.lastSenderUid && rData.lastSenderUid !== uid) {
+        const sender = rData.lastSenderName || "صديق";
+        const rTitle = rData.type === "group" ? rData.name : "خاص";
+        triggerIncomingMessageAlert(sender, rData.lastText || "رسالة جديدة", rTitle);
+        if (currentTab !== "chat") {
+          const b = $("#chatUnreadBadge");
+          b.textContent = Number(b.textContent || 0) + 1;
+          b.hidden = false;
+        }
+      }
+    });
+    initialRoomsLoad = false;
+
     rooms = s.docs.map(d => ({ id: d.id, ...d.data() }));
     rooms.sort((a, b) => (b.updatedAt?.seconds || 0) - (a.updatedAt?.seconds || 0));
     if (activeRoom) {
