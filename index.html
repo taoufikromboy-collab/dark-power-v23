@@ -3,29 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>⚡ Dark Power — Social, Reels, Live, Video Call & Lion Popi Darija AI</title>
-<meta name="description" content="Dark Power — شبكة التواصل الاجتماعي، الريلز، مكالمات الفيديو، البث المباشر (Live)، المحفظة المالية الخاصة، الدردشة والمجموعات مع المساعد الذكي المغربي Lion Popi AI.">
-<meta name="keywords" content="Dark Power, دارك باور, social media, reels maroc, video call, live stream, chat, lion popi ai">
+<title>👑 VYROX — Social, Pulses, Reels, WebRTC Live & Lion Popi AI</title>
+<meta name="description" content="VYROX — منصة التواصل الاجتماعي الملكية، القصص الفورية (Pulses)، الملاحظات (Sparks)، الريلز، مكالمات الفيديو WebRTC، والبث المباشر بالصوت والصورة.">
+<meta name="keywords" content="VYROX, فايروكس, social media, reels maroc, video call, live stream, chat, lion popi ai">
 <meta name="robots" content="index, follow">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&intent=capture"></script>
 <style>
 :root{
-  --bg:#09090d; --card:#12121a; --card2:#181824; --line:#272738;
-  --tx:#f2f2f7; --mut:#8e8ea6; --ac:#ffd700; --ac2:#ffe600; --ac-tx:#09090d;
-  --danger:#f43f5e; --warn:#f59e0b; --ok:#10b981; --ai:#a855f7; --ai2:#ec4899; --r:16px;
+  --bg:#07070b; --card:#111118; --card2:#181824; --line:#28283c;
+  --tx:#f5f5fa; --mut:#8e8ea8; --ac:#ffd700; --ac2:#ffae00; --ac-tx:#07070b;
+  --danger:#f43f5e; --warn:#f59e0b; --ok:#10b981; --ai:#a855f7; --ai2:#ec4899; --r:18px;
 }
 [data-theme=light]{
   --bg:#f4f4f9; --card:#ffffff; --card2:#ececf4; --line:#dcdce8;
-  --tx:#111118; --mut:#64647a; --ac:#d9a400; --ac2:#b8860b; --ac-tx:#ffffff;
+  --tx:#111118; --mut:#64647a; --ac:#d99b00; --ac2:#b87800; --ac-tx:#ffffff;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--tx);font-family:Cairo,system-ui,sans-serif;line-height:1.6;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
-.top{position:sticky;top:0;z-index:35;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:8px 12px}
-.bar{display:flex;gap:6px;align-items:center;max-width:960px;margin:auto;flex-wrap:wrap}
-.logo{margin:0;font-size:1.25rem;font-weight:900;cursor:pointer;white-space:nowrap}
-.logo span{color:var(--ac)}
+.top{position:sticky;top:0;z-index:35;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:8px 12px}
+.bar{display:flex;gap:8px;align-items:center;max-width:980px;margin:auto;flex-wrap:wrap}
+.brand-logo{display:inline-flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none;user-select:none}
+.brand-logo svg{width:38px;height:38px;filter:drop-shadow(0 0 8px rgba(255,215,0,0.45));flex-shrink:0}
+.brand-txt{font-size:1.35rem;font-weight:900;letter-spacing:1.5px;color:#fff;display:flex;align-items:center}
+[data-theme=light] .brand-txt{color:#111}
+.brand-txt span{background:linear-gradient(135deg,#ffd700,#ff9900);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 input,textarea,select{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;width:100%}
 input:focus,textarea:focus,select:focus{outline:2px solid var(--ac);border-color:transparent}
 #search{flex:1;min-width:110px;width:auto;padding:7px 12px;font-size:.9rem}
@@ -33,26 +36,46 @@ button{font:inherit;cursor:pointer;transition:transform .12s,opacity .15s}
 button:active{transform:scale(0.95)}
 .ghost{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:6px 10px}
 .ghost:hover{border-color:var(--ac)}
-.btn{background:linear-gradient(90deg,var(--ac),var(--ac2));color:var(--ac-tx);border:0;border-radius:12px;padding:9px 16px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn{background:linear-gradient(135deg,var(--ac),var(--ac2));color:var(--ac-tx);border:0;border-radius:12px;padding:9px 16px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .btn.ghost{background:var(--card2);color:var(--tx);border-radius:12px;border:1px solid var(--line)}
 .btn.danger{background:var(--danger);color:#fff}
 .btn.ok-btn{background:var(--ok);color:#fff}
 .btn.ai-btn{background:linear-gradient(135deg,var(--ai),var(--ai2));color:#fff}
 .btn.sm{padding:5px 12px;font-size:.82rem;border-radius:99px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.follow-btn{background:var(--ac);color:#000;border:1px solid var(--ac);border-radius:99px;padding:4px 14px;font-size:.82rem;font-weight:800}
+.follow-btn{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#000;border:1px solid var(--ac);border-radius:99px;padding:4px 14px;font-size:.82rem;font-weight:800}
 .follow-btn.following{background:var(--card2);color:var(--tx);border-color:var(--line)}
 .wallet-top-btn{background:rgba(16,185,129,0.16);color:var(--ok);border:1px solid var(--ok);border-radius:99px;padding:5px 10px;font-weight:900;font-size:.82rem;display:inline-flex;align-items:center;gap:4px}
 .wallet-top-btn:hover{background:var(--ok);color:#fff}
 
-/* شريط التنقل المتجاوب (فوق للبيسي، وتحت ثابت ومريح لأصحاب التليفون) */
-.nav-tabs{display:flex;gap:8px;max-width:960px;margin:8px auto 0;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+/* 🟢 النقطة الخضراء للناس اللي Online والرمادية للـ Offline */
+.avatar-wrap{position:relative;display:inline-flex;flex-shrink:0}
+.status-dot{position:absolute;bottom:0;right:0;width:12px;height:12px;border-radius:50%;border:2px solid var(--card);z-index:3}
+.status-dot.online{background:#10b981;box-shadow:0 0 8px #10b981}
+.status-dot.offline{background:#64748b}
+.status-txt-online{color:#10b981;font-size:.75rem;font-weight:800}
+.status-txt-offline{color:var(--mut);font-size:.75rem}
+
+/* ⚡💭 شريط VYROX Pulses (Stories) & Sparks (Instagram Notes بلمسة VYROX) */
+.vyrox-bar{display:flex;gap:14px;overflow-x:auto;padding:18px 12px 10px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:14px;scrollbar-width:none;align-items:flex-end}
+.vyrox-bar::-webkit-scrollbar{display:none}
+.pulse-item{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;position:relative;min-width:72px;flex-shrink:0;user-select:none}
+.spark-bubble{position:absolute;top:-14px;background:linear-gradient(135deg,var(--card2),#252538);color:var(--tx);border:1px solid var(--ac);border-radius:14px;padding:2px 8px;font-size:.7rem;font-weight:700;max-width:95px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 4px 12px rgba(0,0,0,0.5);z-index:4;animation:floatNote 2.4s ease-in-out infinite alternate}
+@keyframes floatNote{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.pulse-ring{width:64px;height:64px;border-radius:22px;padding:3px;background:linear-gradient(135deg,#ffd700,#ff0055,#a855f7);display:grid;place-items:center;position:relative;transition:transform .15s}
+.pulse-ring.no-story{background:var(--line)}
+.pulse-ring:hover{transform:scale(1.05)}
+.pulse-ring .avatar{width:100%;height:100%;border-radius:19px;border:2px solid var(--card);font-size:1.3rem}
+.pulse-add-badge{position:absolute;bottom:-2px;left:-2px;background:var(--ac);color:#000;width:22px;height:22px;border-radius:50%;font-weight:900;font-size:.85rem;display:grid;place-items:center;border:2px solid var(--card);z-index:4}
+.pulse-name{font-size:.76rem;font-weight:700;max-width:74px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.nav-tabs{display:flex;gap:8px;max-width:980px;margin:8px auto 0;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
 .nav-tabs::-webkit-scrollbar{display:none}
 .tab-btn{flex:1;min-width:90px;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;font-size:.9rem}
-.tab-btn.on{background:var(--ac);color:var(--ac-tx);border-color:var(--ac)}
+.tab-btn.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:var(--ac-tx);border-color:var(--ac)}
 .badge-cnt{background:var(--danger);color:#fff;font-size:.7rem;border-radius:99px;padding:0 6px;font-weight:800}
 
-.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0;max-width:960px;margin:auto;scrollbar-width:none}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0;max-width:980px;margin:auto;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chip{white-space:nowrap;background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-weight:600;font-size:.88rem}
 .chip.on{background:var(--ac);color:var(--ac-tx);border-color:var(--ac);font-weight:700}
@@ -63,7 +86,7 @@ button:active{transform:scale(0.95)}
 .mention-tag{background:rgba(255,215,0,0.22);color:var(--ac);padding:0 6px;border-radius:6px;font-weight:800;display:inline-block}
 .msg.me .mention-tag{background:rgba(0,0,0,0.2);color:#000}
 
-main{max-width:960px;margin:12px auto;padding:0 12px 95px}
+main{max-width:980px;margin:12px auto;padding:0 12px 95px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:14px}
 .composer .chips{padding-top:0}
 .composer textarea{margin:6px 0 10px;resize:vertical}
@@ -78,30 +101,36 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .user-row{display:flex;align-items:center;gap:10px}
 .user-click{cursor:pointer;display:flex;align-items:center;gap:10px}
 .user-click:hover .who{color:var(--ac);text-decoration:underline}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--ac);color:#000;font-weight:800;display:grid;place-items:center;flex-shrink:0;overflow:hidden;object-fit:cover}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#000;font-weight:800;display:grid;place-items:center;flex-shrink:0;overflow:hidden;object-fit:cover}
 .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.who{font-weight:700;transition:color .15s}
+.who{font-weight:800;transition:color .15s;display:inline-flex;align-items:center;gap:4px}
+.v-crown{color:var(--ac);font-size:.82rem;title:"حساب موثق فـ VYROX"}
 .badge{font-size:.75rem;color:var(--ac);border:1px solid var(--line);border-radius:99px;padding:0 8px;margin-inline-start:6px}
 .admin-tag{font-size:.72rem;background:rgba(255,215,0,0.18);color:var(--ac);border:1px solid var(--ac);border-radius:99px;padding:1px 8px;font-weight:700}
 .body{white-space:pre-wrap;word-break:break-word;margin:8px 0 10px}
-.media img,.media video{width:100%;max-height:480px;object-fit:contain;background:#000;border-radius:12px;display:block}
+.media{position:relative}
+.media img,.media video{width:100%;max-height:480px;object-fit:contain;background:#000;border-radius:14px;display:block}
 .media video.reel-vid{max-width:340px;max-height:560px;aspect-ratio:9/16;object-fit:cover;margin:0 auto;border:1px solid var(--line)}
 .media iframe{width:100%;height:420px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.post-heart-pop{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:5.5rem;pointer-events:none;z-index:10;transition:transform .3s cubic-bezier(.17,.89,.32,1.49);filter:drop-shadow(0 4px 16px rgba(244,63,94,0.8))}
+.post-heart-pop.on{transform:translate(-50%,-50%) scale(1.15)}
 .file{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--card2);padding:8px 12px;border-radius:12px}
 .file a,.file button{color:var(--ac);text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:4px 12px;background:transparent}
-.acts{display:flex;gap:8px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;flex-wrap:wrap}
-.acts button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:99px;padding:5px 14px;font-size:.86rem}
+.acts{display:flex;gap:6px;margin-top:10px;border-top:1px solid var(--line);padding-top:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.acts-left,.acts-right{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.acts button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:99px;padding:5px 12px;font-size:.84rem}
 .acts .liked{color:#f43f5e;border-color:#f43f5e;font-weight:700}
+.acts .saved{color:var(--ac);border-color:var(--ac);font-weight:700}
 .comments{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
 .cm{background:var(--card2);border-radius:12px;padding:6px 12px;margin-bottom:6px;font-size:.92rem}
 .cm b{color:var(--ac);cursor:pointer}
 .cform{display:flex;gap:6px;margin-top:6px}
 .empty{text-align:center;color:var(--mut);padding:40px 14px}
-.authwrap{min-height:100vh;display:grid;place-items:center;padding:16px}
-.authcard{width:min(100%,410px);display:grid;gap:10px;text-align:center}
+.authwrap{min-height:100vh;display:grid;place-items:center;padding:16px;background:radial-gradient(circle at top,rgba(255,215,0,0.1),transparent 60%)}
+.authcard{width:min(100%,420px);display:grid;gap:10px;text-align:center;border-color:rgba(255,215,0,0.35)}
 .authcard .chips{justify-content:center}
 .err{color:var(--danger);font-size:.9rem;min-height:1.4em}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:grid;place-items:center;padding:14px;z-index:130}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:grid;place-items:center;padding:14px;z-index:130}
 .modal-box{width:min(100%,520px);display:grid;gap:10px;text-align:right;max-height:92vh;overflow-y:auto}
 .rules-box{background:var(--card2);border:1px solid var(--ac);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:.86rem;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .strike-badge{background:rgba(244,63,94,0.15);color:var(--danger);border:1px solid var(--danger);border-radius:99px;padding:2px 10px;font-weight:700;font-size:.78rem}
@@ -119,7 +148,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .tx-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-bottom:1px solid var(--line);font-size:.83rem}
 .tx-row:last-child{border-bottom:0}
 .profile-header{display:flex;gap:22px;align-items:center;flex-wrap:wrap;padding:10px 6px}
-.profile-avatar-xl{width:96px;height:96px;border-radius:50%;background:var(--ac);color:#000;font-size:2.4rem;font-weight:900;display:grid;place-items:center;border:3px solid var(--ac);overflow:hidden;flex-shrink:0}
+.profile-avatar-xl{width:96px;height:96px;border-radius:28px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#000;font-size:2.4rem;font-weight:900;display:grid;place-items:center;border:3px solid var(--ac);overflow:hidden;flex-shrink:0;position:relative}
 .profile-avatar-xl img{width:100%;height:100%;object-fit:cover;display:block}
 .profile-info{flex:1;min-width:220px}
 .profile-top-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
@@ -131,8 +160,10 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .stat-box span{font-size:.75rem;color:var(--mut)}
 .profile-bio{white-space:pre-wrap;font-size:.92rem;color:var(--tx);background:var(--card2);padding:8px 12px;border-radius:10px;border:1px solid var(--line)}
 .grp-profile-banner{background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 18%,var(--card2)),var(--card));border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+
+/* 🔴 اللايف المباشر بالصوت والصورة WebRTC */
 .live-stage{display:grid;grid-template-columns:1fr 340px;gap:14px;min-height:540px}
-.live-video-box{background:#000;border:2px solid var(--danger);border-radius:20px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:420px}
+.live-video-box{background:#000;border:2px solid var(--danger);border-radius:20px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:430px}
 .live-video-box video,.live-video-box img.live-frame{width:100%;height:100%;object-fit:cover;display:block;max-height:70vh}
 .live-top-badges{position:absolute;top:14px;right:14px;left:14px;display:flex;justify-content:space-between;align-items:center;z-index:10;pointer-events:none;flex-wrap:wrap;gap:6px}
 .live-top-badges *{pointer-events:auto}
@@ -152,6 +183,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .gift-card .gp{font-size:.75rem;color:var(--ok);font-weight:900}
 .live-side{background:var(--card);border:1px solid var(--line);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;max-height:72vh}
 .live-gift-log{padding:8px 12px;background:rgba(255,215,0,0.1);border-bottom:1px solid var(--line);font-size:.82rem;max-height:110px;overflow-y:auto}
+
 .reels-fullscreen-modal{position:fixed;inset:0;background:#000;z-index:105;display:flex;flex-direction:column}
 .reels-top-bar{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(to bottom,rgba(0,0,0,0.75),transparent);color:#fff}
 .reels-container{flex:1;width:100%;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none}
@@ -174,7 +206,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .user-item{display:flex;justify-content:space-between;align-items:center;background:var(--card2);padding:10px 12px;border-radius:12px;margin-bottom:8px;border:1px solid var(--line);gap:8px;flex-wrap:wrap}
 
-/* قسم الشات + الملصقات (Stickers) + مكالمة الفيديو (Video Call) */
+/* الشات + الملصقات + مكالمة الفيديو WebRTC */
 .chat-layout{display:grid;grid-template-columns:280px 1fr;gap:14px;height:74vh;min-height:480px}
 .chat-side{background:var(--card);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
 .chat-side-head{padding:12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:6px}
@@ -200,7 +232,6 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .mention-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;cursor:pointer;font-weight:700}
 .mention-item:hover{background:var(--card2);color:var(--ac)}
 
-/* نافذة الملصقات وصانع الـ Stickers */
 .sticker-drawer{position:absolute;bottom:60px;right:10px;left:10px;max-width:410px;background:var(--card);border:2px solid var(--ac);border-radius:18px;box-shadow:0 12px 35px rgba(0,0,0,0.75);z-index:40;padding:12px;display:flex;flex-direction:column;gap:10px}
 .sticker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-height:210px;overflow-y:auto;padding:4px}
 .sticker-item{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:6px;display:grid;place-items:center;cursor:pointer;aspect-ratio:1/1;transition:transform .12s,border-color .15s;position:relative}
@@ -208,11 +239,11 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .sticker-item img{width:100%;height:100%;object-fit:contain}
 .sticker-item .del-stk{position:absolute;top:2px;left:2px;background:rgba(244,63,94,0.9);color:#fff;border:0;border-radius:50%;width:20px;height:20px;font-size:.68rem;display:grid;place-items:center}
 
-/* ستوديو مكالمة الفيديو (Video Call Overlay) */
-.vcall-modal{position:fixed;inset:0;background:rgba(5,5,10,0.96);z-index:160;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:20px}
-.vcall-stage{position:relative;width:min(100%,680px);flex:1;background:#111;border:2px solid var(--ac);border-radius:24px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin:10px 0}
-.vcall-remote{width:100%;height:100%;object-fit:cover;display:block}
-.vcall-local{position:absolute;bottom:16px;right:16px;width:125px;height:175px;border-radius:16px;border:2px solid var(--ac);object-fit:cover;background:#000;z-index:5;box-shadow:0 6px 20px rgba(0,0,0,0.7)}
+/* 📹 ستوديو مكالمة الفيديو الحقيقي WebRTC (الصوت والصورة معاً) */
+.vcall-modal{position:fixed;inset:0;background:rgba(5,5,10,0.97);z-index:160;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:18px}
+.vcall-stage{position:relative;width:min(100%,720px);flex:1;background:#0d0d14;border:2px solid var(--ac);border-radius:24px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin:10px 0;box-shadow:0 0 35px rgba(255,215,0,0.15)}
+.vcall-remote-vid{width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.vcall-local{position:absolute;bottom:16px;right:16px;width:130px;height:180px;border-radius:18px;border:2px solid var(--ac);object-fit:cover;background:#000;z-index:5;box-shadow:0 6px 20px rgba(0,0,0,0.75)}
 .vcall-controls{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap}
 .vcall-btn{width:54px;height:54px;border-radius:50%;border:0;font-size:1.35rem;display:grid;place-items:center;background:var(--card2);color:#fff;border:1px solid var(--line)}
 .vcall-btn.hangup{background:var(--danger);width:64px;height:64px;font-size:1.5rem;box-shadow:0 0 20px rgba(244,63,94,0.6)}
@@ -238,7 +269,6 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 .toast-notif{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:var(--card);border:2px solid var(--ac);color:var(--tx);padding:10px 18px;border-radius:99px;z-index:200;box-shadow:0 8px 25px rgba(0,0,0,0.7);display:flex;align-items:center;gap:10px;font-weight:700;animation:slideDown .25s ease;max-width:92vw;font-size:.88rem}
 @keyframes slideDown{from{transform:translate(-50%,-100%);opacity:0}to{transform:translate(-50%,0);opacity:1}}
 
-/* 📱 تحسينات خاصة ومريحة لأصحاب التليفون (Mobile Comfort UI) */
 @media(max-width:760px){
   .grid-2,.live-stage{grid-template-columns:1fr}
   .chat-layout{grid-template-columns:1fr;height:auto}
@@ -262,23 +292,99 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 </head>
 <body>
 
+<!-- قالب SVG للشعار الملكي VYROX (V + التاج الذهبي) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="vyroxGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff2a3"/>
+      <stop offset="45%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#b87300"/>
+    </linearGradient>
+    <g id="vyroxLogoSymbol">
+      <circle cx="50" cy="52" r="44" fill="#09090d" stroke="url(#vyroxGold)" stroke-width="2.5"/>
+      <!-- التاج الملكي -->
+      <path d="M32 28 L36 16 L44 24 L50 11 L56 24 L64 16 L68 28 Z" fill="url(#vyroxGold)"/>
+      <path d="M32 30 Q50 27 68 30" stroke="url(#vyroxGold)" stroke-width="2.2" fill="none"/>
+      <!-- حرف V الملكي -->
+      <path d="M24 35 L42 35 L50 56 L58 35 L76 35 L50 86 Z" fill="url(#vyroxGold)"/>
+      <!-- المدار الذهبي -->
+      <ellipse cx="50" cy="56" rx="46" ry="11" fill="none" stroke="url(#vyroxGold)" stroke-width="3" transform="rotate(-18 50 56)"/>
+    </g>
+  </defs>
+</svg>
+
 <div id="toastNotif" class="toast-notif" hidden>
   <span>🔔</span>
   <span id="toastText">إشعار جديد!</span>
 </div>
 
-<!-- 📞📹 نافذة مكالمة الفيديو المباشرة مع الأصدقاء (Video Call Studio) -->
+<!-- ⚡ نافذة عرض القصة الفورية (VYROX Pulse Story Viewer) -->
+<div id="pulseViewerModal" class="modal" hidden>
+  <div class="card modal-box" style="background:#000;border:2px solid var(--ac);padding:0;overflow:hidden;max-width:410px;position:relative">
+    <div style="position:absolute;top:0;left:0;right:0;padding:12px;background:linear-gradient(to bottom,rgba(0,0,0,0.8),transparent);display:flex;justify-content:space-between;align-items:center;z-index:10;color:#fff">
+      <div class="user-row">
+        <div id="pvAvatar" class="avatar" style="width:34px;height:34px">⚡</div>
+        <div>
+          <b id="pvAuthor">@user</b>
+          <div class="muted" id="pvTime" style="font-size:.72rem;color:#ccc">الآن</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button type="button" class="btn danger sm" id="pvDeleteBtn" hidden>🗑️</button>
+        <button type="button" class="ghost" id="closePulseViewerBtn" style="color:#fff;border-color:rgba(255,255,255,0.3)">✖</button>
+      </div>
+    </div>
+    <div id="pvMediaBox" style="min-height:460px;max-height:78vh;display:flex;align-items:center;justify-content:center;background:#08080c"></div>
+    <div id="pvCaption" style="padding:12px 14px;background:rgba(0,0,0,0.85);color:#fff;text-align:center;font-weight:700"></div>
+  </div>
+</div>
+
+<!-- 💭⚡ نافذة إضافة VYROX Spark (ملاحظة فورية بحال Insta Notes) أو Pulse (Story) -->
+<div id="createPulseSparkModal" class="modal" hidden>
+  <div class="card modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0;color:var(--ac)">⚡ VYROX Instant (ملاحظة Spark أو قصة Pulse)</h3>
+      <button type="button" class="ghost" id="closeCreatePsBtn">✖</button>
+    </div>
+
+    <!-- 1. إضافة Spark Note (فقاعة فوق الأفتار بحال Instagram Notes) -->
+    <div style="background:var(--card2);padding:12px;border-radius:14px;border:1px solid var(--line)">
+      <b style="color:var(--ac)">💭 1. حط Spark (ملاحظة فورية فوق صورتك يشوفوها المتابعين):</b>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <input id="sparkNoteInp" maxlength="60" placeholder="شنو فـ بالك دابا؟ (مثلاً: كنوجد لـ لافاك 📚⚡)…">
+        <button type="button" class="btn sm" id="saveSparkNoteBtn">نشر 💭</button>
+      </div>
+    </div>
+
+    <!-- 2. إضافة Pulse Story (صورة أو فيديو لمدة 24 ساعة) -->
+    <div style="background:var(--card2);padding:12px;border-radius:14px;border:1px solid var(--line)">
+      <b style="color:var(--ac)">⚡ 2. لوح VYROX Pulse (قصة مصورة أو فيديو 24 ساعة):</b>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
+        <label class="btn ghost sm" for="pulseFileInp" style="cursor:pointer">📷 ختار صورة أو فيديو للقصة</label>
+        <input id="pulseFileInp" type="file" accept="image/*,video/*" hidden>
+        <span id="pulseFileName" class="muted"></span>
+      </div>
+      <input id="pulseCaptionInp" placeholder="كتب نص أو #هاشتاق فوق القصة ديالك…" style="margin-top:8px">
+      <button type="button" class="btn" id="publishPulseBtn" style="width:100%;margin-top:8px">⚡ نشر القصة الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 📞📹 نافذة مكالمة الفيديو الحقيقية WebRTC مع الأصدقاء -->
 <div id="videoCallModal" class="vcall-modal" hidden>
   <div style="text-align:center;color:#fff">
-    <h3 style="margin:0;color:var(--ac)" id="vcallTitle">📹 مكالمة فيديو مباشرة</h3>
-    <span class="muted" id="vcallStatusTxt">جاري الاتصال بصاحبك… 🔔</span>
+    <h3 style="margin:0;color:var(--ac)" id="vcallTitle">📹 مكالمة فيديو VYROX المباشرة</h3>
+    <span class="muted" id="vcallStatusTxt">جاري ربط الاتصال بالصوت والصورة (WebRTC)… 🔔</span>
   </div>
 
   <div class="vcall-stage">
-    <img id="vcallRemoteImg" class="vcall-remote" alt="فيديو الصديق" hidden>
+    <!-- فيديو وصوت الصديق المباشر عبر WebRTC -->
+    <video id="vcallRemoteVid" class="vcall-remote-vid" autoplay playsinline hidden></video>
+    <!-- Fallback سريع في حال ضعف الشبكة -->
+    <img id="vcallRemoteImg" class="vcall-remote-vid" alt="فيديو الصديق" hidden>
     <div id="vcallWaitingBox" style="text-align:center;color:var(--mut);padding:20px">
       <div style="font-size:4rem;margin-bottom:10px">📹</div>
-      <div id="vcallWaitingTxt">في انتظار رد الصديق لفتح الكاميرا…</div>
+      <div id="vcallWaitingTxt">في انتظار رد الصديق لفتح الكاميرا والميكروفون…</div>
     </div>
     <video id="vcallLocalVid" class="vcall-local" autoplay muted playsinline></video>
   </div>
@@ -290,12 +396,12 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- نافذة رنين مكالمة واردة من صديق (Incoming Video Call Alert) -->
+<!-- نافذة رنين مكالمة واردة من صديق -->
 <div id="incomingCallModal" class="modal" hidden>
   <div class="card modal-box" style="text-align:center;max-width:360px;border:2px solid var(--ok)">
     <div style="font-size:3.4rem">📹🔔</div>
     <h3 style="margin:0;color:var(--ac)" id="incCallCallerName">@friend يتصل بك فيديو!</h3>
-    <p class="muted" style="margin:0">مكالمة فيديو مباشرة فـ Dark Power</p>
+    <p class="muted" style="margin:0">مكالمة فيديو مباشرة بالصوت والصورة فـ VYROX</p>
     <div style="display:flex;gap:12px;justify-content:center;margin-top:10px">
       <button type="button" class="btn ok-btn" id="acceptCallBtn">📹 قبول والرد</button>
       <button type="button" class="btn danger" id="rejectCallBtn">✖ رفض</button>
@@ -332,7 +438,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
         <div class="pack-btn" data-amt="5">+$5<br><small class="muted">5 ورود</small></div>
         <div class="pack-btn" data-amt="10">+$10<br><small class="muted">قهوتين</small></div>
         <div class="pack-btn on" data-amt="25">+$25<br><small class="muted">تاج ملكي</small></div>
-        <div class="pack-btn" data-amt="50">+$50<br><small class="muted">أسد دارك</small></div>
+        <div class="pack-btn" data-amt="50">+$50<br><small class="muted">أسد VYROX</small></div>
         <div class="pack-btn" data-amt="100" style="border-color:var(--ac)">+$100<br><small style="color:var(--ac)">🧠 العقل!</small></div>
       </div>
 
@@ -379,11 +485,10 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- نافذة تعديل البروفايل الشخصي -->
 <div id="editProfileModal" class="modal" hidden>
   <div class="card modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <h3 style="margin:0;color:var(--ac)">✏️ تعديل البروفايل ديالك</h3>
+      <h3 style="margin:0;color:var(--ac)">✏️ تعديل البروفايل ديالك فـ VYROX</h3>
       <button type="button" class="ghost" id="closeEditProfBtn">✖</button>
     </div>
     <div style="text-align:center;margin:8px 0">
@@ -391,6 +496,8 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
       <label class="btn ghost sm" for="editAvatarInp" style="cursor:pointer">📷 تغيير صورة البروفايل</label>
       <input id="editAvatarInp" type="file" accept="image/*" hidden>
     </div>
+    <label class="muted">💭 ملاحظتك الفورية (VYROX Spark - تظهر فوق صورتك):</label>
+    <input id="editSparkInp" maxlength="60" placeholder="مثلاً: خدام فـ مشروع جديد ⚡">
     <label class="muted">النبذة الشخصية (Bio):</label>
     <textarea id="editBioInp" rows="3" maxlength="220" placeholder="كتب شي نبذة واعرة عليك (مثلاً: صانع محتوى | Gamer | FST ⚡)…"></textarea>
     <div style="display:flex;gap:8px;justify-content:flex-end">
@@ -400,21 +507,19 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- نافذة عرض لائحة المتابعين / المتابَعين -->
 <div id="followListModal" class="modal" hidden>
   <div class="card modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <h3 style="margin:0;color:var(--ac)" id="flModalTitle">👥 القائمة</h3>
+      <h3 style="margin:0;color:var(--ac)" id="flModalTitle">👥 القائمة (مع حالة الاتصال 🟢)</h3>
       <button type="button" class="ghost" id="closeFlModalBtn">✖</button>
     </div>
-    <div id="flModalBody" class="chk-list" style="max-height:320px"></div>
+    <div id="flModalBody" class="chk-list" style="max-height:340px"></div>
   </div>
 </div>
 
-<!-- نافذة القوانين -->
 <div id="lawsModal" class="modal" hidden>
   <div class="card modal-box">
-    <h3 style="margin:0;color:var(--ac)">⚖️ قوانين مجتمع Dark Power الصارمة</h3>
+    <h3 style="margin:0;color:var(--ac)">⚖️ قوانين مجتمع VYROX الملكي الصارمة</h3>
     <p class="muted" style="margin:0">هاد المنصة تجمعنا كأصدقاء وإخوة، وعليها خاصنا كاملين نحترمو هاد القوانين:</p>
     <ul class="law-list">
       <li>🚫 <b>ممنوع السب، الشتم، أو الكلام الساقط:</b> الفلتر الذكي كيبلوكي أي كلام خايب وكيعطي إنذار (3 إنذارات = حظر 15 دقيقة).</li>
@@ -427,7 +532,6 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- نافذة مشاركة Reel أو منشور مع صديق -->
 <div id="shareModal" class="modal" hidden>
   <div class="card modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -439,7 +543,6 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- نافذة إنشاء مجموعة جديدة مع صورة وبروفايل -->
 <div id="grpModal" class="modal" hidden>
   <div class="card modal-box">
     <h3 style="margin:0;color:var(--ac)">👥 إنشاء كروب جديد ببروفايل خاص (نتا Admin 👑)</h3>
@@ -460,7 +563,6 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- نافذة بروفايل الكروب وإدارة الأدمن والأعضاء -->
 <div id="grpInfoModal" class="modal" hidden>
   <div class="card modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -501,7 +603,6 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- نافذة دعوة الأصدقاء أو الكروب عبر QR Code -->
 <div id="qrModal" class="modal" hidden>
   <div class="card modal-box" style="text-align:center">
     <h3 style="margin:0;color:var(--ac)" id="qrTitle">📱 دعوة عبر رمز QR</h3>
@@ -516,37 +617,46 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
   </div>
 </div>
 
-<!-- شاشة الدخول -->
+<!-- شاشة الدخول بشعار VYROX الملكي -->
 <section id="auth" class="authwrap">
   <form class="card authcard" id="authForm">
-    <h1 class="logo">⚡ Dark <span>Power</span></h1>
-    <p class="muted" style="margin:0">شبكة التواصل، الريلز، مكالمات الفيديو، والذكاء المغربي Lion Popi 🦁</p>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+      <svg viewBox="0 0 100 100" style="width:88px;height:88px;filter:drop-shadow(0 0 18px rgba(255,215,0,0.55))"><use href="#vyroxLogoSymbol"/></svg>
+      <div class="brand-txt" style="font-size:2rem">VYR<span>OX</span></div>
+    </div>
+    <p class="muted" style="margin:0">منصة التواصل الملكية — الريلز، اللايف، مكالمات الفيديو و Lion Popi 🦁</p>
     <div class="chips">
       <button type="button" class="chip on" data-m="login">دخول</button>
       <button type="button" class="chip" data-m="signup">حساب جديد</button>
     </div>
-    <input id="u" dir="ltr" autocomplete="username" placeholder="Username (e.g. taoufik)">
+    <input id="u" dir="ltr" autocomplete="username" placeholder="Username (e.g. taoufik120)">
     <input id="pw" dir="ltr" type="password" autocomplete="current-password" placeholder="Password (6+ chars)">
     <label class="muted" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:.82rem">
-      <input type="checkbox" id="agreeChk" checked style="width:auto"> أوافق على <a href="#" id="showLawsLink" style="color:var(--ac)">قوانين منع السب والعري والدم</a>
+      <input type="checkbox" id="agreeChk" checked style="width:auto"> أوافق على <a href="#" id="showLawsLink" style="color:var(--ac)">قوانين مجتمع VYROX</a>
     </label>
     <div id="authErr" class="err"></div>
-    <button type="submit" class="btn" id="authBtn">دخول إلى المنصة ⚡</button>
+    <button type="submit" class="btn" id="authBtn">دخول إلى VYROX 👑</button>
     <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
       <button type="button" class="ghost themeBtn">🌓 تبديل المظهر</button>
-      <button type="button" class="ghost" id="openLawsBtn">⚖️ قوانين المنصة</button>
+      <button type="button" class="ghost" id="openLawsBtn">⚖️ قوانين VYROX</button>
     </div>
   </form>
 </section>
 
-<!-- التطبيق الرئيسي -->
+<!-- التطبيق الرئيسي VYROX -->
 <div id="appRoot" hidden>
   <header class="top">
     <div class="bar">
-      <h1 class="logo" id="logoHomeBtn">⚡ Dark <span>Power</span></h1>
+      <div class="brand-logo" id="logoHomeBtn">
+        <svg viewBox="0 0 100 100"><use href="#vyroxLogoSymbol"/></svg>
+        <div class="brand-txt">VYR<span>OX</span></div>
+      </div>
       <input id="search" type="search" placeholder="ابحث بالاسم أو #هاشتاق…">
       <button type="button" class="ghost" id="topMyProfileBtn" title="البروفايل ديالي" style="display:flex;align-items:center;gap:6px;padding:4px 10px">
-        <span id="topMiniAvatar" class="avatar" style="width:24px;height:24px;font-size:.75rem">👤</span>
+        <span class="avatar-wrap">
+          <span id="topMiniAvatar" class="avatar" style="width:26px;height:26px;font-size:.75rem">👤</span>
+          <span class="status-dot online" style="width:9px;height:9px"></span>
+        </span>
         <b id="nameLbl"></b>
       </button>
       <button type="button" class="wallet-top-btn" id="topWalletBtn" title="الحقيبة المالية الخاصة والإعدادات">
@@ -559,29 +669,24 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
       <button type="button" id="outBtn" class="ghost" title="خروج">🚪</button>
     </div>
     <div class="nav-tabs" id="mainTabs">
-      <button type="button" class="tab-btn on" data-tab="feed"><span>🏠</span><span>المنشورات</span></button>
+      <button type="button" class="tab-btn on" data-tab="feed"><span>🏠</span><span>الرئيسية</span></button>
       <button type="button" class="tab-btn" data-tab="reels"><span>📱</span><span>الريلز</span></button>
       <button type="button" class="tab-btn" data-tab="live"><span>🔴</span><span>المباشر <span id="liveCountBadge" class="badge-cnt" hidden>0</span></span></button>
       <button type="button" class="tab-btn" data-tab="profile" id="navProfileBtn"><span>👤</span><span>بروفايلي</span></button>
-      <button type="button" class="tab-btn" data-tab="friends"><span>👥</span><span>الأصدقاء <span id="reqBadge" class="badge-cnt" hidden>0</span></span></button>
+      <button type="button" class="tab-btn" data-tab="friends"><span>👥</span><span>المتابعون <span id="reqBadge" class="badge-cnt" hidden>0</span></span></button>
       <button type="button" class="tab-btn" data-tab="chat"><span>💬</span><span>الشات <span id="chatUnreadBadge" class="badge-cnt" hidden>0</span></span></button>
     </div>
   </header>
 
   <main>
-    <div class="rules-box">
-      <span>⚖️ <b>حماية المجتمع:</b> ممنوع السب، وممنوع العري 🔞 أو الدم 🩸 (حذف فوري + حظر الحساب 24 ساعة!).</span>
-      <div style="display:flex;gap:6px">
-        <button type="button" class="ghost" id="bannerWalletBtn" style="padding:3px 10px;font-size:.8rem;border-color:var(--ok);color:var(--ok)">💳 الحقيبة 🔒</button>
-        <button type="button" class="ghost" id="bannerLawsBtn" style="padding:3px 10px;font-size:.8rem">القوانين</button>
-      </div>
-    </div>
-
-    <!-- 1. قسم المنشورات -->
+    <!-- 1. قسم المنشورات + شريط VYROX Pulses (Stories) & Sparks (Notes) & Online Status -->
     <div id="tab-feed">
+      <!-- ⚡💭 شريط VYROX Instant (القصص + الملاحظات الفورية + شكون Online من المتابعين) -->
+      <div class="vyrox-bar" id="vyroxInstantBar"></div>
+
       <div class="card" style="padding:10px 14px;margin-bottom:10px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-          <b style="color:var(--ac);font-size:.9rem">🔥 الهاشتاقات المشهورة (#Trending_Hashtags):</b>
+          <b style="color:var(--ac);font-size:.9rem">🔥 هاشتاقات VYROX الرائجة (#Trending):</b>
           <button type="button" class="ghost" id="clearHashtagBtn" hidden style="padding:2px 8px;font-size:.75rem">إلغاء الفلتر ✖</button>
         </div>
         <div class="chips" id="trendingHashtags" style="padding:2px 0"></div>
@@ -590,12 +695,12 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
       <nav class="chips" id="filters" style="margin-bottom:10px">
         <button type="button" class="chip on" data-f="all">الكل</button>
         <button type="button" class="chip" data-f="following">🌟 متابَعون</button>
+        <button type="button" class="chip" data-f="saved">🔖 المحفوظات (Saved)</button>
         <button type="button" class="chip" data-f="text">📝 نصوص</button>
         <button type="button" class="chip" data-f="image">🖼️ صور</button>
         <button type="button" class="chip" data-f="video">🎬 فيديو</button>
         <button type="button" class="chip" data-f="reel">📱 ريلز</button>
         <button type="button" class="chip" data-f="audio">🎙️ صوتيات</button>
-        <button type="button" class="chip" data-f="pdf">📄 PDF</button>
       </nav>
 
       <section class="card composer">
@@ -607,9 +712,9 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
           <button type="button" class="chip" data-t="audio">🎙️ أوديو</button>
           <button type="button" class="chip" data-t="pdf">📄 PDF</button>
         </div>
-        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي؟ استعمل #هاشتاق (مثلاً #gaming #morocco)…"></textarea>
+        <textarea id="text" rows="3" placeholder="شنو باغي تبارطاجي فـ VYROX؟ استعمل #هاشتاق (مثلاً #vyrox #gaming)…"></textarea>
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
-          <button type="button" class="ghost" data-ins-tag="#darkpower" style="padding:3px 10px;font-size:.78rem">+ #darkpower</button>
+          <button type="button" class="ghost" data-ins-tag="#vyrox" style="padding:3px 10px;font-size:.78rem">+ #vyrox</button>
           <button type="button" class="ghost" data-ins-tag="#reels_maroc" style="padding:3px 10px;font-size:.78rem">+ #reels_maroc</button>
           <button type="button" class="ghost" data-ins-tag="#gaming" style="padding:3px 10px;font-size:.78rem">+ #gaming</button>
           <button type="button" class="btn ai-btn sm" id="askLionHashtagsBtn">🦁 اقترح هاشتاقات بـ Lion Popi</button>
@@ -622,7 +727,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
           <div id="preview"></div>
         </div>
         <div class="progress" id="prog" hidden><i id="progBar"></i></div>
-        <button type="button" id="post" class="btn">نشر المنشور ⚡</button>
+        <button type="button" id="post" class="btn">نشر فـ VYROX 👑</button>
       </section>
 
       <section id="feed"></section>
@@ -633,7 +738,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
       <div class="reels-top-bar">
         <div style="display:flex;align-items:center;gap:10px">
           <button type="button" class="ghost" id="exitReelsBtn" style="background:rgba(0,0,0,0.5);color:#fff">🔙 رجوع</button>
-          <b>📱 Reels <span id="reelActiveTag" style="color:var(--ac);font-size:.85rem"></span></b>
+          <b>📱 VYROX Reels <span id="reelActiveTag" style="color:var(--ac);font-size:.85rem"></span></b>
         </div>
         <button type="button" class="btn sm" id="goPostReelBtn">➕ لوح Reel</button>
       </div>
@@ -651,23 +756,23 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
       </div>
     </div>
 
-    <!-- 3. اللايف المباشر -->
+    <!-- 3. 🔴 اللايف المباشر السريع بالصوت والصورة (WebRTC Live Audio + Fast Video) -->
     <div id="tab-live" hidden>
       <div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
         <div>
-          <h3 style="margin:0;color:var(--danger)">🔴 البث المباشر (Live) & الهدايا 🎁</h3>
-          <span class="muted">طلق اللايف (أرباحك سرية 🔒)، أو اشحن الحقيبة لدعم الأصدقاء!</span>
+          <h3 style="margin:0;color:var(--danger)">🔴 البث المباشر السريع بالصوت والصورة (VYROX Live) 🎁</h3>
+          <span class="muted">لايف سريع بالصوت والصورة عبر WebRTC! أرباحك سرية 🔒، والدراري يقدرو يدعموك بالجوائز.</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <input id="liveTitleInp" placeholder="عنوان اللايف…" style="width:200px">
-          <button type="button" class="btn danger" id="startLiveBtn">🎥 ابدا اللايف</button>
+          <button type="button" class="btn danger" id="startLiveBtn">🎥 ابدا اللايف بالصوت والصورة</button>
           <button type="button" class="btn ghost" id="stopLiveBtn" hidden>⏹️ إنهاء</button>
           <button type="button" class="btn ok-btn sm" id="liveTopUpBtn">💳 حقيبتي المالية 🔒</button>
         </div>
       </div>
 
       <div class="card" id="activeLivesCard">
-        <b style="color:var(--ac)">📡 اللايفات المباشرة حالياً:</b>
+        <b style="color:var(--ac)">📡 اللايفات المباشرة حالياً (كليكي باش تتفرج وتسمع الصوت مباشر):</b>
         <div id="activeLivesList" style="display:flex;gap:10px;overflow-x:auto;padding-top:10px"></div>
       </div>
 
@@ -680,13 +785,19 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
                   <span class="live-pill">🔴 LIVE • <span id="liveHostNameLbl">@host</span></span>
                   <span class="badge" style="background:rgba(0,0,0,0.7);color:#fff" id="liveTitleBadge">بث</span>
                 </div>
-                <div class="live-earnings-pill" id="liveHostPrivateEarningsPill" hidden>
-                  🔒 أرباحي: <span id="liveEarningsLbl">•••• $</span> 👁️
+                <div style="display:flex;gap:6px;align-items:center">
+                  <button type="button" class="btn ok-btn sm" id="liveUnmuteAudioBtn" hidden>🔊 تفعيل صوت اللايف</button>
+                  <div class="live-earnings-pill" id="liveHostPrivateEarningsPill" hidden>
+                    🔒 أرباحي: <span id="liveEarningsLbl">•••• $</span> 👁️
+                  </div>
                 </div>
               </div>
+              <!-- فيديو صاحب اللايف المحلي أو عبر WebRTC السريع بالصوت -->
               <video id="localLiveVideo" autoplay muted playsinline hidden></video>
+              <video id="remoteLiveWebRtcVideo" autoplay playsinline hidden></video>
               <img id="remoteLiveFrame" class="live-frame" alt="live" hidden>
-              <div id="livePlaceholder" class="muted">جاري الاتصال بالبث المباشر…</div>
+              <audio id="remoteLiveAudioPlayer" autoplay hidden></audio>
+              <div id="livePlaceholder" class="muted">جاري ربط الصوت والصورة للبث المباشر…</div>
               <div id="liveGiftBurst" class="live-gift-burst">
                 <div class="g-icon" id="burstIcon">🧠</div>
                 <div class="g-text" id="burstText">هدية!</div>
@@ -707,7 +818,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
                 <div class="gift-card" data-gift-id="coffee" data-gift-name="قهوة" data-gift-icon="☕" data-gift-price="5">
                   <span class="gi">☕</span><span class="gn">قهوة</span><span class="gp">$5</span>
                 </div>
-                <div class="gift-card" data-gift-id="crown" data-gift-name="تاج" data-gift-icon="👑" data-gift-price="20">
+                <div class="gift-card" data-gift-id="crown" data-gift-name="تاج VYROX" data-gift-icon="👑" data-gift-price="20">
                   <span class="gi">👑</span><span class="gn">تاج</span><span class="gp">$20</span>
                 </div>
                 <div class="gift-card" data-gift-id="lion" data-gift-name="أسد" data-gift-icon="🦁" data-gift-price="50">
@@ -722,7 +833,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 
           <aside class="live-side">
             <div class="chat-header">
-              <b>💬 شات اللايف</b>
+              <b>💬 شات اللايف المباشر</b>
               <button type="button" class="ghost" id="leaveWatchLiveBtn" style="padding:3px 10px;font-size:.8rem">خروج ✖</button>
             </div>
             <div class="live-gift-log" id="liveGiftLog">🎁 سجل الهدايا…</div>
@@ -744,12 +855,13 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
           <div class="profile-info">
             <div class="profile-top-row">
               <h2 class="profile-uname" id="profUsername">@user</h2>
+              <span id="profOnlineBadge"></span>
               <div id="profActionBtns" style="display:flex;gap:8px;flex-wrap:wrap"></div>
             </div>
             <div class="profile-stats">
               <div class="stat-box"><b id="profPostsCnt">0</b><span>منشور</span></div>
-              <div class="stat-box" id="profFollowersBox"><b id="profFollowersCnt">0</b><span>متابِع</span></div>
-              <div class="stat-box" id="profFollowingBox"><b id="profFollowingCnt">0</b><span>يتابع</span></div>
+              <div class="stat-box" id="profFollowersBox"><b id="profFollowersCnt">0</b><span>متابِع (🟢)</span></div>
+              <div class="stat-box" id="profFollowingBox"><b id="profFollowingCnt">0</b><span>يتابع (🟢)</span></div>
               <div class="stat-box" id="profPrivateEarningsBox" title="أرباحك سرية ومستورة" hidden><b id="profGiftsEarned">•••• $</b><span>🔒 أرباحي 👁️</span></div>
               <div class="stat-box" id="profWalletBox" title="محفظتك المالية" hidden><b id="profWalletBal" style="color:var(--ok)">•••• $</b><span>💳 محفظتي 🔒</span></div>
             </div>
@@ -761,16 +873,17 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
       <div class="chips" id="profTabs" style="margin-bottom:10px">
         <button type="button" class="chip on" data-pt="all">⊞ المنشورات</button>
         <button type="button" class="chip" data-pt="reels">📱 الريلز والفيديوهات</button>
+        <button type="button" class="chip" data-pt="saved">🔖 المحفوظات</button>
       </div>
 
       <div id="profPostsList"></div>
     </div>
 
-    <!-- 5. الأصدقاء -->
+    <!-- 5. المتابعون والأصدقاء (مع حالة Online 🟢 / Offline ⚫) -->
     <div id="tab-friends" hidden>
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
-          <h3 style="margin:0;color:var(--ac)">➕ إضافة صديق بالاسم أو QR</h3>
+          <h3 style="margin:0;color:var(--ac)">➕ إضافة صديق أو متابعته بالاسم أو QR</h3>
           <button type="button" id="myQrFriendBtn" class="btn sm">📱 عرض QR ديالي</button>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -779,15 +892,21 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
         </div>
       </div>
 
-      <div class="grid-2">
-        <div class="card"><h3 style="margin:0 0 10px;color:var(--ac)">🔔 الطلبات الواردة</h3><div id="incomingReqs"></div></div>
-        <div class="card"><h3 style="margin:0 0 10px;color:var(--ac)">🤝 أصدقائي</h3><div id="myFriendsList"></div></div>
+      <!-- المتابعون والأصدقاء المتصلون الآن (Online Followers) -->
+      <div class="card">
+        <h3 style="margin:0 0 10px;color:var(--ok)">🟢 المتابعون والأصدقاء المتصلون الآن (Online Now)</h3>
+        <div id="onlineFollowersList"></div>
       </div>
 
-      <div class="card"><h3 style="margin:0 0 10px;color:var(--ac)">🌍 كاع المستخدمين فـ المنصة</h3><div id="allUsersList"></div></div>
+      <div class="grid-2">
+        <div class="card"><h3 style="margin:0 0 10px;color:var(--ac)">🔔 الطلبات الواردة</h3><div id="incomingReqs"></div></div>
+        <div class="card"><h3 style="margin:0 0 10px;color:var(--ac)">🤝 قائمة أصدقائي (Online / Offline)</h3><div id="myFriendsList"></div></div>
+      </div>
+
+      <div class="card"><h3 style="margin:0 0 10px;color:var(--ac)">🌍 كاع أعضاء VYROX (مع حالة الاتصال 🟢/⚫)</h3><div id="allUsersList"></div></div>
     </div>
 
-    <!-- 6. الشات والكروبات + مكالمة فيديو + الملصقات وإرسال فيديو -->
+    <!-- 6. الشات والكروبات + مكالمة فيديو WebRTC + الملصقات -->
     <div id="tab-chat" hidden>
       <div class="chat-layout">
         <aside class="chat-side">
@@ -804,11 +923,11 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
               <div class="avatar" id="chatAvatar">💬</div>
               <div>
                 <div class="who" id="chatTitle">اختار صديق أو كروب</div>
-                <div class="muted" id="chatSub">دير @ للطاغ • متاح اتصال فيديو 📹</div>
+                <div class="muted" id="chatSub">دير @ للطاغ • اتصال فيديو WebRTC 📹</div>
               </div>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-              <button type="button" class="btn ok-btn sm" id="startVideoCallBtn" hidden title="اتصال فيديو مباشر مع الصديق أو الكروب">📹 اتصال فيديو</button>
+              <button type="button" class="btn ok-btn sm" id="startVideoCallBtn" hidden title="اتصال فيديو مباشر بالصوت والصورة WebRTC">📹 اتصال فيديو</button>
               <div id="grpActionsBar" hidden style="display:flex;gap:5px;flex-wrap:wrap">
                 <button type="button" class="ghost" id="grpQrBtn" style="padding:4px 8px;font-size:.78rem">📱 QR</button>
                 <button type="button" class="ghost" id="grpManageBtn" style="padding:4px 8px;font-size:.78rem">👥 بروفايل</button>
@@ -817,10 +936,9 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
             </div>
           </div>
 
-          <div id="msgList" class="msg-list"><div class="empty">اختر محادثة لبدء الشات أو اتصال الفيديو 📹⚡</div></div>
+          <div id="msgList" class="msg-list"><div class="empty">اختر محادثة لبدء الشات أو اتصال الفيديو المباشر 📹⚡</div></div>
           <div id="mentionPopup" class="mention-popup" hidden></div>
 
-          <!-- لوحة الملصقات وصانع الـ Stickers من صورك -->
           <div id="stickerDrawer" class="sticker-drawer" hidden>
             <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:6px">
               <b style="color:var(--ac);font-size:.9rem">😊 الملصقات (Stickers) & صانع الملصقات</b>
@@ -849,14 +967,14 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
     </div>
   </main>
 
-  <!-- 🦁🧠 المساعد الذكي المغربي Lion Popi AI (يفكر بـ 3 ردود ويختار أحسن رد بالدارجة) -->
+  <!-- 🦁🧠 المساعد الذكي المغربي Lion Popi AI -->
   <button type="button" id="fabLionBtn" class="fab-lion">🦁 Lion Popi AI 🇲🇦</button>
   <div id="lionPanel" class="lion-panel" hidden>
     <div class="lion-head">
       <div style="display:flex;align-items:center;gap:10px">
         <div class="lion-voice-orb" id="lionOrb">🦁</div>
         <div>
-          <div style="line-height:1.1">Lion Popi AI <span style="font-size:.7rem;background:rgba(0,0,0,0.25);padding:1px 6px;border-radius:99px">Darija Brain 🧠🇲🇦</span></div>
+          <div style="line-height:1.1">Lion Popi AI <span style="font-size:.7rem;background:rgba(0,0,0,0.25);padding:1px 6px;border-radius:99px">VYROX Brain 🧠🇲🇦</span></div>
           <small style="font-weight:400;opacity:.9" id="lionStatusTxt">كيهضر بالدارجة وكيفكر فـ أحسن رد 🔊</small>
         </div>
       </div>
@@ -866,14 +984,13 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
       </div>
     </div>
     <div id="lionMsgs" class="lion-msgs">
-      <div class="lion-bubble">السلام خويا! أنا <b>Lion Popi 🦁🇲🇦</b>.
-دابا راني فاهم الهضرة ديال المغاربة بالدارجة مزيان! ملي كتسولني شي حاجة، <b>كنفكر فـ 3 ديال الردود المختلفة وكنعزل ليك أحسن وأذكى جواب</b>.
-جرب تكتب ليا أي ميساج بالدارجة ولا هضر معايا بـ 🎙️!</div>
+      <div class="lion-bubble">السلام خويا فـ <b>👑 VYROX</b>! أنا <b>Lion Popi 🦁🇲🇦</b>.
+دابا راني فاهم الهضرة ديال المغاربة بالدارجة مزيان! ملي كتسولني شي حاجة، <b>كنفكر فـ 3 ديال الردود المختلفة وكنعزل ليك أحسن وأذكى جواب</b>.</div>
     </div>
     <div style="display:flex;gap:4px;padding:6px 10px;overflow-x:auto;background:var(--card2);border-top:1px solid var(--line)">
-      <button type="button" class="ghost lion-q" data-q="خويا ليون كيفاش داير هاد النهار؟" style="font-size:.74rem;padding:3px 8px;white-space:nowrap">👋 سلام بالدارجة</button>
+      <button type="button" class="ghost lion-q" data-q="شنو هي ميزات VYROX الجديدة بحال Pulses و Sparks؟" style="font-size:.74rem;padding:3px 8px;white-space:nowrap">⚡ ميزات VYROX</button>
       <button type="button" class="ghost lion-q" data-q="عندي امتحانات فـ لافاك، باش تنصحني؟" style="font-size:.74rem;padding:3px 8px;white-space:nowrap">🎓 نصيحة للقراية</button>
-      <button type="button" class="ghost lion-q" data-q="كيفاش نصاوب Sticker ولا ندير فيديو كول مع عشيري؟" style="font-size:.74rem;padding:3px 8px;white-space:nowrap">📹 الفيديو كول والستيكرز</button>
+      <button type="button" class="ghost lion-q" data-q="كيفاش خدام اتصال الفيديو واللايف بالصوت؟" style="font-size:.74rem;padding:3px 8px;white-space:nowrap">📹 الفيديو كول واللايف</button>
     </div>
     <form id="lionForm" style="display:flex;gap:6px;padding:10px;background:var(--card);border-top:1px solid var(--line);align-items:center">
       <button type="button" class="ghost" id="lionMicBtn" style="padding:8px 12px;border-radius:50%">🎙️</button>
@@ -889,7 +1006,7 @@ main{max-width:960px;margin:12px auto;padding:0 12px 95px}
 
 <script>
 /* =================================================================
-   ✅ 1. إعدادات Firebase & Cloudinary
+   ✅ 1. إعدادات Firebase & Cloudinary + خوادم WebRTC العالمية
    ================================================================= */
 const firebaseConfig = {
   apiKey: "AIzaSyCTJ44jjKQg6Ph_Gv9l8WQjgopNE0TXLC4",
@@ -903,6 +1020,14 @@ const firebaseConfig = {
 
 const CLOUDINARY_CLOUD_NAME = "jxxdayqe";
 const CLOUDINARY_PRESET = "dark_power_preset";
+
+const RTC_CONFIG = {
+  iceServers: [
+    { urls: "stun:stun.l.google.com:19302" },
+    { urls: "stun:stun1.l.google.com:19302" },
+    { urls: "stun:stun2.l.google.com:19302" }
+  ]
+};
 
 function uploadToCloudinary(fileObj, onProgress) {
   return new Promise((resolve, reject) => {
@@ -935,44 +1060,53 @@ const urlParams = new URLSearchParams(location.search);
 if (urlParams.get("invite_user")) LS("dp_inv_user", urlParams.get("invite_user"));
 if (urlParams.get("join_group")) LS("dp_join_grp", urlParams.get("join_group"));
 
-function renderAvatarHtml(userObjOrUid, fallbackName = "U", customClass = "avatar") {
+// =====================================================
+// 🟢⚫ نظام معرفة شكون Online وشكون Offline فـ الوقت الحقيقي
+// =====================================================
+function isUserOnline(uObj) {
+  if (!uObj) return false;
+  if (uObj.uid === uid) return true;
+  if (uObj.isOnline === false) return false;
+  const lastSeen = uObj.lastSeenMs || 0;
+  return (Date.now() - lastSeen) < 95000; // متصل خلال آخر دقيقة ونصف
+}
+
+function renderAvatarHtml(userObjOrUid, fallbackName = "U", customClass = "avatar", showStatusDot = true) {
   let u = typeof userObjOrUid === "object" ? userObjOrUid : allUsers.find(x => x.uid === userObjOrUid);
   const uname = u?.username || fallbackName || "U";
-  if (u?.avatarUrl) return `<div class="${customClass}"><img src="${esc(u.avatarUrl)}" alt=""></div>`;
-  return `<div class="${customClass}">${esc(uname[0]?.toUpperCase() || "U")}</div>`;
+  const inner = u?.avatarUrl
+    ? `<div class="${customClass}"><img src="${esc(u.avatarUrl)}" alt=""></div>`
+    : `<div class="${customClass}">${esc(uname[0]?.toUpperCase() || "U")}</div>`;
+  if (!showStatusDot) return inner;
+  const online = isUserOnline(u);
+  return `<div class="avatar-wrap">${inner}<span class="status-dot ${online ? "online" : "offline"}" title="${online ? "متصل الآن (Online)" : "غير متصل (Offline)"}"></span></div>`;
 }
 
 // =====================================================
-// 🔇 نظام الإيقاف التلقائي الذكي للفيديوهات والريلز (Smart Media Auto-Pause)
+// 🔇 نظام الإيقاف التلقائي الذكي للفيديوهات والريلز
 // =====================================================
 function pauseAllPlayingMedia(exceptElement = null) {
   document.querySelectorAll("video, audio").forEach(mediaEl => {
-    if (mediaEl !== exceptElement && mediaEl.id !== "localLiveVideo" && mediaEl.id !== "vcallLocalVid") {
+    if (mediaEl !== exceptElement && mediaEl.id !== "localLiveVideo" && mediaEl.id !== "remoteLiveWebRtcVideo" && mediaEl.id !== "remoteLiveAudioPlayer" && mediaEl.id !== "vcallLocalVid" && mediaEl.id !== "vcallRemoteVid") {
       try { mediaEl.pause(); } catch (e) {}
     }
   });
 }
 
-// ملي يخدم أي فيديو أو أوديو فـ المنشورات أو الشات، أي فيديو آخر كيحبس فوراً
 document.addEventListener("play", (e) => {
   if (e.target && (e.target.tagName === "VIDEO" || e.target.tagName === "AUDIO")) {
     pauseAllPlayingMedia(e.target);
   }
 }, true);
 
-// مراقب الفيديوهات فـ قسم المنشورات: إلا هبطتي بالـ Scroll وخرج الفيديو من الشاشة كيحبس بوحدو
 const feedMediaObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (!entry.isIntersecting && !entry.target.paused) {
-      entry.target.pause();
-    }
+    if (!entry.isIntersecting && !entry.target.paused) entry.target.pause();
   });
 }, { threshold: 0.25 });
 
 function observeFeedVideos() {
-  document.querySelectorAll("#feed video, #profPostsList video").forEach(v => {
-    feedMediaObserver.observe(v);
-  });
+  document.querySelectorAll("#feed video, #profPostsList video").forEach(v => feedMediaObserver.observe(v));
 }
 
 // =====================================================
@@ -1032,7 +1166,7 @@ function triggerIncomingMessageAlert(senderName, textPreview, roomTitle) {
 }
 
 // =====================================================
-// 💳🏦 الحقيبة المالية السرية + رفض الكارطة الخاوية (0 درهم) أو الوهمية
+// 💳🏦 الحقيبة المالية السرية + رفض الكارطة الخاوية (0 درهم)
 // =====================================================
 let selectedPayMethod = "card";
 let revealPrivateMoney = false;
@@ -1051,12 +1185,8 @@ function isValidLuhnCard(numStr) {
   let sum = 0, shouldDouble = false;
   for (let i = digits.length - 1; i >= 0; i--) {
     let digit = parseInt(digits.charAt(i), 10);
-    if (shouldDouble) {
-      digit *= 2;
-      if (digit > 9) digit -= 9;
-    }
-    sum += digit;
-    shouldDouble = !shouldDouble;
+    if (shouldDouble) { digit *= 2; if (digit > 9) digit -= 9; }
+    sum += digit; shouldDouble = !shouldDouble;
   }
   return (sum % 10) === 0;
 }
@@ -1064,11 +1194,9 @@ function isValidLuhnCard(numStr) {
 function isCardNotExpired(expStr) {
   const m = expStr.match(/^(\d{2})\/(\d{2})$/);
   if (!m) return false;
-  const month = parseInt(m[1], 10);
-  const year = 2000 + parseInt(m[2], 10);
+  const month = parseInt(m[1], 10), year = 2000 + parseInt(m[2], 10);
   if (month < 1 || month > 12) return false;
-  const expDate = new Date(year, month, 0, 23, 59, 59);
-  return expDate > new Date();
+  return new Date(year, month, 0, 23, 59, 59) > new Date();
 }
 
 async function creditUserWalletAfterBankApproval(amount, methodLabel, txOrderId) {
@@ -1086,13 +1214,10 @@ function renderRealPayPalGateway() {
   const container = $("#paypalRealBtnContainer");
   if (!container) return;
   container.dataset.rendered = "1";
-
   window.paypal.Buttons({
     createOrder: (data, actions) => {
       const amt = Number($("#depositAmountInp").value || 10).toFixed(2);
-      return actions.order.create({
-        purchase_units: [{ description: `Dark Power Wallet (@${name})`, amount: { value: amt } }]
-      });
+      return actions.order.create({ purchase_units: [{ description: `VYROX Wallet (@${name})`, amount: { value: amt } }] });
     },
     onApprove: async (data, actions) => {
       const order = await actions.order.capture();
@@ -1102,9 +1227,7 @@ function renderRealPayPalGateway() {
         $("#walletErr").textContent = "";
       }
     },
-    onError: () => {
-      $("#walletErr").textContent = "🚫 تم رفض البطاقة من البنك: الرصيد غير كافٍ (0 درهم) أو البطاقة موقوفة!";
-    }
+    onError: () => { $("#walletErr").textContent = "🚫 تم رفض البطاقة من البنك: الرصيد غير كافٍ (0 درهم) أو البطاقة موقوفة!"; }
   }).render("#paypalRealBtnContainer");
 }
 
@@ -1120,27 +1243,13 @@ function updateWalletUI() {
   const txList = (myUserDoc.walletTransactions || []).slice().reverse();
   if ($("#walletTxHistory")) {
     $("#walletTxHistory").innerHTML = txList.length
-      ? txList.map(tx => `
-          <div class="tx-row">
-            <span>${esc(tx.title)}</span>
-            <b style="color:${tx.type === 'in' ? 'var(--ok)' : 'var(--danger)'}">
-              ${revealPrivateMoney ? `${tx.type === 'in' ? '+' : '-'}$${Number(tx.amount).toFixed(2)}` : '•••• $'}
-            </b>
-          </div>
-        `).join("")
+      ? txList.map(tx => `<div class="tx-row"><span>${esc(tx.title)}</span><b style="color:${tx.type === 'in' ? 'var(--ok)' : 'var(--danger)'}">${revealPrivateMoney ? `${tx.type === 'in' ? '+' : '-'}$${Number(tx.amount).toFixed(2)}` : '•••• $'}</b></div>`).join("")
       : `<div class="muted" style="text-align:center;padding:12px">مازال ما درتي حتى عملية.</div>`;
   }
 }
 
 $("#togglePrivacyEyeBtn").onclick = () => { revealPrivateMoney = !revealPrivateMoney; updateWalletUI(); };
-
-function openWalletSettingsModal() {
-  $("#walletErr").textContent = "";
-  updateWalletUI();
-  $("#walletSettingsModal").hidden = false;
-  setTimeout(renderRealPayPalGateway, 200);
-}
-
+function openWalletSettingsModal() { $("#walletErr").textContent = ""; updateWalletUI(); $("#walletSettingsModal").hidden = false; setTimeout(renderRealPayPalGateway, 200); }
 $("#topWalletBtn").onclick = openWalletSettingsModal;
 $("#bannerWalletBtn").onclick = openWalletSettingsModal;
 $("#liveTopUpBtn").onclick = openWalletSettingsModal;
@@ -1176,8 +1285,7 @@ $("#cardExpInp").addEventListener("input", e => {
 
 $("#confirmDepositBtn").onclick = async () => {
   if (!ready || !uid) return;
-  const errEl = $("#walletErr");
-  errEl.textContent = "";
+  const errEl = $("#walletErr"); errEl.textContent = "";
   const amount = Number($("#depositAmountInp").value);
   if (!amount || amount < 1 || amount > 5000) return errEl.textContent = "❌ عافاك دخل مبلغ صحيح بين $1 و $5000!";
 
@@ -1193,12 +1301,9 @@ $("#confirmDepositBtn").onclick = async () => {
   }
 
   const btn = $("#confirmDepositBtn");
-  btn.disabled = true;
-  btn.textContent = "⏳ جاري الاتصال بالبنك للتحقق من الرصيد (3D Secure)…";
-
+  btn.disabled = true; btn.textContent = "⏳ جاري الاتصال بالبنك للتحقق من الرصيد (3D Secure)…";
   setTimeout(() => {
-    btn.disabled = false;
-    btn.textContent = "🔒 التحقق من الرصيد البنكي وشحن المحفظة";
+    btn.disabled = false; btn.textContent = "🔒 التحقق من الرصيد البنكي وشحن المحفظة";
     errEl.innerHTML = `🚫 <b>تم رفض العملية من طرف البنك (Insufficient Funds - 0 DH):</b><br>البطاقة لا تتوفر على رصيد كافٍ ($${amount}) أو لم يتم تأكيد الاقتطاع عبر بوابة الدفع الرسمية أسفله.`;
   }, 1200);
 };
@@ -1218,14 +1323,35 @@ $("#convertEarningsBtn").onclick = async () => {
 // =====================================================
 // ⚖️ القوانين ومكافحة السب والعري والدم
 // =====================================================
-const BAD_WORDS = ["قحبة","قحاب","زامل","زوامل","حمار","كلب","حيوان","مكلخ","نيك","ينيك","قواد","شرموطة","خول","متناك","كس","زب","طيز","fuck","bitch","asshole","pute","merde","9a7ba","zamel"];
-const GORE_NUDITY_WORDS = ["porn","porno","xxx","nude","naked","sex","nsfw","gore","blood","murder","عري","عاري","اباحي","سكس","جنس","دم","ذبح","l3ra"];
+const AUTH_ERR = {
+  "auth/email-already-in-use": "هاد الاسم واخدو شي واحد من الدراري، اختار اسم آخر",
+  "auth/invalid-credential": "الاسم أو كلمة السر غالطة (إلا يلاه أول مرة كليكي على حساب جديد الفوق)",
+  "auth/user-not-found": "هاد الحساب ما كاينش، كليكي على (حساب جديد) أولاً",
+  "auth/wrong-password": "كلمة السر غالطة",
+  "auth/weak-password": "كلمة السر خاص تكون فيها 6 حروف أو أرقام على الأقل"
+};
+
+const BAD_WORDS = [
+  "قحبة","قحاب","زامل","زوامل","حمار","كلب","حيوان","مكلخ","تافه","حقير","لعنة","ملعون",
+  "نيك","ينيك","منيوك","قواد","تقود","سير تقود","تبرهيش","ولد القحبة","ولد الحرام","بنت القحبة",
+  "شرموطة","عرص","خول","متناك","كس","زب","زبي","طيز","عير",
+  "9a7ba","9ahba","zamel","zaml","zwaml","mkelkh","9wad","t9awed","sir t9awed","wld l9a7ba","weld l9ahba","nik","zeb","zebi","tabon","taboun",
+  "fuck","fucking","bitch","asshole","motherfucker","dick","pussy","whore","slut","bastard",
+  "pute","putain","connard","salope","enculé","encule","merde","batard","bâtard","ntm","fdp"
+];
+
+const GORE_NUDITY_WORDS = [
+  "porn","porno","xxx","nude","naked","sex","nsfw","onlyfans","brazzers","xnxx","xvideos","hentai","boobs","strip",
+  "gore","blood","bloody","murder","behead","decapitate","corpse","mutilation","slaughter",
+  "عري","عاري","عارية","اباحي","إباحي","اباحية","سكس","جنس","بورن","دم","دموي","ذبح","تقطيع","جثة","قتل_دموي","l3ra","3ari","3arya"
+];
 
 function containsWordFromList(text, list) {
   if (!text) return false;
   const clean = text.toLowerCase().replace(/[._\-*+~`'"]/g, " ");
   for (const w of list) {
-    const reg = new RegExp(`(^|\\s|#|[^a-zA-Z0-9\u0600-\u06FF])${w}($|\\s|[^a-zA-Z0-9\u0600-\u06FF])`, "i");
+    const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const reg = new RegExp(`(^|\\s|#|[^a-zA-Z0-9\u0600-\u06FF])${escaped}($|\\s|[^a-zA-Z0-9\u0600-\u06FF])`, "i");
     if (reg.test(clean)) return w;
   }
   return false;
@@ -1325,7 +1451,6 @@ try {
 
 let currentTab = "feed", viewedProfileUid = "", profTabFilter = "all";
 
-// عند تغيير التبويب (مثلاً من المنشورات إلى الريلز أو الشات)، كيوقف أي فيديو كان خدام باش ما يتخلطش الصوت!
 function switchTab(tabName) {
   pauseAllPlayingMedia(null);
   currentTab = tabName;
@@ -1358,7 +1483,154 @@ document.querySelectorAll("[data-ins-tag]").forEach(btn => {
 });
 
 // =====================================================
-// 🦁🧠🇲🇦 عقل Lion Popi AI بالدارجة المغربية (Multi-Candidate Thinking)
+// ⚡💭 نظام VYROX Pulses (Stories 24h) & Sparks (Instagram Notes)
+// =====================================================
+let pulsesList = [];
+let pulseFileObj = null;
+
+function renderVyroxInstantBar() {
+  const bar = $("#vyroxInstantBar");
+  if (!bar) return;
+  const now = Date.now();
+  const validPulses = pulsesList.filter(p => (now - (p.ts || 0)) < 24 * 3600 * 1000);
+  const myPulse = validPulses.find(p => p.uid === uid);
+  const mySpark = myUserDoc.sparkNote || "";
+
+  // العنصر الأول: ديالي (لإضافة Spark أو Pulse أو مشاهدة قصتي)
+  let html = `
+    <div class="pulse-item" data-pulse-act="${myPulse ? "view" : "create"}" data-uid="${uid}">
+      <div class="spark-bubble" data-pulse-act="create" title="كليكي لتغيير ملاحظتك الفورية Spark">${esc(mySpark || "💭 حط Spark…")}</div>
+      <div class="pulse-ring ${myPulse ? "" : "no-story"}">
+        ${renderAvatarHtml(myUserDoc, name, "avatar", false)}
+        <span class="pulse-add-badge" data-pulse-act="create" title="إضافة قصة Pulse أو ملاحظة Spark">+</span>
+      </div>
+      <span class="pulse-name">قصتي ⚡</span>
+    </div>
+  `;
+
+  // عرض الأصدقاء والمتابعين (أولوية للناس اللي عندهم Pulse أو Spark أو Online 🟢)
+  const otherUsers = allUsers.filter(u => u.uid !== uid).sort((a, b) => {
+    const aOnline = isUserOnline(a) ? 1 : 0;
+    const bOnline = isUserOnline(b) ? 1 : 0;
+    return bOnline - aOnline;
+  });
+
+  otherUsers.forEach(u => {
+    const uPulse = validPulses.find(p => p.uid === u.uid);
+    const uSpark = u.sparkNote || "";
+    const online = isUserOnline(u);
+    if (!uPulse && !uSpark && !online && !(myUserDoc.following || []).includes(u.uid)) return;
+
+    html += `
+      <div class="pulse-item" data-pulse-act="${uPulse ? "view" : "prof"}" data-uid="${u.uid}">
+        ${uSpark ? `<div class="spark-bubble" title="${esc(uSpark)}">💭 ${esc(uSpark)}</div>` : ""}
+        <div class="pulse-ring ${uPulse ? "" : "no-story"}">
+          ${renderAvatarHtml(u, u.username, "avatar", true)}
+        </div>
+        <span class="pulse-name">@${esc(u.username)}</span>
+      </div>
+    `;
+  });
+
+  bar.innerHTML = html;
+}
+
+$("#vyroxInstantBar").onclick = e => {
+  const actEl = e.target.closest("[data-pulse-act]");
+  if (!actEl) return;
+  const act = actEl.dataset.pulseAct;
+  const targetUid = actEl.closest(".pulse-item")?.dataset.uid || uid;
+
+  if (act === "create") {
+    pulseFileObj = null;
+    $("#pulseFileName").textContent = "";
+    $("#pulseCaptionInp").value = "";
+    $("#sparkNoteInp").value = myUserDoc.sparkNote || "";
+    $("#createPulseSparkModal").hidden = false;
+    return;
+  }
+  if (act === "view") {
+    const p = pulsesList.find(x => x.uid === targetUid);
+    if (p) openPulseStoryViewer(p);
+    return;
+  }
+  if (act === "prof") {
+    openUserProfile(targetUid);
+  }
+};
+
+$("#closeCreatePsBtn").onclick = () => { $("#createPulseSparkModal").hidden = true; };
+
+$("#saveSparkNoteBtn").onclick = async () => {
+  const note = $("#sparkNoteInp").value.trim();
+  if (!(await checkModerationAndStrike(note))) return;
+  await db.collection("users").doc(uid).set({ sparkNote: note, lastSeenMs: Date.now(), isOnline: true }, { merge: true });
+  $("#createPulseSparkModal").hidden = true;
+  showToast("💭 تم نشر ملاحظتك الفورية (VYROX Spark) فوق صورتك!");
+};
+
+$("#pulseFileInp").onchange = e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  pulseFileObj = f;
+  $("#pulseFileName").textContent = f.name;
+};
+
+$("#publishPulseBtn").onclick = async () => {
+  if (!pulseFileObj) return alert("ختار صورة أو فيديو للقصة بعدا!");
+  const cap = $("#pulseCaptionInp").value.trim();
+  if (!(await checkModerationAndStrike(cap))) return;
+  if (!(await scanMediaSafety(pulseFileObj, cap))) return;
+
+  const btn = $("#publishPulseBtn");
+  btn.disabled = true; btn.textContent = "⏳ جاري رفع القصة…";
+  try {
+    const isVid = pulseFileObj.type.startsWith("video");
+    let mediaUrl = "";
+    if (!isVid && pulseFileObj.size < 3 * 1024 * 1024) {
+      mediaUrl = await compressImage(pulseFileObj, 900, 0.75);
+    } else {
+      mediaUrl = await uploadToCloudinary(pulseFileObj);
+    }
+    await db.collection("pulses").doc("pulse_" + uid).set({
+      uid, author: name, avatarUrl: myUserDoc.avatarUrl || "",
+      mediaType: isVid ? "video" : "image",
+      mediaUrl, caption: cap, ts: Date.now(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    $("#createPulseSparkModal").hidden = true;
+    showToast("⚡ تم نشر قصتك (VYROX Pulse) بنجاح!");
+  } catch (err) {
+    alert("مشكل فـ نشر القصة: " + err.message);
+  }
+  btn.disabled = false; btn.textContent = "⚡ نشر القصة الآن";
+};
+
+function openPulseStoryViewer(p) {
+  pauseAllPlayingMedia(null);
+  $("#pvAuthor").textContent = "@" + p.author;
+  $("#pvTime").textContent = "قصة فورية (24h)";
+  $("#pvCaption").textContent = p.caption || "";
+  $("#pvDeleteBtn").hidden = p.uid !== uid;
+  $("#pvDeleteBtn").onclick = async () => {
+    await db.collection("pulses").doc("pulse_" + uid).delete();
+    $("#pulseViewerModal").hidden = true;
+    showToast("🗑️ تم حذف قصتك.");
+  };
+  $("#pvMediaBox").innerHTML = p.mediaType === "video"
+    ? `<video controls autoplay playsinline src="${esc(p.mediaUrl)}" style="width:100%;max-height:74vh"></video>`
+    : `<img src="${esc(p.mediaUrl)}" alt="" style="width:100%;max-height:74vh;object-fit:contain">`;
+  $("#pulseViewerModal").hidden = false;
+}
+
+$("#closePulseViewerBtn").onclick = () => {
+  pauseAllPlayingMedia(null);
+  $("#pvMediaBox").innerHTML = "";
+  $("#pulseViewerModal").hidden = true;
+};
+
+// =====================================================
+// 🦁🧠🇲🇦 عقل Lion Popi AI بالدارجة المغربية
 // =====================================================
 let lionVoiceEnabled = true;
 $("#lionVoiceToggleBtn").onclick = () => {
@@ -1381,71 +1653,48 @@ function speakLionPopi(text) {
   } catch (e) {}
 }
 
-// توليد 3 ردود مختلفة بالدارجة المغربية حسب سياق كلام المستخدم، واختيار أحسن رد
 function generateMoroccanDarijaCandidates(userMsg) {
   const m = userMsg.toLowerCase();
-  let intent = "تواصل عام بالدارجة المغربية";
+  let intent = "تواصل عام بالدارجة المغربية فـ VYROX";
   let candidates = [];
 
-  if (/(سلام|سلم|اهلا|أهلا|مرحبا|صباح|مساء|فين|كيداير|لاباس|لباس|بخير|هاني|واش|salam|slm|cv|cc|labas|bikhir|fin)/.test(m) && m.length < 45) {
+  if (/(vyrox|فايروكس|pulse|spark|نوت|ستوري|story|notes|ميزات)/.test(m)) {
+    intent = "شرح هوية وميزات VYROX الجديدة";
+    candidates = [
+      "مرحبا بيك فـ الحلة الجديدة 👑 VYROX! زدنا ميزة ⚡ Pulses (قصص 24 ساعة)، وميزة 💭 Sparks (ملاحظات فورية كتبان فوق صورتك بحال Instagram Notes)، وزدنا النقطة الخضراء 🟢 باش تعرف شكون Online من صحابك، وصلحنا الفيديو كول واللايف بـ WebRTC باش يخدمو بالصوت والصورة طيار!",
+      "فـ VYROX كاع داكشي لي فـ إنستغرام طورناه بشكل ملكي: تقدر تدير Double-Tap على أي صورة باش دير ❤️، وتحفظ المنشورات بـ 🔖، وتلوح Spark فوق الأفتار ديالك باش كاع المتابعين يشوفو شنو فـ بالك!",
+      "VYROX دابا خدام بـ WebRTC الحقيقي فـ مكالمات الفيديو واللايف، يعني غير يجاوبك صاحبك كتبان ليك الكاميرا ديالو وكتسمع صوتو فـ البلاصة بلا ثقل!"
+    ];
+  } else if (/(سلام|سلم|اهلا|أهلا|مرحبا|صباح|مساء|فين|كيداير|لاباس|لباس|بخير|هاني|واش|salam|slm|cv|cc|labas|bikhir|fin)/.test(m) && m.length < 45) {
     intent = "تحية وسؤال على الأحوال بالدارجة المغربية";
     candidates = [
-      "وعليكم السلام خويا العزيز! الحمد لله كلشي ناضي ومزيان، نتا كي داير مع الصحة والقراية؟ أمورك هانية؟ ⚡",
-      "أهلاً وسهلاً بالعشير! ساعة سعيدة هادي، أنا ديما واجد وموجود فـ Dark Power، قول ليا شنو الجديد عندك؟ 🦁🇲🇦",
+      "وعليكم السلام خويا العزيز! الحمد لله كلشي ناضي فـ VYROX، نتا كي داير مع الصحة والقراية؟ أمورك هانية؟ ⚡",
+      "أهلاً وسهلاً بالعشير! ساعة سعيدة هادي، أنا ديما واجد وموجود فـ VYROX، قول ليا شنو الجديد عندك؟ 🦁🇲🇦",
       "مرحبا بيك آ خويا! كلشي بخير وعلى خير، الله يحفظك. كيف غادي مع الوقت ومع الدراري؟ ✨"
     ];
   } else if (/(قراية|امتحان|لافاك|كلية|ماط|فيزيك|شيمي|باك|مدرسة|استاذ|fac|fst|s2|exam|étude|qraya|lafac)/.test(m)) {
     intent = "الحديث على القراية، لافاك والامتحانات";
     candidates = [
       "الله يسهل عليك آ خويا فـ القراية ولافاك! سر النجاح هو تخدم ليزيكسيرسيس وهادوك ليزيكزام قدام، وتنظم وقتك بلا ستريس، وراه ربي ما كيضيعش لي كيضرب تمارة! 🎓🔥",
-      "شوف آ عشيري، لافاك كتبغي شوية ديال الصبر والتركيز. بدا بـ الموديلات لي فيهم الكويفيسيون طالع وخدم مع صحابك فـ كروب هنا فـ Dark Power! 📚⚡",
-      "لافاك صعيبة غير فـ البديا، ولكن مع البراتيك غادي تجيك ساهلة إن شاء الله. إلا وحلتي فـ شي تمرين ديال الماط ولا الشيمي ولا الفيزيك غير حطو ليا نعاونك فيه! 🧠"
+      "شوف آ عشيري، لافاك كتبغي شوية ديال الصبر والتركيز. بدا بـ الموديلات لي فيهم الكويفيسيون طالع وخدم مع صحابك فـ كروب هنا فـ VYROX! 📚⚡",
+      "إلا وحلتي فـ شي تمرين ديال الماط ولا الشيمي ولا الفيزيك غير حطو ليا نعاونك فيه سطر بـ سطر! 🧠"
     ];
-  } else if (/(كود|برمجة|لعبة|غودو|بايثون|جافا|موقع|تطبيق|سيت|code|coding|godot|python|js|html|game|dev)/.test(m)) {
-    intent = "تطوير الألعاب والبرمجة (Coding & GameDev)";
+  } else if (/(فيديو كول|اتصال|عيط|كاميرا|لايف|صوت|appel|video call|call|live)/.test(m)) {
+    intent = "شرح مكالمة الفيديو WebRTC واللايف بالصوت";
     candidates = [
-      "الـ الدومين ديال البرمجة وتطوير الألعاب واعر بزاف! سواء خدام بـ Godot 4 ولا Python ولا JavaScript، أهم حاجة هي تقسم المشروع ديالك لـ أجزاء صغار وتجرب كل حاجة بوحدها، وإلا بغيتي شي سكريبت واجد قولي الفكرة ونكتبو ليك! 💻🚀",
-      "تبارك الله عليك آ خويا! الكودينغ هو المستقبل. بارطاجي لقطات من الألعاب والمشاريع لي كتصاوب فـ قسم الـ Reels مع هاشتاق #gamedev باش يشوفوه الدراري ويشجعوك! 🎮⚡",
-      "إلا طلع ليك شي Bug فـ الكود ديالك ولا بغيتي تزيد شي ميكانيك جديدة فـ اللعبة، غير صيفط ليا السؤال هنا ونحللوه سطر بـ سطر! 🧠🔥"
-    ];
-  } else if (/(ستيكر|ملصق|فيديو كول|اتصال|عيط|كاميرا|sticker|appel|video call|call)/.test(m)) {
-    intent = "شرح ميزة مكالمة الفيديو والملصقات الجديدة";
-    candidates = [
-      "هاد الميزة الجديدة ناضية! دخل لقسم 💬 الشات، غادي تلقى الفوق زر (📹 اتصال فيديو) باش تهضر كاميرا مع صاحبك مباشرة، ولتحت حدا الميساج كاين زر (😊) تقدر تصيفط منو Stickers أو تكليكي على (➕ صاوب Sticker بصورتك) وتصاوب ملصق خاص بيك! 🎨📹",
-      "ساهلة آ خويا! فـ الشات زدنا زر 🎬 باش تصيفط فيديو، وزر 😊 ديال الملصقات لي تقدر تحول بيه أي صورة عندك فـ التليفون لـ Sticker، وزدنا 📹 باش دير Appel Vidéo مع العشران! ⚡",
-      "دابا الشات ولا متكامل: كليكي على 📹 الفوق فـ المحادثة باش يرن التليفون عند صاحبك وتفتحو الكاميرا، واستعمل 😊 باش تصنع ملصقاتك الخاصة! 🔥"
-    ];
-  } else if (/(مقلق|طالع ليا الدم|مهموم|عييت|مشكيل|زيرو|خاسر|حزين|ضغط|ستريس|m9ala9|3yit|mochkil)/.test(m)) {
-    intent = "دعم نفسي ومواساة بالدارجة المغربية";
-    candidates = [
-      "وسّع خاطرك آ خويا العزيز، ما يكون غير الخير إن شاء الله! الدنيا كتبغي الصبر، خذ ليك شي استراحة، صلي ولا خرج ضرب دويرة تبدل الجو، وكل مشكل عندو حل بإذن الله. أنا معاك! 🤝❤️",
-      "لا، ما تخليش الستريس يغلبك آ بطل! راه كاع الدراري كيدوزو من فترات صعيبة، غير ارتاح شوية وعاود رتب أوراقك وغادي ترجع أقوى من الأول! 💪⚡",
-      "هون عليك آ عشيري، حتى حاجة ما تستاهل تقلق راسك عليها. دير شي كاس ديال أتاي وتفرج شوية فـ الريلز ولا هضر مع صحابك فـ الشات باش تفوج! 🌟"
-    ];
-  } else if (/(كرة|ماتش|ريال|برشلونة|كلاسيكو|المنتخب|المغرب|football|real|barca|maroc|match)/.test(m)) {
-    intent = "الحديث على الكرة والرياضة";
-    candidates = [
-      "الكرة هي الحماس كامل! سواء الكلاسيكو بين الريال والبارصا ولا ماتشات المنتخب المغربي، الفرجة مع الدراري فـ لايف ولا فـ كروب الشات كتكون واعرة بزاف! شكون كتشجع نتا آ خويا؟ ⚽🔥",
-      "ديما مغرب وديما فرجة نقية! طلق لينا شي موضوع ولا توقع ديالك للماتش الجاي فـ المنشورات مع هاشتاق #football وشوف آراء الدراري! 🇲🇦⚽",
-      "ما كاين ما أحسن من سهرة كروية! تقدر تصاوب كروب خاص بالكرة فـ Dark Power وتجمع فيه صحابك تناقشو الماتشات مباشرة! ⚡"
-    ];
-  } else if (/(لايف|هدية|جائزة|عقل|وردة|حقيبة|فلوس|محفظة|live|gift|wallet|brain)/.test(m)) {
-    intent = "شرح اللايف، الهدايا، والحقيبة المالية الخاصة";
-    candidates = [
-      "فـ قسم 🔴 المباشر تقدر تطلق لايف بالكاميرا، والدراري يصيفطو ليك هدايا من الوردة ($1) حتى لجائزة العقل الخارق 🧠 ($100)! وأحسن حاجة هي أن أرباحك ومحفظتك مستورين 100% بـ (•••• $) وما كيشوفهم حتى واحد غيرك! 🔒🎁",
-      "الحقيبة المالية (💳) محمية مزيان وما كتقبلش الكارطة الخاوية (0 درهم). ملي تشحنها تقدر تدعم صحابك فـ اللايف وتفرحهم بجوائز واعرة! ⚡",
-      "بغيتي تجمع جوائز فـ اللايف؟ طلق بث مباشر فـ شي موضوع ممتع للدراري، وأي هدية وصلاتك كتمشي لأرباحك الخاصة لي تقدر تحولها لمحفظتك وقتما بغيتي! 👑"
+      "دابا صلحنا مكالمة الفيديو واللايف بـ تقنية WebRTC المباشرة! غير تمشي للشات وتكليكي على (📹 اتصال فيديو) ويقبل صاحبك، كيتفتح الفيديو والصوت بيناتكم فـ البلاصة بلا انتظار! 📹🔊",
+      "فـ اللايف ديال VYROX، دابا الصوت كيدوز مباشر مع الصورة وما بقاش ثقيل. غير يطلق صاحبك اللايف كليكي على (👀 تفرج) وغادي تسمع صوتو وتشوفو بوضوح! 🔴⚡",
+      "جرب دابا تصوني على صاحبك لي طالع حداه نقطة خضراء 🟢 Online، راه الاتصال ولا خفيف ومباشر بحال إنستغرام! 🔥"
     ];
   } else {
     intent = `تحليل كلام المستخدم بالدارجة ("${userMsg.slice(0, 28)}") وصياغة ردود متعددة`;
     candidates = [
-      `فهمتك مزيان آ خويا بخصوص "${userMsg}"! الصراحة فكرة ناضية، كنصحك تبارطاجيها مع الدراري فـ منشور أو Reel باش تشوف التفاعل ديالهم، وإلا بغيتي نعاونك فـ أي تفصيل فيها أنا واجد! 🦁⚡`,
-      `والله إلا كلامك معقول آ عشيري! هاد الموضوع ديال "${userMsg}" يستاهل النقاش، تقدر تطلق عليه حتى Live مباشر ولا تسول عليه الأصدقاء فـ الكروب. قول ليا شنو رأيك نزيدو نطورو هاد الفكرة؟ 🧠🇲🇦`,
-      `ناضي آ خويا! أنا كـ Lion Popi عجباتني هاد الهضرة. إلا محتاج شي مساعدة تقنية ولا فكرة إضافية فـ هاد الموضوع غير قولها ليا ونقادوها فـ البلاصة! 🔥`
+      `فهمتك مزيان آ خويا بخصوص "${userMsg}"! الصراحة فكرة ناضية، كنصحك تبارطاجيها مع الدراري فـ VYROX Pulse أو Reel باش تشوف التفاعل ديالهم، وإلا بغيتي نعاونك فـ أي تفصيل فيها أنا واجد! 🦁⚡`,
+      `والله إلا كلامك معقول آ عشيري! هاد الموضوع ديال "${userMsg}" يستاهل النقاش، تقدر تحطو فـ Spark فوق صورتك ولا تطلق عليه Live بالصوت والصورة! 🧠🇲🇦`,
+      `ناضي آ خويا! أنا كـ Lion Popi عجباتني هاد الهضرة. إلا محتاج شي مساعدة تقنية ولا فكرة إضافية غير قولها ليا ونقادوها فـ البلاصة! 🔥`
     ];
   }
 
-  // اختيار أحسن رد (التقييم الذكي حسب طول وجودة الجواب)
   const bestIdx = Math.floor(Math.random() * candidates.length);
   return { intent, candidates, chosenIdx: bestIdx, finalReply: candidates[bestIdx] };
 }
@@ -1459,7 +1708,7 @@ function askLionPopiWithThinking(userText) {
 
   const thinkDiv = document.createElement("div");
   thinkDiv.className = "lion-thinking";
-  thinkDiv.innerHTML = `<b>🧠 Lion Popi كيقرا الميساج بالدارجة وكيولّد ردود محتملة…</b>`;
+  thinkDiv.innerHTML = `<b>🧠 Lion Popi كيقرا الميساج بالدارجة وكيولّد 3 ردود محتملة…</b>`;
   box.appendChild(thinkDiv);
   box.scrollTop = box.scrollHeight;
   $("#lionStatusTxt").textContent = "🧠 كيفكر فـ 3 ردود وكيعزل أحسن جواب…";
@@ -1467,7 +1716,7 @@ function askLionPopiWithThinking(userText) {
   setTimeout(() => {
     const res = generateMoroccanDarijaCandidates(userText);
     thinkDiv.innerHTML = `
-      <b>🧠 فهمت القصد: ${esc(res.intent)} (تم توليد 3 ردود واختيار الأفضل):</b>
+      <b>🧠 فهمت القصد: ${esc(res.intent)} (تم اختيار أحسن رد):</b>
       ${res.candidates.map((c, idx) => `
         <div class="lion-cand ${idx === res.chosenIdx ? "chosen" : ""}">
           ${idx === res.chosenIdx ? "✅ الرد المختار: " : `• اقتراح ${idx + 1}: `}${esc(c.slice(0, 75))}…
@@ -1482,7 +1731,7 @@ function askLionPopiWithThinking(userText) {
     box.scrollTop = box.scrollHeight;
 
     speakLionPopi(res.finalReply);
-  }, 750);
+  }, 650);
 }
 
 $("#lionForm").onsubmit = e => {
@@ -1511,15 +1760,15 @@ $("#lionMicBtn").onclick = () => {
 };
 
 $("#askLionHashtagsBtn").onclick = () => {
-  const suggested = "#darkpower #reels_maroc #viral #explore";
+  const suggested = "#vyrox #reels_maroc #viral #explore";
   const inp = $("#text");
   if (!inp.value.includes("#")) inp.value = (inp.value.trim() + " " + suggested).trim();
   $("#lionPanel").hidden = false;
-  askLionPopiWithThinking("عطيني أحسن هاشتاقات باش يطلع الفيديو ديالي فـ الطوندونس");
+  askLionPopiWithThinking("عطيني أحسن هاشتاقات فـ VYROX");
 };
 
 // =====================================================
-// 🎨😊 نظام الملصقات (Stickers) + صانع الملصقات من صور المستخدم
+// 🎨😊 نظام الملصقات (Stickers) + صانع الملصقات
 // =====================================================
 function makeBuiltInSvgSticker(emoji, topTxt, bgGrad1, bgGrad2) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
@@ -1533,17 +1782,16 @@ function makeBuiltInSvgSticker(emoji, topTxt, bgGrad1, bgGrad2) {
 }
 
 const DEFAULT_STICKERS = [
+  makeBuiltInSvgSticker("👑", "VYROX KING", "#f59e0b", "#b45309"),
   makeBuiltInSvgSticker("🦁", "ناضي خويا!", "#a855f7", "#ec4899"),
-  makeBuiltInSvgSticker("⚡", "Dark Power", "#f59e0b", "#b45309"),
   makeBuiltInSvgSticker("😂", "وااااعر ههه", "#10b981", "#047857"),
   makeBuiltInSvgSticker("🔥", "شاعلة العافية", "#f43f5e", "#9f1239"),
-  makeBuiltInSvgSticker("👑", "الرجولة!", "#3b82f6", "#1d4ed8"),
+  makeBuiltInSvgSticker("⚡", "طاقة قصوى", "#3b82f6", "#1d4ed8"),
   makeBuiltInSvgSticker("🧠", "العقل الخارق", "#8b5cf6", "#4c1d95"),
   makeBuiltInSvgSticker("🇲🇦", "ديما مغرب", "#dc2626", "#15803d"),
   makeBuiltInSvgSticker("❤️", "عشيري العزيز", "#ec4899", "#be185d")
 ];
 
-// تحويل أي صورة من جهاز المستخدم لـ ملصق دائري/مربع بحواف بيضاء (Custom Sticker)
 function createStickerFromImageFile(fileObj) {
   return new Promise((resolve) => {
     const img = new Image();
@@ -1552,23 +1800,17 @@ function createStickerFromImageFile(fileObj) {
       const c = document.createElement("canvas");
       c.width = size; c.height = size;
       const ctx = c.getContext("2d");
-
       ctx.save();
       ctx.beginPath();
       ctx.roundRect ? ctx.roundRect(10, 10, size - 20, size - 20, 44) : ctx.arc(size/2, size/2, size/2 - 10, 0, Math.PI * 2);
       ctx.clip();
-
       const scale = Math.max((size - 20) / img.width, (size - 20) / img.height);
       const w = img.width * scale, h = img.height * scale;
       ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
       ctx.restore();
-
       ctx.beginPath();
       ctx.roundRect ? ctx.roundRect(10, 10, size - 20, size - 20, 44) : ctx.arc(size/2, size/2, size/2 - 10, 0, Math.PI * 2);
-      ctx.lineWidth = 8;
-      ctx.strokeStyle = "#ffffff";
-      ctx.stroke();
-
+      ctx.lineWidth = 8; ctx.strokeStyle = "#ffd700"; ctx.stroke();
       resolve(c.toDataURL("image/webp", 0.82));
     };
     img.src = URL.createObjectURL(fileObj);
@@ -1578,25 +1820,16 @@ function createStickerFromImageFile(fileObj) {
 function renderStickerDrawer() {
   const customList = myUserDoc.customStickers || [];
   let html = customList.map((url, idx) => `
-    <div class="sticker-item" data-send-stk="${esc(url)}" title="كليكي لإرسال الملصق">
+    <div class="sticker-item" data-send-stk="${esc(url)}">
       <img src="${esc(url)}" alt="sticker">
-      <button type="button" class="del-stk" data-del-stk="${idx}" title="حذف الملصق">✖</button>
+      <button type="button" class="del-stk" data-del-stk="${idx}">✖</button>
     </div>
   `).join("");
-
-  html += DEFAULT_STICKERS.map(url => `
-    <div class="sticker-item" data-send-stk="${esc(url)}" title="كليكي لإرسال الملصق">
-      <img src="${esc(url)}" alt="sticker">
-    </div>
-  `).join("");
-
+  html += DEFAULT_STICKERS.map(url => `<div class="sticker-item" data-send-stk="${esc(url)}"><img src="${esc(url)}" alt="sticker"></div>`).join("");
   $("#stickerGrid").innerHTML = html;
 }
 
-$("#chatStickerBtn").onclick = () => {
-  renderStickerDrawer();
-  $("#stickerDrawer").hidden = !$("#stickerDrawer").hidden;
-};
+$("#chatStickerBtn").onclick = () => { renderStickerDrawer(); $("#stickerDrawer").hidden = !$("#stickerDrawer").hidden; };
 $("#closeStickerDrawerBtn").onclick = () => { $("#stickerDrawer").hidden = true; };
 
 $("#customStickerInp").onchange = async e => {
@@ -1604,11 +1837,9 @@ $("#customStickerInp").onchange = async e => {
   if (!f) return;
   if (!(await scanMediaSafety(f, ""))) return;
   const stkDataUrl = await createStickerFromImageFile(f);
-  await db.collection("users").doc(uid).set({
-    customStickers: firebase.firestore.FieldValue.arrayUnion(stkDataUrl)
-  }, { merge: true });
+  await db.collection("users").doc(uid).set({ customStickers: firebase.firestore.FieldValue.arrayUnion(stkDataUrl) }, { merge: true });
   e.target.value = "";
-  showToast("🎨 تم صنع وحفظ الـ Sticker ديالك بنجاح! كليكي عليه باش تصيفطو فـ الشات.");
+  showToast("🎨 تم صنع وحفظ الـ Sticker ديالك بنجاح!");
   setTimeout(renderStickerDrawer, 250);
 };
 
@@ -1617,12 +1848,9 @@ $("#stickerGrid").onclick = async e => {
   if (delBtn) {
     e.stopPropagation();
     const idx = Number(delBtn.dataset.delStk);
-    const current = [...(myUserDoc.customStickers || [])];
-    const removed = current[idx];
+    const removed = (myUserDoc.customStickers || [])[idx];
     if (removed) {
-      await db.collection("users").doc(uid).update({
-        customStickers: firebase.firestore.FieldValue.arrayRemove(removed)
-      });
+      await db.collection("users").doc(uid).update({ customStickers: firebase.firestore.FieldValue.arrayRemove(removed) });
       setTimeout(renderStickerDrawer, 200);
     }
     return;
@@ -1634,11 +1862,14 @@ $("#stickerGrid").onclick = async e => {
 };
 
 // =====================================================
-// 📹📞 نظام مكالمة الفيديو المباشرة مع الأصدقاء (Video Call 1-on-1 & Group)
+// 📹📞 حل مشكل مكالمة الفيديو: WebRTC الحقيقي بالصوت والصورة + Fast Frame Sync
 // =====================================================
 let vcallLocalStream = null;
+let vcallPeerConn = null;
 let vcallFrameTimer = null;
 let unsubRoomVcall = null;
+let unsubCallerCand = null;
+let unsubCalleeCand = null;
 let inVideoCall = false;
 let vcallMicMuted = false;
 let vcallCamOff = false;
@@ -1647,7 +1878,10 @@ async function startOrJoinRoomVideoCall(isCaller = true) {
   if (!activeRoom) return;
   pauseAllPlayingMedia(null);
   try {
-    vcallLocalStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    vcallLocalStream = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 640 }, height: { ideal: 480 } },
+      audio: { echoCancellation: true, noiseSuppression: true }
+    });
     const locVid = $("#vcallLocalVid");
     locVid.srcObject = vcallLocalStream;
     inVideoCall = true;
@@ -1655,58 +1889,128 @@ async function startOrJoinRoomVideoCall(isCaller = true) {
     vcallCamOff = false;
     $("#vcallMuteMicBtn").textContent = "🎙️";
     $("#vcallToggleCamBtn").textContent = "📷";
+    $("#vcallRemoteVid").hidden = true;
+    $("#vcallRemoteImg").hidden = true;
+    $("#vcallWaitingBox").hidden = false;
 
     const info = getRoomDisplay(activeRoom);
     $("#vcallTitle").textContent = `📹 مكالمة فيديو: ${info.title}`;
-    $("#vcallStatusTxt").textContent = isCaller ? "🔔 جاري الرنين والاتصال…" : "🟢 متصل الآن بالصوت والصورة";
+    $("#vcallStatusTxt").textContent = isCaller ? "🔔 جاري الرنين على الصديق…" : "⚡ جاري ربط الصوت والصورة…";
     $("#videoCallModal").hidden = false;
     $("#incomingCallModal").hidden = true;
 
     const callRef = db.collection("rooms").doc(activeRoom.id).collection("vcall").doc("session");
+    const callerCandCol = callRef.collection("callerCandidates");
+    const calleeCandCol = callRef.collection("calleeCandidates");
+
+    // إنشاء اتصال WebRTC الحقيقي لنقل الصوت والصورة مباشرة
+    vcallPeerConn?.close();
+    vcallPeerConn = new RTCPeerConnection(RTC_CONFIG);
+
+    vcallLocalStream.getTracks().forEach(track => vcallPeerConn.addTrack(track, vcallLocalStream));
+
+    vcallPeerConn.ontrack = (event) => {
+      const remVid = $("#vcallRemoteVid");
+      if (remVid.srcObject !== event.streams[0]) {
+        remVid.srcObject = event.streams[0];
+        remVid.hidden = false;
+        $("#vcallRemoteImg").hidden = true;
+        $("#vcallWaitingBox").hidden = true;
+        $("#vcallStatusTxt").textContent = `🟢 متصل الآن بالصوت والصورة HD`;
+        remVid.play().catch(() => {});
+      }
+    };
+
+    vcallPeerConn.onicecandidate = (event) => {
+      if (event.candidate) {
+        const targetCol = isCaller ? callerCandCol : calleeCandCol;
+        targetCol.add(event.candidate.toJSON()).catch(() => {});
+      }
+    };
+
     if (isCaller) {
+      const offer = await vcallPeerConn.createOffer();
+      await vcallPeerConn.setLocalDescription(offer);
       await callRef.set({
         active: true,
         callerUid: uid,
         callerName: name,
+        offer: { type: offer.type, sdp: offer.sdp },
+        answer: null,
         frames: {},
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
-      await sendChatMessage({ text: `📹 بدأ @${name} مكالمة فيديو مباشرة! كليكي على (📹 اتصال فيديو) الفوق للانضمام.` });
+      });
+      await sendChatMessage({ text: `📹 بدأ @${name} مكالمة فيديو مباشرة! كليكي على (📹 اتصال فيديو) للرد.` });
+
+      unsubCalleeCand?.();
+      unsubCalleeCand = calleeCandCol.onSnapshot(snap => {
+        snap.docChanges().forEach(change => {
+          if (change.type === "added" && vcallPeerConn?.remoteDescription) {
+            vcallPeerConn.addIceCandidate(new RTCIceCandidate(change.doc.data())).catch(() => {});
+          }
+        });
+      });
+    } else {
+      const snap = await callRef.get();
+      const data = snap.data() || {};
+      if (data.offer) {
+        await vcallPeerConn.setRemoteDescription(new RTCSessionDescription(data.offer));
+        const answer = await vcallPeerConn.createAnswer();
+        await vcallPeerConn.setLocalDescription(answer);
+        await callRef.update({
+          answer: { type: answer.type, sdp: answer.sdp },
+          calleeUid: uid,
+          calleeName: name,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }
+
+      unsubCallerCand?.();
+      unsubCallerCand = callerCandCol.onSnapshot(cSnap => {
+        cSnap.docChanges().forEach(change => {
+          if (change.type === "added" && vcallPeerConn?.remoteDescription) {
+            vcallPeerConn.addIceCandidate(new RTCIceCandidate(change.doc.data())).catch(() => {});
+          }
+        });
+      });
     }
 
-    // إرسال إطارات الكاميرا وتبادل الصورة مع الصديق فـ الوقت الحقيقي
+    // مزامنة سريعة احتياطية (Fast Frame Fallback) لضمان ظهور صورة الصديق فوراً حتى لو كان خلف جدار ناري
     vcallFrameTimer = setInterval(async () => {
       if (!inVideoCall || !activeRoom || vcallCamOff) return;
       if (!locVid.videoWidth) return;
       const c = document.createElement("canvas");
-      c.width = 280; c.height = 210;
-      c.getContext("2d").drawImage(locVid, 0, 0, 280, 210);
-      const frame = c.toDataURL("image/jpeg", 0.5);
+      c.width = 240; c.height = 180;
+      c.getContext("2d").drawImage(locVid, 0, 0, 240, 180);
+      const frame = c.toDataURL("image/jpeg", 0.45);
       await callRef.set({
         active: true,
-        [`frames.${uid}`]: { author: name, img: frame, ts: Date.now() },
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        [`frames.${uid}`]: { author: name, img: frame, ts: Date.now() }
       }, { merge: true }).catch(() => {});
-    }, 1300);
+    }, 900);
 
     unsubRoomVcall?.();
-    unsubRoomVcall = callRef.onSnapshot(snap => {
+    unsubRoomVcall = callRef.onSnapshot(async snap => {
       if (!snap.exists || !snap.data()?.active) {
         if (inVideoCall) endVideoCall(false);
         return;
       }
       const data = snap.data();
-      const frames = data.frames || {};
-      const otherEntry = Object.entries(frames).find(([k, v]) => k !== uid && (Date.now() - (v.ts || 0) < 15000));
-      if (otherEntry) {
-        const [, peerData] = otherEntry;
-        $("#vcallRemoteImg").src = peerData.img;
-        $("#vcallRemoteImg").hidden = false;
-        $("#vcallWaitingBox").hidden = true;
-        $("#vcallStatusTxt").textContent = `🟢 متصل مباشرة مع @${peerData.author}`;
-      } else {
-        $("#vcallRemoteImg").hidden = true;
-        $("#vcallWaitingBox").hidden = false;
+      // ربط جواب WebRTC عند المتصل
+      if (isCaller && data.answer && vcallPeerConn && !vcallPeerConn.currentRemoteDescription) {
+        await vcallPeerConn.setRemoteDescription(new RTCSessionDescription(data.answer)).catch(() => {});
+      }
+      // إظهار الصورة الاحتياطية فوراً ريثما يكتمل مسار WebRTC
+      if ($("#vcallRemoteVid").hidden) {
+        const frames = data.frames || {};
+        const otherEntry = Object.entries(frames).find(([k, v]) => k !== uid && (Date.now() - (v.ts || 0) < 12000));
+        if (otherEntry) {
+          const [, peerData] = otherEntry;
+          $("#vcallRemoteImg").src = peerData.img;
+          $("#vcallRemoteImg").hidden = false;
+          $("#vcallWaitingBox").hidden = true;
+          $("#vcallStatusTxt").textContent = `🟢 متصل مباشرة مع @${peerData.author}`;
+        }
       }
     });
   } catch (err) {
@@ -1716,15 +2020,14 @@ async function startOrJoinRoomVideoCall(isCaller = true) {
 
 async function endVideoCall(notifyRemote = true) {
   clearInterval(vcallFrameTimer);
-  unsubRoomVcall?.();
-  if (vcallLocalStream) {
-    vcallLocalStream.getTracks().forEach(t => t.stop());
-    vcallLocalStream = null;
-  }
+  unsubRoomVcall?.(); unsubCallerCand?.(); unsubCalleeCand?.();
+  if (vcallPeerConn) { vcallPeerConn.close(); vcallPeerConn = null; }
+  if (vcallLocalStream) { vcallLocalStream.getTracks().forEach(t => t.stop()); vcallLocalStream = null; }
   if (notifyRemote && activeRoom) {
     await db.collection("rooms").doc(activeRoom.id).collection("vcall").doc("session").set({ active: false }, { merge: true }).catch(() => {});
   }
   inVideoCall = false;
+  $("#vcallRemoteVid").srcObject = null;
   $("#videoCallModal").hidden = true;
   $("#incomingCallModal").hidden = true;
 }
@@ -1750,140 +2053,9 @@ $("#acceptCallBtn").onclick = () => startOrJoinRoomVideoCall(false);
 $("#rejectCallBtn").onclick = () => { $("#incomingCallModal").hidden = true; endVideoCall(true); };
 
 // =====================================================
-// 👤➕ نظام المتابعة (Follow / Unfollow) والبروفايل الشخصي السري
+// 🔴🔊 حل مشكل اللايف الثقيل وبدون صوت: Fast Live Video + Live Audio Stream
 // =====================================================
-function isFollowing(targetUid) { return (myUserDoc.following || []).includes(targetUid); }
-
-async function toggleFollowUser(targetUid) {
-  if (!ready || !uid || !targetUid || targetUid === uid) return;
-  const currentlyFollowing = isFollowing(targetUid);
-  const myRef = db.collection("users").doc(uid);
-  const targetRef = db.collection("users").doc(targetUid);
-  if (currentlyFollowing) {
-    await myRef.update({ following: firebase.firestore.FieldValue.arrayRemove(targetUid) });
-    await targetRef.update({ followers: firebase.firestore.FieldValue.arrayRemove(uid) });
-    showToast("تم إلغاء المتابعة");
-  } else {
-    await myRef.update({ following: firebase.firestore.FieldValue.arrayUnion(targetUid) });
-    await targetRef.update({ followers: firebase.firestore.FieldValue.arrayUnion(uid) });
-    showToast("تمت المتابعة بنجاح ✅");
-  }
-}
-
-function openUserProfile(targetUid) {
-  if (!targetUid) return;
-  viewedProfileUid = targetUid;
-  switchTab("profile");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function renderProfileTab() {
-  const targetUid = viewedProfileUid || uid;
-  const isMe = targetUid === uid;
-  const uDoc = isMe ? myUserDoc : (allUsers.find(u => u.uid === targetUid) || { uid: targetUid, username: "مستخدم" });
-  const uname = uDoc.username || "user";
-  const userPosts = posts.filter(p => p.uid === targetUid);
-
-  $("#profAvatarBox").innerHTML = uDoc.avatarUrl ? `<img src="${esc(uDoc.avatarUrl)}" alt="">` : esc(uname[0]?.toUpperCase() || "U");
-  $("#profUsername").textContent = "@" + uname;
-  $("#profPostsCnt").textContent = userPosts.length;
-  $("#profFollowersCnt").textContent = (uDoc.followers || []).length;
-  $("#profFollowingCnt").textContent = (uDoc.following || []).length;
-
-  $("#profPrivateEarningsBox").hidden = !isMe;
-  $("#profWalletBox").hidden = !isMe;
-  if (isMe) {
-    $("#profGiftsEarned").textContent = revealPrivateMoney ? `$${Number(myUserDoc.giftsEarned || 0).toFixed(0)}` : "•••• $";
-    $("#profWalletBal").textContent = revealPrivateMoney ? `$${Number(myUserDoc.walletBalance || 0).toFixed(0)}` : "•••• $";
-    $("#profPrivateEarningsBox").onclick = () => { revealPrivateMoney = !revealPrivateMoney; updateWalletUI(); };
-    $("#profWalletBox").onclick = openWalletSettingsModal;
-  }
-
-  $("#profBioText").textContent = uDoc.bio || (isMe ? "مازال ما درتيش Bio!" : "حساب رسمي فـ Dark Power ⚡");
-
-  if (isMe) {
-    $("#profActionBtns").innerHTML = `
-      <button type="button" class="btn sm" id="openEditProfBtn">✏️ تعديل</button>
-      <button type="button" class="btn ok-btn sm" id="profOpenWalletBtn">💳 الحقيبة 🔒</button>
-      <button type="button" class="ghost" id="profShareQrBtn" style="padding:4px 10px;font-size:.8rem">📱 QR</button>
-    `;
-    $("#openEditProfBtn").onclick = openEditProfileModal;
-    $("#profOpenWalletBtn").onclick = openWalletSettingsModal;
-    $("#profShareQrBtn").onclick = openMyProfileQr;
-  } else {
-    const fState = isFollowing(targetUid);
-    $("#profActionBtns").innerHTML = `
-      <button type="button" class="follow-btn ${fState ? "following" : ""}" id="profFollowActBtn">${fState ? "✓ متابَع" : "➕ متابعة"}</button>
-      <button type="button" class="btn ghost sm" id="profDmActBtn">💬 خاص</button>
-    `;
-    $("#profFollowActBtn").onclick = () => toggleFollowUser(targetUid);
-    $("#profDmActBtn").onclick = () => openDirectChat({ uid: targetUid, username: uname });
-  }
-
-  const filteredPosts = profTabFilter === "reels" ? userPosts.filter(p => p.type === "reel" || p.type === "video") : userPosts;
-  $("#profPostsList").innerHTML = filteredPosts.length ? filteredPosts.map(card).join("") : `<div class="empty">ما كاين حتى منشور.</div>`;
-  observeFeedVideos();
-}
-
-$("#profTabs").onclick = e => {
-  const b = e.target.closest("[data-pt]");
-  if (!b) return;
-  profTabFilter = b.dataset.pt;
-  document.querySelectorAll("#profTabs .chip").forEach(x => x.classList.toggle("on", x === b));
-  renderProfileTab();
-};
-
-function showFollowListModal(modeType) {
-  const targetUid = viewedProfileUid || uid;
-  const uDoc = targetUid === uid ? myUserDoc : (allUsers.find(u => u.uid === targetUid) || {});
-  const listIds = modeType === "followers" ? (uDoc.followers || []) : (uDoc.following || []);
-  $("#flModalTitle").textContent = modeType === "followers" ? "👥 المتابعون (Followers)" : "🌟 يتابع (Following)";
-  $("#flModalBody").innerHTML = listIds.length ? listIds.map(id => {
-    const u = allUsers.find(x => x.uid === id) || { uid: id, username: "مستخدم" };
-    return `<div class="user-item"><div class="user-click" data-open-prof="${u.uid}">${renderAvatarHtml(u, u.username)}<b>@${esc(u.username)}</b></div></div>`;
-  }).join("") : `<div class="muted" style="text-align:center;padding:18px">القائمة فارغة.</div>`;
-  $("#followListModal").hidden = false;
-}
-$("#profFollowersBox").onclick = () => showFollowListModal("followers");
-$("#profFollowingBox").onclick = () => showFollowListModal("following");
-$("#closeFlModalBtn").onclick = () => { $("#followListModal").hidden = true; };
-$("#flModalBody").onclick = e => {
-  const pClick = e.target.closest("[data-open-prof]");
-  if (pClick) { $("#followListModal").hidden = true; openUserProfile(pClick.dataset.openProf); }
-};
-
-let pendingAvatarDataUrl = null;
-function openEditProfileModal() {
-  pendingAvatarDataUrl = null;
-  $("#editBioInp").value = myUserDoc.bio || "";
-  $("#editAvatarPreview").innerHTML = myUserDoc.avatarUrl ? `<img src="${esc(myUserDoc.avatarUrl)}" alt="">` : esc((name || "U")[0].toUpperCase());
-  $("#editProfileModal").hidden = false;
-}
-$("#closeEditProfBtn").onclick = () => $("#editProfileModal").hidden = true;
-$("#cancelEditProfBtn").onclick = () => $("#editProfileModal").hidden = true;
-
-$("#editAvatarInp").onchange = async e => {
-  const f = e.target.files[0];
-  if (!f) return;
-  if (!(await scanMediaSafety(f, ""))) return;
-  pendingAvatarDataUrl = await compressImage(f, 320, 0.78);
-  $("#editAvatarPreview").innerHTML = `<img src="${esc(pendingAvatarDataUrl)}" alt="">`;
-};
-
-$("#saveProfileBtn").onclick = async () => {
-  const bio = $("#editBioInp").value.trim();
-  if (!(await checkModerationAndStrike(bio))) return;
-  const updates = { bio };
-  if (pendingAvatarDataUrl) updates.avatarUrl = pendingAvatarDataUrl;
-  await db.collection("users").doc(uid).set(updates, { merge: true });
-  $("#editProfileModal").hidden = true;
-  showToast("✅ تم التحديث بنجاح!");
-};
-
-// =====================================================
-// 🔴 اللايف والهدايا السرية
-// =====================================================
-let localLiveStream = null, liveFrameInterval = null, currentLiveId = null, isHostingLive = false, unsubLiveDoc = null, unsubLiveComments = null, lastGiftTimestamp = 0;
+let localLiveStream = null, liveFrameInterval = null, liveAudioRecorder = null, currentLiveId = null, isHostingLive = false, unsubLiveDoc = null, unsubLiveComments = null, lastGiftTimestamp = 0, lastAudioChunkTs = 0;
 
 function updateLiveHostEarningsDisplay() {
   const pill = $("#liveHostPrivateEarningsPill");
@@ -1896,34 +2068,90 @@ $("#liveHostPrivateEarningsPill").onclick = () => { revealLiveHostEarnings = !re
 $("#startLiveBtn").onclick = async () => {
   if (!ready || !uid) return;
   pauseAllPlayingMedia(null);
-  const title = $("#liveTitleInp").value.trim() || `لايف مع @${name}`;
+  const title = $("#liveTitleInp").value.trim() || `لايف مباشر مع @${name} 👑`;
   if (!(await checkModerationAndStrike(title))) return;
   try {
-    localLiveStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-    const vid = $("#localLiveVideo"); vid.srcObject = localLiveStream; vid.hidden = false;
-    $("#remoteLiveFrame").hidden = true; $("#livePlaceholder").hidden = true;
-    isHostingLive = true; revealLiveHostEarnings = false; currentLiveId = "live_" + uid;
+    localLiveStream = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 480 }, height: { ideal: 640 }, frameRate: { ideal: 24 } },
+      audio: { echoCancellation: true, noiseSuppression: true }
+    });
+    const vid = $("#localLiveVideo");
+    vid.srcObject = localLiveStream;
+    vid.hidden = false;
+    $("#remoteLiveFrame").hidden = true;
+    $("#livePlaceholder").hidden = true;
+    isHostingLive = true;
+    revealLiveHostEarnings = false;
+    currentLiveId = "live_" + uid;
 
     await db.collection("lives").doc(currentLiveId).set({
-      hostUid: uid, hostName: name, title, active: true, earnings: 0, frameData: "", lastGift: null, startedAt: firebase.firestore.FieldValue.serverTimestamp()
+      hostUid: uid, hostName: name, title, active: true, earnings: 0,
+      frameData: "", audioChunk: "", audioTs: 0, lastGift: null,
+      startedAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
-    $("#startLiveBtn").hidden = true; $("#stopLiveBtn").hidden = false; $("#liveStageWrap").hidden = false;
+    $("#startLiveBtn").hidden = true;
+    $("#stopLiveBtn").hidden = false;
+    $("#liveStageWrap").hidden = false;
     joinLiveRoomSession(currentLiveId);
 
+    // 1. بث الصورة بسرعة وخفة عالية (كل 550ms بضغط ذكي سريع باش ما يكونش ثقيل نهائياً)
+    const c = document.createElement("canvas");
+    const ctx = c.getContext("2d");
     liveFrameInterval = setInterval(async () => {
-      if (!isHostingLive || !currentLiveId) return;
-      const c = document.createElement("canvas"); c.width = 320; c.height = 240;
-      c.getContext("2d").drawImage(vid, 0, 0, 320, 240);
-      const frame = c.toDataURL("image/jpeg", 0.5);
+      if (!isHostingLive || !currentLiveId || !vid.videoWidth) return;
+      const scale = Math.min(1, 300 / vid.videoWidth);
+      c.width = vid.videoWidth * scale;
+      c.height = vid.videoHeight * scale;
+      ctx.drawImage(vid, 0, 0, c.width, c.height);
+      const frame = c.toDataURL("image/jpeg", 0.42);
       await db.collection("lives").doc(currentLiveId).update({ frameData: frame }).catch(()=>{});
-    }, 1500);
-    showToast("🔴 اللايف خدام! (أرباحك سرية 🔒)");
-  } catch (err) { alert("أعطِ صلاحية الكاميرا!"); }
+    }, 550);
+
+    // 2. بث الصوت المباشر (Live Audio Chunks) باش المتفرجين يسمعو صوت صاحب اللايف بوضوح!
+    startHostLiveAudioBroadcast();
+
+    showToast("🔴 اللايف خدام بالصوت والصورة السريعة!");
+  } catch (err) { alert("أعطِ صلاحية الكاميرا والميكروفون لبث اللايف!"); }
 };
+
+function startHostLiveAudioBroadcast() {
+  if (!localLiveStream || !isHostingLive) return;
+  try {
+    const audioTracks = localLiveStream.getAudioTracks();
+    if (!audioTracks.length) return;
+    const audioOnlyStream = new MediaStream([audioTracks[0]]);
+
+    const recordClip = () => {
+      if (!isHostingLive || !currentLiveId) return;
+      const chunks = [];
+      const rec = new MediaRecorder(audioOnlyStream);
+      liveAudioRecorder = rec;
+      rec.ondataavailable = e => { if (e.data && e.data.size > 0) chunks.push(e.data); };
+      rec.onstop = async () => {
+        if (!isHostingLive || !currentLiveId) return;
+        if (chunks.length) {
+          const blob = new Blob(chunks, { type: rec.mimeType || "audio/webm" });
+          if (blob.size < 350 * 1024) {
+            const dataUrl = await fileToDataUrl(blob);
+            await db.collection("lives").doc(currentLiveId).update({
+              audioChunk: dataUrl,
+              audioTs: Date.now()
+            }).catch(() => {});
+          }
+        }
+        if (isHostingLive) setTimeout(recordClip, 50);
+      };
+      rec.start();
+      setTimeout(() => { if (rec.state === "recording") rec.stop(); }, 2200);
+    };
+    recordClip();
+  } catch (e) {}
+}
 
 async function stopMyLiveStream() {
   clearInterval(liveFrameInterval);
+  try { if (liveAudioRecorder && liveAudioRecorder.state === "recording") liveAudioRecorder.stop(); } catch (e) {}
   if (localLiveStream) { localLiveStream.getTracks().forEach(t => t.stop()); localLiveStream = null; }
   if (isHostingLive && currentLiveId) await db.collection("lives").doc(currentLiveId).delete().catch(()=>{});
   isHostingLive = false; currentLiveId = null;
@@ -1933,11 +2161,31 @@ async function stopMyLiveStream() {
 }
 
 $("#stopLiveBtn").onclick = stopMyLiveStream;
-$("#leaveWatchLiveBtn").onclick = () => { if (isHostingLive) stopMyLiveStream(); else { unsubLiveDoc?.(); unsubLiveComments?.(); currentLiveId = null; $("#liveStageWrap").hidden = true; } };
+$("#leaveWatchLiveBtn").onclick = () => {
+  if (isHostingLive) stopMyLiveStream();
+  else {
+    unsubLiveDoc?.(); unsubLiveComments?.(); currentLiveId = null;
+    $("#remoteLiveAudioPlayer").pause();
+    $("#liveStageWrap").hidden = true;
+  }
+};
+
+$("#liveUnmuteAudioBtn").onclick = () => {
+  const aud = $("#remoteLiveAudioPlayer");
+  aud.muted = false;
+  aud.play().catch(() => {});
+  $("#liveUnmuteAudioBtn").hidden = true;
+  showToast("🔊 تم تفعيل صوت اللايف!");
+};
 
 function joinLiveRoomSession(liveId) {
-  currentLiveId = liveId; lastGiftTimestamp = Date.now();
-  $("#liveStageWrap").hidden = false; $("#liveGiftLog").innerHTML = `🎁 سجل الداعمين:`;
+  currentLiveId = liveId;
+  lastGiftTimestamp = Date.now();
+  lastAudioChunkTs = 0;
+  $("#liveStageWrap").hidden = false;
+  $("#liveGiftLog").innerHTML = `🎁 سجل الداعمين:`;
+  $("#liveUnmuteAudioBtn").hidden = isHostingLive;
+
   unsubLiveDoc?.();
   unsubLiveDoc = db.collection("lives").doc(liveId).onSnapshot(snap => {
     if (!snap.exists) { $("#liveStageWrap").hidden = true; return; }
@@ -1946,9 +2194,31 @@ function joinLiveRoomSession(liveId) {
     $("#liveTitleBadge").textContent = data.title || "بث مباشر";
     currentLiveHostEarningsVal = data.earnings || 0;
     updateLiveHostEarningsDisplay();
-    if (!isHostingLive && data.frameData) { $("#remoteLiveFrame").src = data.frameData; $("#remoteLiveFrame").hidden = false; $("#livePlaceholder").hidden = true; }
-    if (data.lastGift && data.lastGift.ts > lastGiftTimestamp) { lastGiftTimestamp = data.lastGift.ts; triggerLiveGiftAnimation(data.lastGift); }
+
+    if (!isHostingLive) {
+      if (data.frameData) {
+        $("#remoteLiveFrame").src = data.frameData;
+        $("#remoteLiveFrame").hidden = false;
+        $("#livePlaceholder").hidden = true;
+      }
+      // تشغيل الصوت المباشر لصاحب اللايف عند المتفرجين
+      if (data.audioChunk && data.audioTs && data.audioTs > lastAudioChunkTs) {
+        lastAudioChunkTs = data.audioTs;
+        const aud = $("#remoteLiveAudioPlayer");
+        aud.src = data.audioChunk;
+        aud.play().then(() => {
+          $("#liveUnmuteAudioBtn").hidden = true;
+        }).catch(() => {
+          $("#liveUnmuteAudioBtn").hidden = false;
+        });
+      }
+    }
+    if (data.lastGift && data.lastGift.ts > lastGiftTimestamp) {
+      lastGiftTimestamp = data.lastGift.ts;
+      triggerLiveGiftAnimation(data.lastGift);
+    }
   });
+
   unsubLiveComments?.();
   unsubLiveComments = db.collection("lives").doc(liveId).collection("comments").orderBy("createdAt", "asc").onSnapshot(s => {
     $("#liveChatList").innerHTML = s.docs.map(d => `<div class="cm"><b>@${esc(d.data().author)}</b>: ${esc(d.data().text)}</div>`).join("") || `<div class="empty">لا تعليقات بعد</div>`;
@@ -2007,6 +2277,158 @@ $("#liveChatForm").onsubmit = async e => {
 };
 
 // =====================================================
+// 👤➕ نظام المتابعة (Follow / Unfollow) + حالة Online 🟢
+// =====================================================
+function isFollowing(targetUid) { return (myUserDoc.following || []).includes(targetUid); }
+
+async function toggleFollowUser(targetUid) {
+  if (!ready || !uid || !targetUid || targetUid === uid) return;
+  const currentlyFollowing = isFollowing(targetUid);
+  const myRef = db.collection("users").doc(uid);
+  const targetRef = db.collection("users").doc(targetUid);
+  if (currentlyFollowing) {
+    await myRef.update({ following: firebase.firestore.FieldValue.arrayRemove(targetUid) });
+    await targetRef.update({ followers: firebase.firestore.FieldValue.arrayRemove(uid) });
+    showToast("تم إلغاء المتابعة");
+  } else {
+    await myRef.update({ following: firebase.firestore.FieldValue.arrayUnion(targetUid) });
+    await targetRef.update({ followers: firebase.firestore.FieldValue.arrayUnion(uid) });
+    showToast("تمت المتابعة بنجاح ✅");
+  }
+}
+
+function openUserProfile(targetUid) {
+  if (!targetUid) return;
+  viewedProfileUid = targetUid;
+  switchTab("profile");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderProfileTab() {
+  const targetUid = viewedProfileUid || uid;
+  const isMe = targetUid === uid;
+  const uDoc = isMe ? myUserDoc : (allUsers.find(u => u.uid === targetUid) || { uid: targetUid, username: "مستخدم" });
+  const uname = uDoc.username || "user";
+  const userPosts = posts.filter(p => p.uid === targetUid);
+  const online = isUserOnline(uDoc);
+
+  $("#profAvatarBox").innerHTML = uDoc.avatarUrl ? `<img src="${esc(uDoc.avatarUrl)}" alt="">` : esc(uname[0]?.toUpperCase() || "U");
+  $("#profUsername").innerHTML = `@${esc(uname)} <span class="v-crown" title="عضو VYROX">👑</span>`;
+  $("#profOnlineBadge").innerHTML = online
+    ? `<span class="status-txt-online">🟢 متصل الآن (Online)</span>`
+    : `<span class="status-txt-offline">⚫ غير متصل (Offline)</span>`;
+
+  $("#profPostsCnt").textContent = userPosts.length;
+  $("#profFollowersCnt").textContent = (uDoc.followers || []).length;
+  $("#profFollowingCnt").textContent = (uDoc.following || []).length;
+
+  $("#profPrivateEarningsBox").hidden = !isMe;
+  $("#profWalletBox").hidden = !isMe;
+  if (isMe) {
+    $("#profGiftsEarned").textContent = revealPrivateMoney ? `$${Number(myUserDoc.giftsEarned || 0).toFixed(0)}` : "•••• $";
+    $("#profWalletBal").textContent = revealPrivateMoney ? `$${Number(myUserDoc.walletBalance || 0).toFixed(0)}` : "•••• $";
+    $("#profPrivateEarningsBox").onclick = () => { revealPrivateMoney = !revealPrivateMoney; updateWalletUI(); };
+    $("#profWalletBox").onclick = openWalletSettingsModal;
+  }
+
+  $("#profBioText").textContent = (uDoc.sparkNote ? `💭 "${uDoc.sparkNote}"\n` : "") + (uDoc.bio || (isMe ? "مازال ما درتيش Bio!" : "عضو فـ مجتمع VYROX الملكي 👑"));
+
+  if (isMe) {
+    $("#profActionBtns").innerHTML = `
+      <button type="button" class="btn sm" id="openEditProfBtn">✏️ تعديل البروفايل</button>
+      <button type="button" class="btn ok-btn sm" id="profOpenWalletBtn">💳 الحقيبة 🔒</button>
+      <button type="button" class="ghost" id="profShareQrBtn" style="padding:4px 10px;font-size:.8rem">📱 QR</button>
+    `;
+    $("#openEditProfBtn").onclick = openEditProfileModal;
+    $("#profOpenWalletBtn").onclick = openWalletSettingsModal;
+    $("#profShareQrBtn").onclick = openMyProfileQr;
+  } else {
+    const fState = isFollowing(targetUid);
+    $("#profActionBtns").innerHTML = `
+      <button type="button" class="follow-btn ${fState ? "following" : ""}" id="profFollowActBtn">${fState ? "✓ متابَع" : "➕ متابعة"}</button>
+      <button type="button" class="btn ghost sm" id="profDmActBtn">💬 خاص</button>
+    `;
+    $("#profFollowActBtn").onclick = () => toggleFollowUser(targetUid);
+    $("#profDmActBtn").onclick = () => openDirectChat({ uid: targetUid, username: uname });
+  }
+
+  let filteredPosts = userPosts;
+  if (profTabFilter === "reels") filteredPosts = userPosts.filter(p => p.type === "reel" || p.type === "video");
+  if (profTabFilter === "saved") {
+    const savedIds = myUserDoc.savedPosts || [];
+    filteredPosts = posts.filter(p => savedIds.includes(p.id));
+  }
+  $("#profPostsList").innerHTML = filteredPosts.length ? filteredPosts.map(card).join("") : `<div class="empty">ما كاين حتى منشور فهاد القسم.</div>`;
+  observeFeedVideos();
+}
+
+$("#profTabs").onclick = e => {
+  const b = e.target.closest("[data-pt]");
+  if (!b) return;
+  profTabFilter = b.dataset.pt;
+  document.querySelectorAll("#profTabs .chip").forEach(x => x.classList.toggle("on", x === b));
+  renderProfileTab();
+};
+
+function showFollowListModal(modeType) {
+  const targetUid = viewedProfileUid || uid;
+  const uDoc = targetUid === uid ? myUserDoc : (allUsers.find(u => u.uid === targetUid) || {});
+  const listIds = modeType === "followers" ? (uDoc.followers || []) : (uDoc.following || []);
+  $("#flModalTitle").textContent = modeType === "followers" ? "👥 المتابعون (Followers - 🟢/⚫)" : "🌟 يتابع (Following - 🟢/⚫)";
+  $("#flModalBody").innerHTML = listIds.length ? listIds.map(id => {
+    const u = allUsers.find(x => x.uid === id) || { uid: id, username: "مستخدم" };
+    const online = isUserOnline(u);
+    return `<div class="user-item">
+      <div class="user-click" data-open-prof="${u.uid}">
+        ${renderAvatarHtml(u, u.username)}
+        <div>
+          <b>@${esc(u.username)}</b>
+          <div class="${online ? "status-txt-online" : "status-txt-offline"}">${online ? "🟢 متصل الآن (Online)" : "⚫ غير متصل (Offline)"}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join("") : `<div class="muted" style="text-align:center;padding:18px">القائمة فارغة.</div>`;
+  $("#followListModal").hidden = false;
+}
+$("#profFollowersBox").onclick = () => showFollowListModal("followers");
+$("#profFollowingBox").onclick = () => showFollowListModal("following");
+$("#closeFlModalBtn").onclick = () => { $("#followListModal").hidden = true; };
+$("#flModalBody").onclick = e => {
+  const pClick = e.target.closest("[data-open-prof]");
+  if (pClick) { $("#followListModal").hidden = true; openUserProfile(pClick.dataset.openProf); }
+};
+
+let pendingAvatarDataUrl = null;
+function openEditProfileModal() {
+  pendingAvatarDataUrl = null;
+  $("#editBioInp").value = myUserDoc.bio || "";
+  $("#editSparkInp").value = myUserDoc.sparkNote || "";
+  $("#editAvatarPreview").innerHTML = myUserDoc.avatarUrl ? `<img src="${esc(myUserDoc.avatarUrl)}" alt="">` : esc((name || "U")[0].toUpperCase());
+  $("#editProfileModal").hidden = false;
+}
+$("#closeEditProfBtn").onclick = () => $("#editProfileModal").hidden = true;
+$("#cancelEditProfBtn").onclick = () => $("#editProfileModal").hidden = true;
+
+$("#editAvatarInp").onchange = async e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  if (!(await scanMediaSafety(f, ""))) return;
+  pendingAvatarDataUrl = await compressImage(f, 320, 0.78);
+  $("#editAvatarPreview").innerHTML = `<img src="${esc(pendingAvatarDataUrl)}" alt="">`;
+};
+
+$("#saveProfileBtn").onclick = async () => {
+  const bio = $("#editBioInp").value.trim();
+  const sparkNote = $("#editSparkInp").value.trim();
+  if (!(await checkModerationAndStrike(bio + " " + sparkNote))) return;
+  const updates = { bio, sparkNote };
+  if (pendingAvatarDataUrl) updates.avatarUrl = pendingAvatarDataUrl;
+  await db.collection("users").doc(uid).set(updates, { merge: true });
+  $("#editProfileModal").hidden = true;
+  showToast("✅ تم تحديث بروفايلك بنجاح!");
+};
+
+// =====================================================
 // 📱 نظام الدعوة عبر QR Code
 // =====================================================
 function showQrInvitation(title, desc, linkUrl) {
@@ -2015,7 +2437,7 @@ function showQrInvitation(title, desc, linkUrl) {
   $("#qrModal").hidden = false;
 }
 function openMyProfileQr() {
-  showQrInvitation(`📱 QR لبروفايلك (@${name})`, "سكاني الكود للإضافة والمتابعة:", `${location.origin + location.pathname}?invite_user=${encodeURIComponent(name)}`);
+  showQrInvitation(`📱 QR لبروفايلك فـ VYROX (@${name})`, "سكاني الكود للإضافة والمتابعة:", `${location.origin + location.pathname}?invite_user=${encodeURIComponent(name)}`);
 }
 $("#myQrTopBtn").onclick = openMyProfileQr;
 $("#myQrFriendBtn").onclick = openMyProfileQr;
@@ -2052,10 +2474,10 @@ async function handlePendingQrInvites() {
 }
 
 // =====================================================
-// 👥 الأصدقاء + الشات والكروبات + إرسال فيديو و Stickers
+// 👥 الأصدقاء والمتابعون (مع حالة Online 🟢 / Offline ⚫)
 // =====================================================
-let mode = "login", uid = "", name = "", unsubPosts = null, unsubUsers = null, unsubRooms = null, unsubMsgs = null, unsubLives = null;
-let allUsers = [], myUserDoc = { friends: [], followers: [], following: [], requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0, giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: [] }, rooms = [], activeRoom = null, activeLives = [];
+let mode = "login", uid = "", name = "", unsubPosts = null, unsubUsers = null, unsubRooms = null, unsubMsgs = null, unsubLives = null, unsubPulses = null;
+let allUsers = [], myUserDoc = { friends: [], followers: [], following: [], savedPosts: [], requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0, giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: [] }, rooms = [], activeRoom = null, activeLives = [];
 
 async function sendFriendRequest(targetUser) {
   if (!targetUser || targetUser.uid === uid) return alert("ما يمكنش تزيد راسك!");
@@ -2098,11 +2520,33 @@ $("#addFriendBtn").onclick = () => {
 function renderFriendsTab() {
   const reqsIn = myUserDoc.requestsIn || [];
   const friends = myUserDoc.friends || [];
+  const followers = myUserDoc.followers || [];
+  const following = myUserDoc.following || [];
   const reqsOut = myUserDoc.requestsOut || [];
 
   const badge = $("#reqBadge");
   badge.textContent = reqsIn.length;
   badge.hidden = reqsIn.length === 0;
+
+  // عرض المتابعين والأصدقاء المتصلين الآن (Online Followers & Friends)
+  const networkIds = [...new Set([...followers, ...following, ...friends])].filter(id => id !== uid);
+  const onlineNetwork = networkIds.map(id => allUsers.find(u => u.uid === id)).filter(u => u && isUserOnline(u));
+
+  $("#onlineFollowersList").innerHTML = onlineNetwork.length ? onlineNetwork.map(u => `
+    <div class="user-item" style="border-color:rgba(16,185,129,0.4)">
+      <div class="user-click" data-f-act="prof" data-uid="${u.uid}">
+        ${renderAvatarHtml(u, u.username)}
+        <div>
+          <b>@${esc(u.username)}</b>
+          <div class="status-txt-online">🟢 متصل الآن (Online) ${u.sparkNote ? `• 💭 "${esc(u.sparkNote)}"` : ""}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button type="button" class="btn ok-btn sm" data-f-act="vcall" data-uid="${u.uid}">📹 فيديو</button>
+        <button type="button" class="btn sm" data-f-act="dm" data-uid="${u.uid}">💬 شات</button>
+      </div>
+    </div>
+  `).join("") : `<div class="muted">ما كاين حتى واحد من المتابعين ديالك Online فهاد اللحظة.</div>`;
 
   $("#incomingReqs").innerHTML = reqsIn.map(id => {
     const u = allUsers.find(x => x.uid === id) || { uid: id, username: "مستخدم" };
@@ -2117,8 +2561,15 @@ function renderFriendsTab() {
 
   $("#myFriendsList").innerHTML = friends.map(id => {
     const u = allUsers.find(x => x.uid === id) || { uid: id, username: "صديق" };
+    const online = isUserOnline(u);
     return `<div class="user-item">
-      <div class="user-click" data-f-act="prof" data-uid="${u.uid}">${renderAvatarHtml(u, u.username)}<b>@${esc(u.username)}</b></div>
+      <div class="user-click" data-f-act="prof" data-uid="${u.uid}">
+        ${renderAvatarHtml(u, u.username)}
+        <div>
+          <b>@${esc(u.username)}</b>
+          <div class="${online ? "status-txt-online" : "status-txt-offline"}">${online ? "🟢 متصل الآن" : "⚫ غير متصل"}</div>
+        </div>
+      </div>
       <div style="display:flex;gap:6px">
         <button type="button" class="btn ok-btn sm" data-f-act="vcall" data-uid="${u.uid}">📹 فيديو</button>
         <button type="button" class="btn sm" data-f-act="dm" data-uid="${u.uid}">💬 شات</button>
@@ -2131,13 +2582,17 @@ function renderFriendsTab() {
     const isFr = friends.includes(u.uid);
     const isSent = reqsOut.includes(u.uid);
     const fState = isFollowing(u.uid);
+    const online = isUserOnline(u);
     let actBtn = `<button type="button" class="btn sm" data-f-act="add" data-uid="${u.uid}">➕ صداقة</button>`;
     if (isFr) actBtn = `<button type="button" class="btn ghost sm" data-f-act="dm" data-uid="${u.uid}">💬 خاص</button>`;
     else if (isSent) actBtn = `<span class="muted" style="font-size:.78rem">⏳ مرسل</span>`;
     return `<div class="user-item">
       <div class="user-click" data-f-act="prof" data-uid="${u.uid}">
         ${renderAvatarHtml(u, u.username)}
-        <div><b>@${esc(u.username)}</b><div class="muted" style="font-size:.75rem">${(u.followers || []).length} متابِع</div></div>
+        <div>
+          <b>@${esc(u.username)}</b>
+          <div class="${online ? "status-txt-online" : "status-txt-offline"}">${online ? "🟢 Online" : "⚫ Offline"} • ${(u.followers || []).length} متابِع</div>
+        </div>
       </div>
       <div style="display:flex;gap:6px;align-items:center">
         <button type="button" class="follow-btn ${fState ? "following" : ""}" data-f-act="follow" data-uid="${u.uid}">${fState ? "Unfollow" : "Follow ➕"}</button>
@@ -2293,7 +2748,7 @@ $("#createGrpBtn").onclick = async () => {
   chks.forEach(c => { memberNames[c.value] = c.dataset.uname; });
 
   const docRef = await db.collection("rooms").add({
-    type: "group", name: title, bio: gBio || "كروب رسمي فـ Dark Power ⚡", avatarUrl: newGrpAvatarData || "",
+    type: "group", name: title, bio: gBio || "كروب رسمي فـ VYROX 👑", avatarUrl: newGrpAvatarData || "",
     owner: uid, admins: [uid], members, memberNames, lastText: `👑 تم إنشاء الكروب بواسطة ${name}`, lastSenderUid: uid,
     updatedAt: firebase.firestore.FieldValue.serverTimestamp()
   });
@@ -2335,7 +2790,7 @@ function openGroupManageModal() {
 
   $("#giAvatarBox").innerHTML = r.avatarUrl ? `<img src="${esc(r.avatarUrl)}" alt="">` : "👥";
   $("#giTitle").textContent = r.name || "كروب";
-  $("#giBioDisplay").textContent = r.bio || "كروب رسمي فـ Dark Power ⚡";
+  $("#giBioDisplay").textContent = r.bio || "كروب رسمي فـ VYROX 👑";
   $("#giRoleBadge").innerHTML = amIAdmin ? `<span class="admin-tag">👑 نتا Admin</span>` : `عضو (${(r.members || []).length})`;
   $("#giAdminEditProfileBox").hidden = !amIAdmin;
   $("#giAdminAddBox").hidden = !amIAdmin;
@@ -2421,12 +2876,20 @@ $("#giDeleteGrpBtn").onclick = async () => {
 
 function getRoomDisplay(r) {
   if (r.type === "group") {
-    return { title: r.name || "كروب", sub: `👥 (${(r.members || []).length} أعضاء) • متاح فيديو كول 📹`, icon: "👥", avatarUrl: r.avatarUrl || "" };
+    return { title: r.name || "كروب", sub: `👥 (${(r.members || []).length} أعضاء) • متاح فيديو كول 📹`, icon: "👥", avatarUrl: r.avatarUrl || "", isOnline: true };
   }
   const otherId = (r.members || []).find(m => m !== uid);
   const otherUser = allUsers.find(u => u.uid === otherId);
   const otherName = otherUser?.username || r.memberNames?.[otherId] || "صديق";
-  return { title: otherName, sub: `🔒 خاص مع @${otherName} • متاح 📹`, icon: otherName[0]?.toUpperCase() || "💬", avatarUrl: otherUser?.avatarUrl || "" };
+  const online = isUserOnline(otherUser);
+  return {
+    title: otherName,
+    sub: `${online ? "🟢 متصل الآن (Online)" : "⚫ غير متصل (Offline)"} • متاح 📹`,
+    icon: otherName[0]?.toUpperCase() || "💬",
+    avatarUrl: otherUser?.avatarUrl || "",
+    otherUserObj: otherUser,
+    isOnline: online
+  };
 }
 
 function renderRoomsList() {
@@ -2434,7 +2897,9 @@ function renderRoomsList() {
   let html = rooms.map(r => {
     const info = getRoomDisplay(r);
     const on = activeRoom?.id === r.id ? "active" : "";
-    const avHtml = info.avatarUrl ? `<div class="avatar"><img src="${esc(info.avatarUrl)}" alt=""></div>` : `<div class="avatar">${esc(info.icon)}</div>`;
+    const avHtml = r.type === "group"
+      ? (info.avatarUrl ? `<div class="avatar"><img src="${esc(info.avatarUrl)}" alt=""></div>` : `<div class="avatar">👥</div>`)
+      : renderAvatarHtml(info.otherUserObj, info.title);
     return `<div class="chat-item ${on}" data-room="${r.id}">
       ${avHtml}
       <div style="overflow:hidden;flex:1">
@@ -2544,7 +3009,6 @@ $("#chatImgInp").onchange = async e => {
   e.target.value = "";
 };
 
-// إرسال فيديو مباشرة وسط الشات عبر Cloudinary
 $("#chatVidInp").onchange = async e => {
   const f = e.target.files[0];
   if (!f || !activeRoom) return;
@@ -2555,9 +3019,7 @@ $("#chatVidInp").onchange = async e => {
     const vidUrl = await uploadToCloudinary(f);
     await sendChatMessage({ sharedVideoUrl: vidUrl });
     showToast("✅ تم إرسال الفيديو فـ الشات!");
-  } catch (err) {
-    alert("فشل رفع الفيديو: " + err.message);
-  }
+  } catch (err) { alert("فشل رفع الفيديو: " + err.message); }
   e.target.value = "";
 };
 
@@ -2582,7 +3044,7 @@ $("#chatVocalBtn").onclick = async () => {
 };
 
 // =====================================================
-// 🏠 المنشورات + الريلز ملء الشاشة
+// 🏠 المنشورات + ميزات Instagram (Double-Tap Like, Save Bookmark) + الريلز
 // =====================================================
 let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "", activeHashtag = "";
 const ACCEPT = { pdf: "application/pdf", image: "image/*", video: "video/*", reel: "video/*", audio: "audio/*" };
@@ -2652,7 +3114,7 @@ $("#post").onclick = async () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     $("#text").value = ""; setType(type);
-    showToast("✅ تم النشر بنجاح!");
+    showToast("👑 تم النشر فـ VYROX بنجاح!");
   } catch (err) { alert("مشكل فالنشر: " + err.message); }
   btn.disabled = false; $("#prog").hidden = true; $("#progBar").style.width = 0;
 };
@@ -2696,9 +3158,11 @@ const open = new Set();
 
 function card(p) {
   const likes = p.likes || [], cms = p.comments || [];
+  const savedList = myUserDoc.savedPosts || [];
+  const isSaved = savedList.includes(p.id);
   const date = p.createdAt?.toDate ? p.createdAt.toDate().toLocaleString("ar-MA", { dateStyle: "medium", timeStyle: "short" }) : "الآن";
   let media = "";
-  if (p.type === "image" && p.fileUrl) media = `<div class="media"><img loading="lazy" src="${esc(p.fileUrl)}" alt=""></div>`;
+  if (p.type === "image" && p.fileUrl) media = `<div class="media" data-dbl-like="${p.id}"><img loading="lazy" src="${esc(p.fileUrl)}" alt=""><div class="post-heart-pop">❤️</div></div>`;
   if (p.type === "video" && p.fileUrl) media = `<div class="media"><video controls playsinline preload="metadata" src="${esc(p.fileUrl)}"></video></div>`;
   if (p.type === "reel" && p.fileUrl) media = `<div class="media"><video class="reel-vid" controls loop playsinline preload="metadata" src="${esc(p.fileUrl)}"></video></div>`;
   if (p.type === "audio" && p.fileUrl) media = `<div class="media"><audio controls preload="none" src="${esc(p.fileUrl)}"></audio></div>`;
@@ -2712,7 +3176,11 @@ function card(p) {
       <div class="user-row">
         <div class="user-click" data-a="open-prof" data-uid="${p.uid}">
           ${renderAvatarHtml(authorObj, p.author)}
-          <div><span class="who">@${esc(p.author)}</span><span class="badge">${BADGE[p.type] || "نص"}</span><div class="muted">${date}</div></div>
+          <div>
+            <span class="who">@${esc(p.author)} <span class="v-crown">👑</span></span>
+            <span class="badge">${BADGE[p.type] || "نص"}</span>
+            <div class="muted">${date}</div>
+          </div>
         </div>
         ${!isMe ? `<button type="button" class="follow-btn ${fState ? "following" : ""}" data-a="follow-author" data-uid="${p.uid}">${fState ? "✓ متابَع" : "➕ Follow"}</button>` : ""}
       </div>
@@ -2724,9 +3192,14 @@ function card(p) {
     </div>
     ${p.text ? `<div class="body">${formatRichText(p.text)}</div>` : ""}${media}
     <div class="acts">
-      <button type="button" data-a="like" class="${liked ? "liked" : ""}">${liked ? "❤️" : "🤍"} ${likes.length}</button>
-      <button type="button" data-a="cm">💬 تعليقات (${cms.length})</button>
-      <button type="button" data-a="share">✈️ بارطاجي</button>
+      <div class="acts-left">
+        <button type="button" data-a="like" class="${liked ? "liked" : ""}">${liked ? "❤️" : "🤍"} ${likes.length}</button>
+        <button type="button" data-a="cm">💬 ${cms.length}</button>
+        <button type="button" data-a="share">✈️ بارطاج</button>
+      </div>
+      <div class="acts-right">
+        <button type="button" data-a="save" class="${isSaved ? "saved" : ""}" title="حفظ المنشور فـ المحفوظات">${isSaved ? "🔖 محفوظ" : "🔖 حفظ"}</button>
+      </div>
     </div>
     <div class="comments" ${open.has(p.id) ? "" : "hidden"}>
       ${cms.map(c => `<div class="cm"><b data-a="open-prof" data-uid="${c.uid || ""}">@${esc(c.author)}</b>: ${formatRichText(c.text)}</div>`).join("")}
@@ -2738,8 +3211,13 @@ function card(p) {
 function renderFeed() {
   renderTrendingHashtags();
   const myFollowing = myUserDoc.following || [];
+  const mySaved = myUserDoc.savedPosts || [];
   const list = posts.filter(p => {
-    const matchType = filter === "all" ? true : (filter === "following" ? (myFollowing.includes(p.uid) || p.uid === uid) : p.type === filter);
+    let matchType = true;
+    if (filter === "following") matchType = (myFollowing.includes(p.uid) || p.uid === uid);
+    else if (filter === "saved") matchType = mySaved.includes(p.id);
+    else if (filter !== "all") matchType = (p.type === filter);
+
     const pTags = p.hashtags?.length ? p.hashtags : extractHashtags(p.text);
     const matchTag = !activeHashtag || pTags.includes(activeHashtag);
     const matchTerm = !term || ((p.text || "") + " " + (p.fileName || "") + " " + p.author).toLowerCase().includes(term);
@@ -2750,6 +3228,19 @@ function renderFeed() {
   if (currentTab === "reels") renderReelsFeed();
   if (currentTab === "profile") renderProfileTab();
 }
+
+// Double-tap على الصور فـ المنشورات باش يدير ❤️ بحال Instagram
+$("#feed").addEventListener("dblclick", e => {
+  const mediaBox = e.target.closest("[data-dbl-like]");
+  if (!mediaBox) return;
+  const id = mediaBox.dataset.dblLike;
+  const p = posts.find(x => x.id === id);
+  const pop = mediaBox.querySelector(".post-heart-pop");
+  if (pop) { pop.classList.add("on"); setTimeout(() => pop.classList.remove("on"), 650); }
+  if (p && !(p.likes || []).includes(uid)) {
+    db.collection("posts").doc(id).update({ likes: firebase.firestore.FieldValue.arrayUnion(uid) });
+  }
+});
 
 let activeReelCommentPostId = null, reelObserver = null;
 function renderReelsFeed() {
@@ -2779,7 +3270,7 @@ function renderReelsFeed() {
       </div>
       <div class="ig-bottom-info">
         <div class="ig-author">
-          <div class="user-click" data-a="open-prof" data-uid="${p.uid}">${renderAvatarHtml(authorObj, p.author)}<span>@${esc(p.author)}</span></div>
+          <div class="user-click" data-a="open-prof" data-uid="${p.uid}">${renderAvatarHtml(authorObj, p.author)}<span>@${esc(p.author)} 👑</span></div>
           ${!isMe ? `<button type="button" class="follow-btn ${fState ? "following" : ""}" data-a="follow-author" data-uid="${p.uid}">${fState ? "✓ متابَع" : "➕ متابعة"}</button>` : ""}
         </div>
         ${p.text ? `<div class="ig-caption">${formatRichText(p.text)}</div>` : ""}
@@ -2861,6 +3352,13 @@ async function handlePostAction(e) {
   const d = db.collection("posts").doc(id);
 
   if (a === "like") d.update({ likes: (p.likes || []).includes(uid) ? firebase.firestore.FieldValue.arrayRemove(uid) : firebase.firestore.FieldValue.arrayUnion(uid) });
+  if (a === "save") {
+    const saved = (myUserDoc.savedPosts || []).includes(id);
+    await db.collection("users").doc(uid).update({
+      savedPosts: saved ? firebase.firestore.FieldValue.arrayRemove(id) : firebase.firestore.FieldValue.arrayUnion(id)
+    });
+    showToast(saved ? "تمت الإزالة من المحفوظات" : "🔖 تم حفظ المنشور فـ المحفوظات!");
+  }
   if (a === "cm") { open.has(id) ? open.delete(id) : open.add(id); containerEl.querySelector(".comments").hidden = !open.has(id); }
   if (a === "ig-cm") openReelCommentsDrawer(id);
   if (a === "share") openShareModal(p);
@@ -2886,10 +3384,10 @@ $("#feed").onclick = handlePostAction;
 $("#profPostsList").onclick = handlePostAction;
 $("#reelsContainer").onclick = handlePostAction;
 
-// Auth
+// Auth & Online Presence Heartbeat
 document.querySelectorAll("[data-m]").forEach(b => b.onclick = () => {
   mode = b.dataset.m; document.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b));
-  $("#authBtn").textContent = mode === "login" ? "دخول إلى المنصة ⚡" : "إنشاء حساب جديد ⚡";
+  $("#authBtn").textContent = mode === "login" ? "دخول إلى VYROX 👑" : "إنشاء حساب فـ VYROX 👑";
 });
 
 $("#authForm").onsubmit = async e => {
@@ -2902,20 +3400,48 @@ $("#authForm").onsubmit = async e => {
     if (mode === "signup") {
       const c = await auth.createUserWithEmailAndPassword(u + "@darkpower.app", p);
       await c.user.updateProfile({ displayName: u });
-      await db.collection("users").doc(c.user.uid).set({ uid: c.user.uid, username: u, bio: "", avatarUrl: "", giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: [], following: [], followers: [], friends: [] });
+      await db.collection("users").doc(c.user.uid).set({
+        uid: c.user.uid, username: u, bio: "", sparkNote: "", avatarUrl: "",
+        giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: [], savedPosts: [],
+        following: [], followers: [], friends: [], isOnline: true, lastSeenMs: Date.now()
+      });
     } else {
       await auth.signInWithEmailAndPassword(u + "@darkpower.app", p);
     }
-  } catch (x) { err.textContent = x.message; }
+  } catch (x) { err.textContent = AUTH_ERR[x.code] || x.message; }
 };
 
-$("#outBtn").onclick = () => { if (isHostingLive) stopMyLiveStream(); if (inVideoCall) endVideoCall(true); auth.signOut(); };
+let presenceTimer = null;
+async function updateMyOnlinePresence(onlineState = true) {
+  if (!ready || !uid) return;
+  try {
+    await db.collection("users").doc(uid).set({
+      isOnline: onlineState,
+      lastSeenMs: Date.now()
+    }, { merge: true });
+  } catch (e) {}
+}
+
+window.addEventListener("beforeunload", () => {
+  if (uid && ready) db.collection("users").doc(uid).update({ isOnline: false, lastSeenMs: Date.now() }).catch(()=>{});
+});
+
+$("#outBtn").onclick = async () => {
+  clearInterval(presenceTimer);
+  await updateMyOnlinePresence(false);
+  if (isHostingLive) stopMyLiveStream();
+  if (inVideoCall) endVideoCall(true);
+  auth.signOut();
+};
 
 auth.onAuthStateChanged(async user => {
   $("#auth").hidden = !!user; $("#appRoot").hidden = !user;
   if (user) {
     uid = user.uid; viewedProfileUid = uid; name = (user.displayName || user.email.split("@")[0]).toLowerCase();
     $("#nameLbl").textContent = name;
+    await updateMyOnlinePresence(true);
+    clearInterval(presenceTimer);
+    presenceTimer = setInterval(() => updateMyOnlinePresence(true), 35000);
     listenAll();
     setTimeout(handlePendingQrInvites, 900);
   }
@@ -2925,7 +3451,7 @@ let initialRoomsLoad = true;
 const roomTimestamps = {};
 
 function listenAll() {
-  unsubPosts?.(); unsubUsers?.(); unsubRooms?.(); unsubLives?.();
+  unsubPosts?.(); unsubUsers?.(); unsubRooms?.(); unsubLives?.(); unsubPulses?.();
   initialRoomsLoad = true;
 
   unsubPosts = db.collection("posts").orderBy("createdAt", "desc").onSnapshot(s => {
@@ -2933,12 +3459,17 @@ function listenAll() {
     renderFeed();
   });
 
+  unsubPulses = db.collection("pulses").onSnapshot(s => {
+    pulsesList = s.docs.map(d => ({ id: d.id, ...d.data() }));
+    renderVyroxInstantBar();
+  });
+
   unsubUsers = db.collection("users").onSnapshot(s => {
     allUsers = s.docs.map(d => ({ id: d.id, ...d.data() }));
     myUserDoc = allUsers.find(u => u.uid === uid) || {};
     const topAv = $("#topMiniAvatar");
     if (topAv) topAv.innerHTML = myUserDoc.avatarUrl ? `<img src="${esc(myUserDoc.avatarUrl)}" alt="">` : esc((name || "U")[0].toUpperCase());
-    updateStrikeUI(); updateWalletUI(); renderFriendsTab(); renderRoomsList(); renderFeed();
+    updateStrikeUI(); updateWalletUI(); renderVyroxInstantBar(); renderFriendsTab(); renderRoomsList(); renderFeed();
     if (currentTab === "profile") renderProfileTab();
   });
 
@@ -2951,7 +3482,6 @@ function listenAll() {
         if (currentTab !== "chat") {
           const b = $("#chatUnreadBadge"); b.textContent = Number(b.textContent || 0) + 1; b.hidden = false;
         }
-        // تنبيه رنين مكالمة فيديو واردة
         if ((rData.lastText || "").includes("مكالمة فيديو مباشرة") && !inVideoCall) {
           playNotificationSound(true);
           $("#incCallCallerName").textContent = `@${rData.lastSenderName || "صديق"} يتصل بك فيديو! 📹`;
@@ -2975,7 +3505,7 @@ function listenAll() {
     $("#activeLivesList").innerHTML = activeLives.map(l => `
       <div class="user-item" style="min-width:220px;border-color:var(--danger)">
         <div><span class="live-pill">🔴 LIVE</span> <b>@${esc(l.hostName)}</b></div>
-        <button type="button" class="btn danger sm" onclick="joinLiveRoomSession('${l.id}')">👀 تفرج</button>
+        <button type="button" class="btn danger sm" onclick="joinLiveRoomSession('${l.id}')">👀 تفرج بالصوت</button>
       </div>
     `).join("") || `<div class="muted">ما كاين حتى لايف دابا.</div>`;
   });
