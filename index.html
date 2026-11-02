@@ -8,7 +8,7 @@
 <meta name="keywords" content="VYROX, فايروكس, social media, reels maroc, video call, live stream, chat, lion popi ai">
 <meta name="robots" content="index, follow">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&intent=capture"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&intent=capture" async defer></script>
 <style>
 :root{
   --bg:#07070b; --card:#111118; --card2:#181824; --line:#28283c;
@@ -104,7 +104,7 @@ main{max-width:980px;margin:12px auto;padding:0 12px 95px}
 .avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#000;font-weight:800;display:grid;place-items:center;flex-shrink:0;overflow:hidden;object-fit:cover}
 .avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .who{font-weight:800;transition:color .15s;display:inline-flex;align-items:center;gap:4px}
-.v-crown{color:var(--ac);font-size:.82rem;title:"حساب موثق فـ VYROX"}
+.v-crown{color:var(--ac);font-size:.82rem}
 .badge{font-size:.75rem;color:var(--ac);border:1px solid var(--line);border-radius:99px;padding:0 8px;margin-inline-start:6px}
 .admin-tag{font-size:.72rem;background:rgba(255,215,0,0.18);color:var(--ac);border:1px solid var(--ac);border-radius:99px;padding:1px 8px;font-weight:700}
 .body{white-space:pre-wrap;word-break:break-word;margin:8px 0 10px}
@@ -625,12 +625,12 @@ main{max-width:980px;margin:12px auto;padding:0 12px 95px}
       <div class="brand-txt" style="font-size:2rem">VYR<span>OX</span></div>
     </div>
     <p class="muted" style="margin:0">منصة التواصل الملكية — الريلز، اللايف، مكالمات الفيديو و Lion Popi 🦁</p>
-    <div class="chips">
+    <div class="chips" id="authModeChips">
       <button type="button" class="chip on" data-m="login">دخول</button>
       <button type="button" class="chip" data-m="signup">حساب جديد</button>
     </div>
-    <input id="u" dir="ltr" autocomplete="username" placeholder="Username (e.g. taoufik120)">
-    <input id="pw" dir="ltr" type="password" autocomplete="current-password" placeholder="Password (6+ chars)">
+    <input id="u" dir="ltr" autocomplete="username" placeholder="Username (e.g. taoufik120)" required>
+    <input id="pw" dir="ltr" type="password" autocomplete="current-password" placeholder="Password (6+ chars)" required>
     <label class="muted" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;font-size:.82rem">
       <input type="checkbox" id="agreeChk" checked style="width:auto"> أوافق على <a href="#" id="showLawsLink" style="color:var(--ac)">قوانين مجتمع VYROX</a>
     </label>
@@ -1053,12 +1053,112 @@ function uploadToCloudinary(fileObj, onProgress) {
 }
 
 const $ = s => document.querySelector(s);
+const safeOn = (sel, ev, fn) => { const el = typeof sel === "string" ? $(sel) : sel; if (el) el.addEventListener(ev, fn); };
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LS = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
 
 const urlParams = new URLSearchParams(location.search);
 if (urlParams.get("invite_user")) LS("dp_inv_user", urlParams.get("invite_user"));
 if (urlParams.get("join_group")) LS("dp_join_grp", urlParams.get("join_group"));
+
+// تعريف المتغيرات الأساسية مبكراً لتفادي أي خطأ ReferenceError
+let auth = null, db = null, ready = false;
+let mode = "login", uid = "", name = "";
+let unsubPosts = null, unsubUsers = null, unsubRooms = null, unsubMsgs = null, unsubLives = null, unsubPulses = null;
+let allUsers = [];
+let myUserDoc = {
+  friends: [], followers: [], following: [], savedPosts: [],
+  requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0,
+  giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: []
+};
+let rooms = [], activeRoom = null, activeLives = [];
+let currentTab = "feed", viewedProfileUid = "", profTabFilter = "all";
+let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "", activeHashtag = "";
+
+try {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  auth = firebase.auth();
+  db = firebase.firestore();
+  ready = true;
+} catch (e) {
+  console.error("Firebase Init Error:", e);
+}
+
+// =====================================================
+// 🔐 إصلاح وتفعيل أزرار الدخول وحساب جديد فـ البداية باش تشتغل فوراً
+// =====================================================
+const AUTH_ERR = {
+  "auth/email-already-in-use": "هاد الاسم واخدو شي واحد من الدراري، اختار اسم آخر أو كليكي على (دخول)",
+  "auth/invalid-credential": "الاسم أو كلمة السر غالطة (إلا يلاه أول مرة كليكي على 'حساب جديد' الفوق باش يتصاوب الحساب)",
+  "auth/user-not-found": "هاد الحساب ما كاينش، كليكي على (حساب جديد) الفوق أولاً",
+  "auth/wrong-password": "كلمة السر غالطة",
+  "auth/weak-password": "كلمة السر خاص تكون فيها 6 حروف أو أرقام على الأقل",
+  "auth/network-request-failed": "مشكل فـ الكونيكسيون، تأكد من الإنترنت ديالك"
+};
+
+document.querySelectorAll("[data-m]").forEach(b => {
+  b.addEventListener("click", () => {
+    mode = b.dataset.m;
+    document.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b));
+    const btn = $("#authBtn");
+    if (btn) btn.textContent = mode === "login" ? "دخول إلى VYROX 👑" : "إنشاء حساب جديد فـ VYROX 👑";
+    if ($("#authErr")) $("#authErr").textContent = "";
+  });
+});
+
+safeOn("#authForm", "submit", async e => {
+  e.preventDefault();
+  const err = $("#authErr");
+  err.textContent = "";
+  if (!ready || !auth) {
+    err.textContent = "❌ تعذر الاتصال بقاعدة البيانات، تأكد من الإنترنت وعاود حدث الصفحة.";
+    return;
+  }
+  if (!$("#agreeChk").checked) {
+    err.textContent = "⚠️ خاصك توافق على قوانين VYROX أولاً!";
+    return;
+  }
+  const rawU = $("#u").value.trim().toLowerCase().replace(/\s+/g, "_");
+  const p = $("#pw").value;
+  if (rawU.length < 3 || rawU.length > 25) {
+    err.textContent = "⚠️ الاسم خاص يكون فيه ما بين 3 و 25 حرف أو رقم.";
+    return;
+  }
+  if (!p || p.length < 6) {
+    err.textContent = "⚠️ كلمة السر خاص تكون فيها 6 حروف أو أرقام على الأقل.";
+    return;
+  }
+
+  // تحويل أي اسم لصيغة إيميل مقبولة عند Firebase Auth
+  const safeEmailSlug = encodeURIComponent(rawU).replace(/%/g, "_");
+  const email = safeEmailSlug + "@darkpower.app";
+
+  const btn = $("#authBtn");
+  const oldTxt = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = "⏳ جاري الاتصال بـ VYROX…";
+
+  try {
+    if (mode === "signup") {
+      const c = await auth.createUserWithEmailAndPassword(email, p);
+      await c.user.updateProfile({ displayName: rawU });
+      await db.collection("users").doc(c.user.uid).set({
+        uid: c.user.uid, username: rawU, bio: "", sparkNote: "", avatarUrl: "",
+        giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: [], savedPosts: [],
+        following: [], followers: [], friends: [], isOnline: true, lastSeenMs: Date.now()
+      }, { merge: true });
+    } else {
+      await auth.signInWithEmailAndPassword(email, p);
+    }
+  } catch (x) {
+    err.textContent = AUTH_ERR[x.code] || ("خطأ: " + x.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = oldTxt;
+  }
+});
 
 // =====================================================
 // 🟢⚫ نظام معرفة شكون Online وشكون Offline فـ الوقت الحقيقي
@@ -1068,7 +1168,7 @@ function isUserOnline(uObj) {
   if (uObj.uid === uid) return true;
   if (uObj.isOnline === false) return false;
   const lastSeen = uObj.lastSeenMs || 0;
-  return (Date.now() - lastSeen) < 95000; // متصل خلال آخر دقيقة ونصف
+  return (Date.now() - lastSeen) < 95000;
 }
 
 function renderAvatarHtml(userObjOrUid, fallbackName = "U", customClass = "avatar", showStatusDot = true) {
@@ -1118,13 +1218,13 @@ function updateSoundBtn() {
   if (btn) btn.textContent = soundEnabled ? "🔔" : "🔕";
 }
 updateSoundBtn();
-$("#soundToggleBtn").onclick = () => {
+safeOn("#soundToggleBtn", "click", () => {
   soundEnabled = !soundEnabled;
   LS("dp_sound", soundEnabled ? "on" : "off");
   updateSoundBtn();
   if (soundEnabled) playNotificationSound();
   if ("Notification" in window && Notification.permission === "default") Notification.requestPermission();
-};
+});
 
 function playNotificationSound(isBigGift = false) {
   if (!soundEnabled) return;
@@ -1151,6 +1251,7 @@ function playNotificationSound(isBigGift = false) {
 let toastTimer = null;
 function showToast(msg) {
   const toast = $("#toastNotif");
+  if (!toast) return;
   $("#toastText").textContent = msg;
   toast.hidden = false;
   clearTimeout(toastTimer);
@@ -1214,21 +1315,23 @@ function renderRealPayPalGateway() {
   const container = $("#paypalRealBtnContainer");
   if (!container) return;
   container.dataset.rendered = "1";
-  window.paypal.Buttons({
-    createOrder: (data, actions) => {
-      const amt = Number($("#depositAmountInp").value || 10).toFixed(2);
-      return actions.order.create({ purchase_units: [{ description: `VYROX Wallet (@${name})`, amount: { value: amt } }] });
-    },
-    onApprove: async (data, actions) => {
-      const order = await actions.order.capture();
-      if (order.status === "COMPLETED") {
-        const paidAmt = Number(order.purchase_units[0].amount.value);
-        await creditUserWalletAfterBankApproval(paidAmt, "🏦 دفع بنكي مؤكد", order.id);
-        $("#walletErr").textContent = "";
-      }
-    },
-    onError: () => { $("#walletErr").textContent = "🚫 تم رفض البطاقة من البنك: الرصيد غير كافٍ (0 درهم) أو البطاقة موقوفة!"; }
-  }).render("#paypalRealBtnContainer");
+  try {
+    window.paypal.Buttons({
+      createOrder: (data, actions) => {
+        const amt = Number($("#depositAmountInp").value || 10).toFixed(2);
+        return actions.order.create({ purchase_units: [{ description: `VYROX Wallet (@${name})`, amount: { value: amt } }] });
+      },
+      onApprove: async (data, actions) => {
+        const order = await actions.order.capture();
+        if (order.status === "COMPLETED") {
+          const paidAmt = Number(order.purchase_units[0].amount.value);
+          await creditUserWalletAfterBankApproval(paidAmt, "🏦 دفع بنكي مؤكد", order.id);
+          $("#walletErr").textContent = "";
+        }
+      },
+      onError: () => { $("#walletErr").textContent = "🚫 تم رفض البطاقة من البنك: الرصيد غير كافٍ (0 درهم) أو البطاقة موقوفة!"; }
+    }).render("#paypalRealBtnContainer");
+  } catch (e) {}
 }
 
 function updateWalletUI() {
@@ -1248,21 +1351,20 @@ function updateWalletUI() {
   }
 }
 
-$("#togglePrivacyEyeBtn").onclick = () => { revealPrivateMoney = !revealPrivateMoney; updateWalletUI(); };
+safeOn("#togglePrivacyEyeBtn", "click", () => { revealPrivateMoney = !revealPrivateMoney; updateWalletUI(); });
 function openWalletSettingsModal() { $("#walletErr").textContent = ""; updateWalletUI(); $("#walletSettingsModal").hidden = false; setTimeout(renderRealPayPalGateway, 200); }
-$("#topWalletBtn").onclick = openWalletSettingsModal;
-$("#bannerWalletBtn").onclick = openWalletSettingsModal;
-$("#liveTopUpBtn").onclick = openWalletSettingsModal;
-$("#liveInlineWalletBtn").onclick = openWalletSettingsModal;
-$("#closeWalletModalBtn").onclick = () => { $("#walletSettingsModal").hidden = true; };
-$("#settingsEditProfBtn").onclick = () => { $("#walletSettingsModal").hidden = true; openEditProfileModal(); };
+safeOn("#topWalletBtn", "click", openWalletSettingsModal);
+safeOn("#liveTopUpBtn", "click", openWalletSettingsModal);
+safeOn("#liveInlineWalletBtn", "click", openWalletSettingsModal);
+safeOn("#closeWalletModalBtn", "click", () => { $("#walletSettingsModal").hidden = true; });
+safeOn("#settingsEditProfBtn", "click", () => { $("#walletSettingsModal").hidden = true; openEditProfileModal(); });
 
-$("#walletPackGrid").onclick = e => {
+safeOn("#walletPackGrid", "click", e => {
   const p = e.target.closest("[data-amt]");
   if (!p) return;
   document.querySelectorAll("#walletPackGrid .pack-btn").forEach(x => x.classList.toggle("on", x === p));
   $("#depositAmountInp").value = p.dataset.amt;
-};
+});
 
 document.querySelectorAll("[data-pay-method]").forEach(btn => {
   btn.onclick = () => {
@@ -1274,16 +1376,16 @@ document.querySelectorAll("[data-pay-method]").forEach(btn => {
   };
 });
 
-$("#cardNumberInp").addEventListener("input", e => {
+safeOn("#cardNumberInp", "input", e => {
   const digits = e.target.value.replace(/\D/g, "").slice(0, 16);
   e.target.value = digits.replace(/(\d{4})(?=\d)/g, "$1 ");
 });
-$("#cardExpInp").addEventListener("input", e => {
+safeOn("#cardExpInp", "input", e => {
   const digits = e.target.value.replace(/\D/g, "").slice(0, 4);
   e.target.value = digits.length > 2 ? digits.slice(0, 2) + "/" + digits.slice(2) : digits;
 });
 
-$("#confirmDepositBtn").onclick = async () => {
+safeOn("#confirmDepositBtn", "click", async () => {
   if (!ready || !uid) return;
   const errEl = $("#walletErr"); errEl.textContent = "";
   const amount = Number($("#depositAmountInp").value);
@@ -1306,9 +1408,9 @@ $("#confirmDepositBtn").onclick = async () => {
     btn.disabled = false; btn.textContent = "🔒 التحقق من الرصيد البنكي وشحن المحفظة";
     errEl.innerHTML = `🚫 <b>تم رفض العملية من طرف البنك (Insufficient Funds - 0 DH):</b><br>البطاقة لا تتوفر على رصيد كافٍ ($${amount}) أو لم يتم تأكيد الاقتطاع عبر بوابة الدفع الرسمية أسفله.`;
   }, 1200);
-};
+});
 
-$("#convertEarningsBtn").onclick = async () => {
+safeOn("#convertEarningsBtn", "click", async () => {
   const earned = Number(myUserDoc.giftsEarned || 0);
   if (earned <= 0) return alert("ما عندكش أرباح هدايا لتحويلها!");
   if (!confirm("واش بغيتي تحول أرباح اللايف لمحفظتك المالية؟")) return;
@@ -1318,19 +1420,11 @@ $("#convertEarningsBtn").onclick = async () => {
     walletTransactions: firebase.firestore.FieldValue.arrayUnion({ title: "🔄 تحويل أرباح اللايف", amount: earned, type: "in", ts: Date.now() })
   });
   showToast("🎉 تم التحويل بنجاح!");
-};
+});
 
 // =====================================================
 // ⚖️ القوانين ومكافحة السب والعري والدم
 // =====================================================
-const AUTH_ERR = {
-  "auth/email-already-in-use": "هاد الاسم واخدو شي واحد من الدراري، اختار اسم آخر",
-  "auth/invalid-credential": "الاسم أو كلمة السر غالطة (إلا يلاه أول مرة كليكي على حساب جديد الفوق)",
-  "auth/user-not-found": "هاد الحساب ما كاينش، كليكي على (حساب جديد) أولاً",
-  "auth/wrong-password": "كلمة السر غالطة",
-  "auth/weak-password": "كلمة السر خاص تكون فيها 6 حروف أو أرقام على الأقل"
-};
-
 const BAD_WORDS = [
   "قحبة","قحاب","زامل","زوامل","حمار","كلب","حيوان","مكلخ","تافه","حقير","لعنة","ملعون",
   "نيك","ينيك","منيوك","قواد","تقود","سير تقود","تبرهيش","ولد القحبة","ولد الحرام","بنت القحبة",
@@ -1398,8 +1492,10 @@ function updateStrikeUI() {
 }
 
 const showLaws = (e) => { if (e) e.preventDefault(); $("#lawsModal").hidden = false; };
-$("#openLawsBtn").onclick = showLaws; $("#topLawsBtn").onclick = showLaws; $("#bannerLawsBtn").onclick = showLaws; $("#showLawsLink").onclick = showLaws;
-$("#acceptLawsBtn").onclick = () => { $("#lawsModal").hidden = true; };
+safeOn("#openLawsBtn", "click", showLaws);
+safeOn("#topLawsBtn", "click", showLaws);
+safeOn("#showLawsLink", "click", showLaws);
+safeOn("#acceptLawsBtn", "click", () => { $("#lawsModal").hidden = true; });
 
 function fileToDataUrl(file) {
   return new Promise((res, rej) => {
@@ -1441,16 +1537,6 @@ document.querySelectorAll(".themeBtn").forEach(b => b.onclick = () => {
   document.documentElement.dataset.theme = t; LS("dp_theme", t);
 });
 
-let auth = null, db = null, ready = false;
-try {
-  firebase.initializeApp(firebaseConfig);
-  auth = firebase.auth();
-  db = firebase.firestore();
-  ready = true;
-} catch (e) {}
-
-let currentTab = "feed", viewedProfileUid = "", profTabFilter = "all";
-
 function switchTab(tabName) {
   pauseAllPlayingMedia(null);
   currentTab = tabName;
@@ -1467,16 +1553,16 @@ function switchTab(tabName) {
   if (tabName === "chat") { $("#chatUnreadBadge").hidden = true; $("#chatUnreadBadge").textContent = "0"; }
 }
 
-$("#mainTabs").onclick = e => {
+safeOn("#mainTabs", "click", e => {
   const b = e.target.closest("[data-tab]");
   if (!b) return;
   if (b.dataset.tab === "profile") viewedProfileUid = uid;
   switchTab(b.dataset.tab);
-};
-$("#logoHomeBtn").onclick = () => switchTab("feed");
-$("#topMyProfileBtn").onclick = () => openUserProfile(uid);
-$("#exitReelsBtn").onclick = () => switchTab("feed");
-$("#goPostReelBtn").onclick = () => { switchTab("feed"); setType("reel"); $("#text").focus(); };
+});
+safeOn("#logoHomeBtn", "click", () => switchTab("feed"));
+safeOn("#topMyProfileBtn", "click", () => openUserProfile(uid));
+safeOn("#exitReelsBtn", "click", () => switchTab("feed"));
+safeOn("#goPostReelBtn", "click", () => { switchTab("feed"); setType("reel"); $("#text").focus(); });
 
 document.querySelectorAll("[data-ins-tag]").forEach(btn => {
   btn.onclick = () => { const inp = $("#text"); inp.value = (inp.value.trim() + " " + btn.dataset.insTag + " ").trimStart(); inp.focus(); };
@@ -1496,7 +1582,6 @@ function renderVyroxInstantBar() {
   const myPulse = validPulses.find(p => p.uid === uid);
   const mySpark = myUserDoc.sparkNote || "";
 
-  // العنصر الأول: ديالي (لإضافة Spark أو Pulse أو مشاهدة قصتي)
   let html = `
     <div class="pulse-item" data-pulse-act="${myPulse ? "view" : "create"}" data-uid="${uid}">
       <div class="spark-bubble" data-pulse-act="create" title="كليكي لتغيير ملاحظتك الفورية Spark">${esc(mySpark || "💭 حط Spark…")}</div>
@@ -1508,7 +1593,6 @@ function renderVyroxInstantBar() {
     </div>
   `;
 
-  // عرض الأصدقاء والمتابعين (أولوية للناس اللي عندهم Pulse أو Spark أو Online 🟢)
   const otherUsers = allUsers.filter(u => u.uid !== uid).sort((a, b) => {
     const aOnline = isUserOnline(a) ? 1 : 0;
     const bOnline = isUserOnline(b) ? 1 : 0;
@@ -1535,7 +1619,7 @@ function renderVyroxInstantBar() {
   bar.innerHTML = html;
 }
 
-$("#vyroxInstantBar").onclick = e => {
+safeOn("#vyroxInstantBar", "click", e => {
   const actEl = e.target.closest("[data-pulse-act]");
   if (!actEl) return;
   const act = actEl.dataset.pulseAct;
@@ -1557,26 +1641,26 @@ $("#vyroxInstantBar").onclick = e => {
   if (act === "prof") {
     openUserProfile(targetUid);
   }
-};
+});
 
-$("#closeCreatePsBtn").onclick = () => { $("#createPulseSparkModal").hidden = true; };
+safeOn("#closeCreatePsBtn", "click", () => { $("#createPulseSparkModal").hidden = true; });
 
-$("#saveSparkNoteBtn").onclick = async () => {
+safeOn("#saveSparkNoteBtn", "click", async () => {
   const note = $("#sparkNoteInp").value.trim();
   if (!(await checkModerationAndStrike(note))) return;
   await db.collection("users").doc(uid).set({ sparkNote: note, lastSeenMs: Date.now(), isOnline: true }, { merge: true });
   $("#createPulseSparkModal").hidden = true;
   showToast("💭 تم نشر ملاحظتك الفورية (VYROX Spark) فوق صورتك!");
-};
+});
 
-$("#pulseFileInp").onchange = e => {
+safeOn("#pulseFileInp", "change", e => {
   const f = e.target.files[0];
   if (!f) return;
   pulseFileObj = f;
   $("#pulseFileName").textContent = f.name;
-};
+});
 
-$("#publishPulseBtn").onclick = async () => {
+safeOn("#publishPulseBtn", "click", async () => {
   if (!pulseFileObj) return alert("ختار صورة أو فيديو للقصة بعدا!");
   const cap = $("#pulseCaptionInp").value.trim();
   if (!(await checkModerationAndStrike(cap))) return;
@@ -1604,7 +1688,7 @@ $("#publishPulseBtn").onclick = async () => {
     alert("مشكل فـ نشر القصة: " + err.message);
   }
   btn.disabled = false; btn.textContent = "⚡ نشر القصة الآن";
-};
+});
 
 function openPulseStoryViewer(p) {
   pauseAllPlayingMedia(null);
@@ -1623,23 +1707,23 @@ function openPulseStoryViewer(p) {
   $("#pulseViewerModal").hidden = false;
 }
 
-$("#closePulseViewerBtn").onclick = () => {
+safeOn("#closePulseViewerBtn", "click", () => {
   pauseAllPlayingMedia(null);
   $("#pvMediaBox").innerHTML = "";
   $("#pulseViewerModal").hidden = true;
-};
+});
 
 // =====================================================
 // 🦁🧠🇲🇦 عقل Lion Popi AI بالدارجة المغربية
 // =====================================================
 let lionVoiceEnabled = true;
-$("#lionVoiceToggleBtn").onclick = () => {
+safeOn("#lionVoiceToggleBtn", "click", () => {
   lionVoiceEnabled = !lionVoiceEnabled;
   $("#lionVoiceToggleBtn").textContent = lionVoiceEnabled ? "🔊" : "🔇";
   if (!lionVoiceEnabled && "speechSynthesis" in window) window.speechSynthesis.cancel();
-};
-$("#fabLionBtn").onclick = () => { $("#lionPanel").hidden = !$("#lionPanel").hidden; if (!$("#lionPanel").hidden) $("#lionInp").focus(); };
-$("#closeLionBtn").onclick = () => { $("#lionPanel").hidden = true; if ("speechSynthesis" in window) window.speechSynthesis.cancel(); };
+});
+safeOn("#fabLionBtn", "click", () => { $("#lionPanel").hidden = !$("#lionPanel").hidden; if (!$("#lionPanel").hidden) $("#lionInp").focus(); });
+safeOn("#closeLionBtn", "click", () => { $("#lionPanel").hidden = true; if ("speechSynthesis" in window) window.speechSynthesis.cancel(); });
 
 function speakLionPopi(text) {
   if (!lionVoiceEnabled || !("speechSynthesis" in window)) return;
@@ -1734,17 +1818,17 @@ function askLionPopiWithThinking(userText) {
   }, 650);
 }
 
-$("#lionForm").onsubmit = e => {
+safeOn("#lionForm", "submit", e => {
   e.preventDefault();
   const q = $("#lionInp").value.trim();
   if (!q) return;
   $("#lionInp").value = "";
   askLionPopiWithThinking(q);
-};
+});
 document.querySelectorAll(".lion-q").forEach(b => b.onclick = () => askLionPopiWithThinking(b.dataset.q));
 
 let lionRecognition = null;
-$("#lionMicBtn").onclick = () => {
+safeOn("#lionMicBtn", "click", () => {
   const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRec) return alert("المتصفح ما كيدعمش الميكرو، جرب Chrome.");
   if (lionRecognition) { lionRecognition.stop(); lionRecognition = null; $("#lionMicBtn").classList.remove("mic-btn-active"); return; }
@@ -1757,15 +1841,15 @@ $("#lionMicBtn").onclick = () => {
   };
   lionRecognition.onend = () => { $("#lionMicBtn").classList.remove("mic-btn-active"); lionRecognition = null; };
   lionRecognition.start();
-};
+});
 
-$("#askLionHashtagsBtn").onclick = () => {
+safeOn("#askLionHashtagsBtn", "click", () => {
   const suggested = "#vyrox #reels_maroc #viral #explore";
   const inp = $("#text");
   if (!inp.value.includes("#")) inp.value = (inp.value.trim() + " " + suggested).trim();
   $("#lionPanel").hidden = false;
   askLionPopiWithThinking("عطيني أحسن هاشتاقات فـ VYROX");
-};
+});
 
 // =====================================================
 // 🎨😊 نظام الملصقات (Stickers) + صانع الملصقات
@@ -1829,10 +1913,10 @@ function renderStickerDrawer() {
   $("#stickerGrid").innerHTML = html;
 }
 
-$("#chatStickerBtn").onclick = () => { renderStickerDrawer(); $("#stickerDrawer").hidden = !$("#stickerDrawer").hidden; };
-$("#closeStickerDrawerBtn").onclick = () => { $("#stickerDrawer").hidden = true; };
+safeOn("#chatStickerBtn", "click", () => { renderStickerDrawer(); $("#stickerDrawer").hidden = !$("#stickerDrawer").hidden; });
+safeOn("#closeStickerDrawerBtn", "click", () => { $("#stickerDrawer").hidden = true; });
 
-$("#customStickerInp").onchange = async e => {
+safeOn("#customStickerInp", "change", async e => {
   const f = e.target.files[0];
   if (!f) return;
   if (!(await scanMediaSafety(f, ""))) return;
@@ -1841,9 +1925,9 @@ $("#customStickerInp").onchange = async e => {
   e.target.value = "";
   showToast("🎨 تم صنع وحفظ الـ Sticker ديالك بنجاح!");
   setTimeout(renderStickerDrawer, 250);
-};
+});
 
-$("#stickerGrid").onclick = async e => {
+safeOn("#stickerGrid", "click", async e => {
   const delBtn = e.target.closest("[data-del-stk]");
   if (delBtn) {
     e.stopPropagation();
@@ -1859,10 +1943,10 @@ $("#stickerGrid").onclick = async e => {
   if (!item) return;
   $("#stickerDrawer").hidden = true;
   await sendChatMessage({ stickerUrl: item.dataset.sendStk });
-};
+});
 
 // =====================================================
-// 📹📞 حل مشكل مكالمة الفيديو: WebRTC الحقيقي بالصوت والصورة + Fast Frame Sync
+// 📹📞 مكالمة الفيديو WebRTC الحقيقية بالصوت والصورة + Fast Frame Sync
 // =====================================================
 let vcallLocalStream = null;
 let vcallPeerConn = null;
@@ -1903,7 +1987,6 @@ async function startOrJoinRoomVideoCall(isCaller = true) {
     const callerCandCol = callRef.collection("callerCandidates");
     const calleeCandCol = callRef.collection("calleeCandidates");
 
-    // إنشاء اتصال WebRTC الحقيقي لنقل الصوت والصورة مباشرة
     vcallPeerConn?.close();
     vcallPeerConn = new RTCPeerConnection(RTC_CONFIG);
 
@@ -1975,7 +2058,6 @@ async function startOrJoinRoomVideoCall(isCaller = true) {
       });
     }
 
-    // مزامنة سريعة احتياطية (Fast Frame Fallback) لضمان ظهور صورة الصديق فوراً حتى لو كان خلف جدار ناري
     vcallFrameTimer = setInterval(async () => {
       if (!inVideoCall || !activeRoom || vcallCamOff) return;
       if (!locVid.videoWidth) return;
@@ -1996,11 +2078,9 @@ async function startOrJoinRoomVideoCall(isCaller = true) {
         return;
       }
       const data = snap.data();
-      // ربط جواب WebRTC عند المتصل
       if (isCaller && data.answer && vcallPeerConn && !vcallPeerConn.currentRemoteDescription) {
         await vcallPeerConn.setRemoteDescription(new RTCSessionDescription(data.answer)).catch(() => {});
       }
-      // إظهار الصورة الاحتياطية فوراً ريثما يكتمل مسار WebRTC
       if ($("#vcallRemoteVid").hidden) {
         const frames = data.frames || {};
         const otherEntry = Object.entries(frames).find(([k, v]) => k !== uid && (Date.now() - (v.ts || 0) < 12000));
@@ -2032,28 +2112,28 @@ async function endVideoCall(notifyRemote = true) {
   $("#incomingCallModal").hidden = true;
 }
 
-$("#startVideoCallBtn").onclick = () => startOrJoinRoomVideoCall(true);
-$("#vcallHangupBtn").onclick = () => endVideoCall(true);
+safeOn("#startVideoCallBtn", "click", () => startOrJoinRoomVideoCall(true));
+safeOn("#vcallHangupBtn", "click", () => endVideoCall(true));
 
-$("#vcallMuteMicBtn").onclick = () => {
+safeOn("#vcallMuteMicBtn", "click", () => {
   if (!vcallLocalStream) return;
   vcallMicMuted = !vcallMicMuted;
   vcallLocalStream.getAudioTracks().forEach(t => { t.enabled = !vcallMicMuted; });
   $("#vcallMuteMicBtn").textContent = vcallMicMuted ? "🔇" : "🎙️";
-};
+});
 
-$("#vcallToggleCamBtn").onclick = () => {
+safeOn("#vcallToggleCamBtn", "click", () => {
   if (!vcallLocalStream) return;
   vcallCamOff = !vcallCamOff;
   vcallLocalStream.getVideoTracks().forEach(t => { t.enabled = !vcallCamOff; });
   $("#vcallToggleCamBtn").textContent = vcallCamOff ? "🚫" : "📷";
-};
+});
 
-$("#acceptCallBtn").onclick = () => startOrJoinRoomVideoCall(false);
-$("#rejectCallBtn").onclick = () => { $("#incomingCallModal").hidden = true; endVideoCall(true); };
+safeOn("#acceptCallBtn", "click", () => startOrJoinRoomVideoCall(false));
+safeOn("#rejectCallBtn", "click", () => { $("#incomingCallModal").hidden = true; endVideoCall(true); });
 
 // =====================================================
-// 🔴🔊 حل مشكل اللايف الثقيل وبدون صوت: Fast Live Video + Live Audio Stream
+// 🔴🔊 البث المباشر السريع بالصوت والصورة: Fast Live Video + Live Audio Stream
 // =====================================================
 let localLiveStream = null, liveFrameInterval = null, liveAudioRecorder = null, currentLiveId = null, isHostingLive = false, unsubLiveDoc = null, unsubLiveComments = null, lastGiftTimestamp = 0, lastAudioChunkTs = 0;
 
@@ -2063,9 +2143,9 @@ function updateLiveHostEarningsDisplay() {
   pill.hidden = !isHostingLive;
   $("#liveEarningsLbl").textContent = revealLiveHostEarnings ? `$${currentLiveHostEarningsVal}` : "•••• $";
 }
-$("#liveHostPrivateEarningsPill").onclick = () => { revealLiveHostEarnings = !revealLiveHostEarnings; updateLiveHostEarningsDisplay(); };
+safeOn("#liveHostPrivateEarningsPill", "click", () => { revealLiveHostEarnings = !revealLiveHostEarnings; updateLiveHostEarningsDisplay(); });
 
-$("#startLiveBtn").onclick = async () => {
+safeOn("#startLiveBtn", "click", async () => {
   if (!ready || !uid) return;
   pauseAllPlayingMedia(null);
   const title = $("#liveTitleInp").value.trim() || `لايف مباشر مع @${name} 👑`;
@@ -2095,7 +2175,6 @@ $("#startLiveBtn").onclick = async () => {
     $("#liveStageWrap").hidden = false;
     joinLiveRoomSession(currentLiveId);
 
-    // 1. بث الصورة بسرعة وخفة عالية (كل 550ms بضغط ذكي سريع باش ما يكونش ثقيل نهائياً)
     const c = document.createElement("canvas");
     const ctx = c.getContext("2d");
     liveFrameInterval = setInterval(async () => {
@@ -2108,12 +2187,10 @@ $("#startLiveBtn").onclick = async () => {
       await db.collection("lives").doc(currentLiveId).update({ frameData: frame }).catch(()=>{});
     }, 550);
 
-    // 2. بث الصوت المباشر (Live Audio Chunks) باش المتفرجين يسمعو صوت صاحب اللايف بوضوح!
     startHostLiveAudioBroadcast();
-
     showToast("🔴 اللايف خدام بالصوت والصورة السريعة!");
   } catch (err) { alert("أعطِ صلاحية الكاميرا والميكروفون لبث اللايف!"); }
-};
+});
 
 function startHostLiveAudioBroadcast() {
   if (!localLiveStream || !isHostingLive) return;
@@ -2160,23 +2237,23 @@ async function stopMyLiveStream() {
   $("#startLiveBtn").hidden = false; $("#stopLiveBtn").hidden = true; $("#liveStageWrap").hidden = true;
 }
 
-$("#stopLiveBtn").onclick = stopMyLiveStream;
-$("#leaveWatchLiveBtn").onclick = () => {
+safeOn("#stopLiveBtn", "click", stopMyLiveStream);
+safeOn("#leaveWatchLiveBtn", "click", () => {
   if (isHostingLive) stopMyLiveStream();
   else {
     unsubLiveDoc?.(); unsubLiveComments?.(); currentLiveId = null;
     $("#remoteLiveAudioPlayer").pause();
     $("#liveStageWrap").hidden = true;
   }
-};
+});
 
-$("#liveUnmuteAudioBtn").onclick = () => {
+safeOn("#liveUnmuteAudioBtn", "click", () => {
   const aud = $("#remoteLiveAudioPlayer");
   aud.muted = false;
   aud.play().catch(() => {});
   $("#liveUnmuteAudioBtn").hidden = true;
   showToast("🔊 تم تفعيل صوت اللايف!");
-};
+});
 
 function joinLiveRoomSession(liveId) {
   currentLiveId = liveId;
@@ -2201,7 +2278,6 @@ function joinLiveRoomSession(liveId) {
         $("#remoteLiveFrame").hidden = false;
         $("#livePlaceholder").hidden = true;
       }
-      // تشغيل الصوت المباشر لصاحب اللايف عند المتفرجين
       if (data.audioChunk && data.audioTs && data.audioTs > lastAudioChunkTs) {
         lastAudioChunkTs = data.audioTs;
         const aud = $("#remoteLiveAudioPlayer");
@@ -2237,7 +2313,7 @@ function triggerLiveGiftAnimation(giftObj) {
   log.prepend(item);
 }
 
-$("#liveGiftsBar").onclick = async e => {
+safeOn("#liveGiftsBar", "click", async e => {
   const card = e.target.closest("[data-gift-id]");
   if (!card || !currentLiveId) return;
   const gName = card.dataset.giftName, gIcon = card.dataset.giftIcon, gPrice = Number(card.dataset.giftPrice);
@@ -2265,16 +2341,16 @@ $("#liveGiftsBar").onclick = async e => {
 
   if (hostUid) await db.collection("users").doc(hostUid).update({ giftsEarned: firebase.firestore.FieldValue.increment(gPrice) }).catch(()=>{});
   await liveRef.collection("comments").add({ author: name, text: `🎁 أرسل هدية: ${gIcon} ${gName} ✨`, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-};
+});
 
-$("#liveChatForm").onsubmit = async e => {
+safeOn("#liveChatForm", "submit", async e => {
   e.preventDefault();
   const t = $("#liveChatInp").value.trim();
   if (!t || !currentLiveId) return;
   if (!(await checkModerationAndStrike(t))) return;
   $("#liveChatInp").value = "";
   await db.collection("lives").doc(currentLiveId).collection("comments").add({ author: name, text: t, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
-};
+});
 
 // =====================================================
 // 👤➕ نظام المتابعة (Follow / Unfollow) + حالة Online 🟢
@@ -2362,13 +2438,13 @@ function renderProfileTab() {
   observeFeedVideos();
 }
 
-$("#profTabs").onclick = e => {
+safeOn("#profTabs", "click", e => {
   const b = e.target.closest("[data-pt]");
   if (!b) return;
   profTabFilter = b.dataset.pt;
   document.querySelectorAll("#profTabs .chip").forEach(x => x.classList.toggle("on", x === b));
   renderProfileTab();
-};
+});
 
 function showFollowListModal(modeType) {
   const targetUid = viewedProfileUid || uid;
@@ -2390,13 +2466,13 @@ function showFollowListModal(modeType) {
   }).join("") : `<div class="muted" style="text-align:center;padding:18px">القائمة فارغة.</div>`;
   $("#followListModal").hidden = false;
 }
-$("#profFollowersBox").onclick = () => showFollowListModal("followers");
-$("#profFollowingBox").onclick = () => showFollowListModal("following");
-$("#closeFlModalBtn").onclick = () => { $("#followListModal").hidden = true; };
-$("#flModalBody").onclick = e => {
+safeOn("#profFollowersBox", "click", () => showFollowListModal("followers"));
+safeOn("#profFollowingBox", "click", () => showFollowListModal("following"));
+safeOn("#closeFlModalBtn", "click", () => { $("#followListModal").hidden = true; });
+safeOn("#flModalBody", "click", e => {
   const pClick = e.target.closest("[data-open-prof]");
   if (pClick) { $("#followListModal").hidden = true; openUserProfile(pClick.dataset.openProf); }
-};
+});
 
 let pendingAvatarDataUrl = null;
 function openEditProfileModal() {
@@ -2406,18 +2482,18 @@ function openEditProfileModal() {
   $("#editAvatarPreview").innerHTML = myUserDoc.avatarUrl ? `<img src="${esc(myUserDoc.avatarUrl)}" alt="">` : esc((name || "U")[0].toUpperCase());
   $("#editProfileModal").hidden = false;
 }
-$("#closeEditProfBtn").onclick = () => $("#editProfileModal").hidden = true;
-$("#cancelEditProfBtn").onclick = () => $("#editProfileModal").hidden = true;
+safeOn("#closeEditProfBtn", "click", () => $("#editProfileModal").hidden = true);
+safeOn("#cancelEditProfBtn", "click", () => $("#editProfileModal").hidden = true);
 
-$("#editAvatarInp").onchange = async e => {
+safeOn("#editAvatarInp", "change", async e => {
   const f = e.target.files[0];
   if (!f) return;
   if (!(await scanMediaSafety(f, ""))) return;
   pendingAvatarDataUrl = await compressImage(f, 320, 0.78);
   $("#editAvatarPreview").innerHTML = `<img src="${esc(pendingAvatarDataUrl)}" alt="">`;
-};
+});
 
-$("#saveProfileBtn").onclick = async () => {
+safeOn("#saveProfileBtn", "click", async () => {
   const bio = $("#editBioInp").value.trim();
   const sparkNote = $("#editSparkInp").value.trim();
   if (!(await checkModerationAndStrike(bio + " " + sparkNote))) return;
@@ -2426,7 +2502,7 @@ $("#saveProfileBtn").onclick = async () => {
   await db.collection("users").doc(uid).set(updates, { merge: true });
   $("#editProfileModal").hidden = true;
   showToast("✅ تم تحديث بروفايلك بنجاح!");
-};
+});
 
 // =====================================================
 // 📱 نظام الدعوة عبر QR Code
@@ -2439,11 +2515,11 @@ function showQrInvitation(title, desc, linkUrl) {
 function openMyProfileQr() {
   showQrInvitation(`📱 QR لبروفايلك فـ VYROX (@${name})`, "سكاني الكود للإضافة والمتابعة:", `${location.origin + location.pathname}?invite_user=${encodeURIComponent(name)}`);
 }
-$("#myQrTopBtn").onclick = openMyProfileQr;
-$("#myQrFriendBtn").onclick = openMyProfileQr;
-$("#closeQrBtn").onclick = () => $("#qrModal").hidden = true;
-$("#copyQrLinkBtn").onclick = () => { navigator.clipboard.writeText($("#qrLinkInp").value); showToast("✅ تم نسخ الرابط!"); };
-$("#downloadQrBtn").onclick = () => window.open($("#qrImg").src, "_blank");
+safeOn("#myQrTopBtn", "click", openMyProfileQr);
+safeOn("#myQrFriendBtn", "click", openMyProfileQr);
+safeOn("#closeQrBtn", "click", () => $("#qrModal").hidden = true);
+safeOn("#copyQrLinkBtn", "click", () => { navigator.clipboard.writeText($("#qrLinkInp").value); showToast("✅ تم نسخ الرابط!"); });
+safeOn("#downloadQrBtn", "click", () => window.open($("#qrImg").src, "_blank"));
 
 async function handlePendingQrInvites() {
   const invUser = LS("dp_inv_user");
@@ -2476,9 +2552,6 @@ async function handlePendingQrInvites() {
 // =====================================================
 // 👥 الأصدقاء والمتابعون (مع حالة Online 🟢 / Offline ⚫)
 // =====================================================
-let mode = "login", uid = "", name = "", unsubPosts = null, unsubUsers = null, unsubRooms = null, unsubMsgs = null, unsubLives = null, unsubPulses = null;
-let allUsers = [], myUserDoc = { friends: [], followers: [], following: [], savedPosts: [], requestsIn: [], requestsOut: [], strikes: 0, bannedUntil: 0, giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: [] }, rooms = [], activeRoom = null, activeLives = [];
-
 async function sendFriendRequest(targetUser) {
   if (!targetUser || targetUser.uid === uid) return alert("ما يمكنش تزيد راسك!");
   if ((myUserDoc.friends || []).includes(targetUser.uid)) return alert("نتوما ديجا أصدقاء!");
@@ -2508,14 +2581,14 @@ async function rejectFriend(fromUid) {
   await db.collection("users").doc(fromUid).update({ requestsOut: firebase.firestore.FieldValue.arrayRemove(uid) });
 }
 
-$("#addFriendBtn").onclick = () => {
+safeOn("#addFriendBtn", "click", () => {
   const q = $("#addFriendInp").value.trim().toLowerCase().replace(/^@/, "");
   if (!q) return;
   const found = allUsers.find(u => u.username === q);
   if (!found) return alert("ما لقيناش شي مستخدم بهاد السمية: " + q);
   sendFriendRequest(found);
   $("#addFriendInp").value = "";
-};
+});
 
 function renderFriendsTab() {
   const reqsIn = myUserDoc.requestsIn || [];
@@ -2525,10 +2598,11 @@ function renderFriendsTab() {
   const reqsOut = myUserDoc.requestsOut || [];
 
   const badge = $("#reqBadge");
-  badge.textContent = reqsIn.length;
-  badge.hidden = reqsIn.length === 0;
+  if (badge) {
+    badge.textContent = reqsIn.length;
+    badge.hidden = reqsIn.length === 0;
+  }
 
-  // عرض المتابعين والأصدقاء المتصلين الآن (Online Followers & Friends)
   const networkIds = [...new Set([...followers, ...following, ...friends])].filter(id => id !== uid);
   const onlineNetwork = networkIds.map(id => allUsers.find(u => u.uid === id)).filter(u => u && isUserOnline(u));
 
@@ -2602,7 +2676,7 @@ function renderFriendsTab() {
   }).join("") : `<div class="muted">غير نتا لي مسجل دابا!</div>`;
 }
 
-$("#tab-friends").onclick = async e => {
+safeOn("#tab-friends", "click", async e => {
   const btn = e.target.closest("[data-f-act]");
   if (!btn) return;
   const act = btn.dataset.fAct, targetUid = btn.dataset.uid;
@@ -2617,7 +2691,7 @@ $("#tab-friends").onclick = async e => {
     await openDirectChat(targetUser);
     setTimeout(() => startOrJoinRoomVideoCall(true), 350);
   }
-};
+});
 
 let postToShare = null;
 function openShareModal(postObj) {
@@ -2635,9 +2709,9 @@ function openShareModal(postObj) {
   $("#shareTargetsList").innerHTML = html || `<div class="muted">زيد صحابك أولاً!</div>`;
   $("#shareModal").hidden = false;
 }
-$("#closeShareBtn").onclick = () => { $("#shareModal").hidden = true; };
+safeOn("#closeShareBtn", "click", () => { $("#shareModal").hidden = true; });
 
-$("#shareTargetsList").onclick = async e => {
+safeOn("#shareTargetsList", "click", async e => {
   const rBtn = e.target.closest("[data-sh-room]");
   const uBtn = e.target.closest("[data-sh-uid]");
   if (!postToShare) return;
@@ -2665,7 +2739,7 @@ $("#shareTargetsList").onclick = async e => {
     $("#shareModal").hidden = true;
     showToast(`✅ تم البارطاج مع @${targetUser.username}!`);
   }
-};
+});
 
 function isRoomAdmin(room, userId = uid) {
   if (!room || room.type !== "group") return false;
@@ -2707,37 +2781,37 @@ function updateMentionPopup() {
   pop.innerHTML = candidates.map(u => `<div class="mention-item" data-m-name="${esc(u)}"><span>@${esc(u)}</span></div>`).join("");
   pop.hidden = false;
 }
-$("#chatMsgInp").addEventListener("input", updateMentionPopup);
-$("#insertAtBtn").onclick = () => { const inp = $("#chatMsgInp"); inp.value = (inp.value ? inp.value + " @" : "@"); inp.focus(); updateMentionPopup(); };
-$("#mentionPopup").onclick = e => {
+safeOn("#chatMsgInp", "input", updateMentionPopup);
+safeOn("#insertAtBtn", "click", () => { const inp = $("#chatMsgInp"); inp.value = (inp.value ? inp.value + " @" : "@"); inp.focus(); updateMentionPopup(); });
+safeOn("#mentionPopup", "click", e => {
   const item = e.target.closest("[data-m-name]");
   if (!item) return;
   const inp = $("#chatMsgInp");
   inp.value = inp.value.replace(/@([a-zA-Z0-9_]*)$/, `@${item.dataset.mName} `);
   $("#mentionPopup").hidden = true;
   inp.focus();
-};
+});
 
 let newGrpAvatarData = "";
-$("#newGrpAvatarInp").onchange = async e => {
+safeOn("#newGrpAvatarInp", "change", async e => {
   const f = e.target.files[0];
   if (!f) return;
   if (!(await scanMediaSafety(f, ""))) return;
   newGrpAvatarData = await compressImage(f, 300, 0.75);
   $("#newGrpAvatarPreview").innerHTML = `<img src="${esc(newGrpAvatarData)}" alt="">`;
-};
+});
 
-$("#openGrpBtn").onclick = () => {
+safeOn("#openGrpBtn", "click", () => {
   newGrpAvatarData = "";
   $("#newGrpAvatarPreview").innerHTML = "👥";
   const pool = allUsers.filter(u => u.uid !== uid);
   $("#grpFriendsList").innerHTML = pool.length ? pool.map(u => `<label class="chk-row"><input type="checkbox" value="${u.uid}" data-uname="${esc(u.username)}"><b>@${esc(u.username)}</b></label>`).join("") : `<div class="muted">تقدر تصاوب الكروب وتعرض بـ QR!</div>`;
   $("#grpName").value = ""; $("#grpBioInp").value = ""; $("#grpErr").textContent = "";
   $("#grpModal").hidden = false;
-};
-$("#closeGrpBtn").onclick = () => { $("#grpModal").hidden = true; };
+});
+safeOn("#closeGrpBtn", "click", () => { $("#grpModal").hidden = true; });
 
-$("#createGrpBtn").onclick = async () => {
+safeOn("#createGrpBtn", "click", async () => {
   const title = $("#grpName").value.trim();
   const gBio = $("#grpBioInp").value.trim();
   if (!title) return $("#grpErr").textContent = "كتب سمية للكروب!";
@@ -2754,12 +2828,12 @@ $("#createGrpBtn").onclick = async () => {
   });
   $("#grpModal").hidden = true;
   selectRoom(docRef.id);
-};
+});
 
-$("#grpQrBtn").onclick = () => {
+safeOn("#grpQrBtn", "click", () => {
   if (!activeRoom || activeRoom.type !== "group") return;
   showQrInvitation(`📱 دعوة لكروب: ${activeRoom.name}`, "سكاني الكود للانضمام للكروب:", `${location.origin + location.pathname}?join_group=${encodeURIComponent(activeRoom.id)}`);
-};
+});
 
 async function leaveCurrentGroup() {
   if (!activeRoom || activeRoom.type !== "group") return;
@@ -2777,8 +2851,8 @@ async function leaveCurrentGroup() {
   $("#chatForm").hidden = true; $("#grpActionsBar").hidden = true; $("#startVideoCallBtn").hidden = true;
   renderRoomsList();
 }
-$("#grpQuickLeaveBtn").onclick = leaveCurrentGroup;
-$("#giLeaveBtn").onclick = leaveCurrentGroup;
+safeOn("#grpQuickLeaveBtn", "click", leaveCurrentGroup);
+safeOn("#giLeaveBtn", "click", leaveCurrentGroup);
 
 let pendingEditGrpAvatar = null;
 function openGroupManageModal() {
@@ -2820,22 +2894,22 @@ function openGroupManageModal() {
   $("#grpInfoModal").hidden = false;
 }
 
-$("#grpManageBtn").onclick = openGroupManageModal;
-$("#chatHeaderProfileClick").onclick = () => {
+safeOn("#grpManageBtn", "click", openGroupManageModal);
+safeOn("#chatHeaderProfileClick", "click", () => {
   if (!activeRoom) return;
   if (activeRoom.type === "group") openGroupManageModal();
   else { const otherId = (activeRoom.members || []).find(m => m !== uid); if (otherId) openUserProfile(otherId); }
-};
-$("#closeGiBtn").onclick = () => { $("#grpInfoModal").hidden = true; };
+});
+safeOn("#closeGiBtn", "click", () => { $("#grpInfoModal").hidden = true; });
 
-$("#giEditAvatarInp").onchange = async e => {
+safeOn("#giEditAvatarInp", "change", async e => {
   const f = e.target.files[0];
   if (!f) return;
   pendingEditGrpAvatar = await compressImage(f, 300, 0.75);
   $("#giAvatarBox").innerHTML = `<img src="${esc(pendingEditGrpAvatar)}" alt="">`;
-};
+});
 
-$("#giSaveProfileBtn").onclick = async () => {
+safeOn("#giSaveProfileBtn", "click", async () => {
   if (!activeRoom || !isRoomAdmin(activeRoom)) return;
   const newName = $("#giEditNameInp").value.trim(), newBio = $("#giEditBioInp").value.trim();
   if (!newName) return;
@@ -2844,18 +2918,18 @@ $("#giSaveProfileBtn").onclick = async () => {
   await db.collection("rooms").doc(activeRoom.id).update(updates);
   showToast("✅ تم تحديث بروفايل الكروب!");
   setTimeout(openGroupManageModal, 250);
-};
+});
 
-$("#giAddMemberBtn").onclick = async () => {
+safeOn("#giAddMemberBtn", "click", async () => {
   if (!activeRoom || !isRoomAdmin(activeRoom)) return;
   const sel = $("#giAddSelect"), targetUid = sel.value;
   if (!targetUid) return;
   const targetName = sel.options[sel.selectedIndex]?.dataset.uname || "عضو";
   await db.collection("rooms").doc(activeRoom.id).update({ members: firebase.firestore.FieldValue.arrayUnion(targetUid), [`memberNames.${targetUid}`]: targetName });
   setTimeout(openGroupManageModal, 250);
-};
+});
 
-$("#giMembersList").onclick = async e => {
+safeOn("#giMembersList", "click", async e => {
   const btn = e.target.closest("[data-gi-act]");
   if (!btn || !activeRoom) return;
   const act = btn.dataset.giAct, targetUid = btn.dataset.uid;
@@ -2865,14 +2939,14 @@ $("#giMembersList").onclick = async e => {
   if (act === "promote") await rRef.update({ admins: firebase.firestore.FieldValue.arrayUnion(targetUid) });
   if (act === "kick" && confirm("طرد العضو؟")) await rRef.update({ members: firebase.firestore.FieldValue.arrayRemove(targetUid), admins: firebase.firestore.FieldValue.arrayRemove(targetUid) });
   setTimeout(openGroupManageModal, 250);
-};
+});
 
-$("#giDeleteGrpBtn").onclick = async () => {
+safeOn("#giDeleteGrpBtn", "click", async () => {
   if (!activeRoom || !isRoomAdmin(activeRoom)) return;
   if (!confirm("حذف الكروب نهائياً؟")) return;
   await db.collection("rooms").doc(activeRoom.id).delete();
   $("#grpInfoModal").hidden = true; activeRoom = null; $("#chatForm").hidden = true;
-};
+});
 
 function getRoomDisplay(r) {
   if (r.type === "group") {
@@ -2917,12 +2991,12 @@ function renderRoomsList() {
   $("#roomsList").innerHTML = html || `<div class="empty" style="padding:20px 10px">زيد صحابك باش تهضرو!</div>`;
 }
 
-$("#roomsList").onclick = e => {
+safeOn("#roomsList", "click", e => {
   const rItem = e.target.closest("[data-room]");
   if (rItem) return selectRoom(rItem.dataset.room);
   const dmItem = e.target.closest("[data-dm-uid]");
   if (dmItem) { const u = allUsers.find(x => x.uid === dmItem.dataset.dmUid); if (u) openDirectChat(u); }
-};
+});
 
 function selectRoom(roomId) {
   const r = rooms.find(x => x.id === roomId);
@@ -2967,10 +3041,10 @@ function selectRoom(roomId) {
     });
 }
 
-$("#msgList").onclick = e => {
+safeOn("#msgList", "click", e => {
   const senderEl = e.target.closest("[data-reply-at]");
   if (senderEl) { const inp = $("#chatMsgInp"); inp.value = `@${senderEl.dataset.replyAt} ` + inp.value; inp.focus(); }
-};
+});
 
 async function sendChatMessage({ text = "", imgUrl = null, sharedVideoUrl = null, audioUrl = null, stickerUrl = null }) {
   if (!activeRoom) return;
@@ -2991,25 +3065,25 @@ async function sendChatMessage({ text = "", imgUrl = null, sharedVideoUrl = null
   });
 }
 
-$("#chatForm").onsubmit = async e => {
+safeOn("#chatForm", "submit", async e => {
   e.preventDefault();
   const inp = $("#chatMsgInp"), t = inp.value.trim();
   if (!t) return;
   inp.value = "";
   $("#mentionPopup").hidden = true;
   await sendChatMessage({ text: t });
-};
+});
 
-$("#chatImgInp").onchange = async e => {
+safeOn("#chatImgInp", "change", async e => {
   const f = e.target.files[0];
   if (!f) return;
   if (!(await scanMediaSafety(f, ""))) return;
   const dataUrl = await compressImage(f, 700, 0.7);
   await sendChatMessage({ imgUrl: dataUrl });
   e.target.value = "";
-};
+});
 
-$("#chatVidInp").onchange = async e => {
+safeOn("#chatVidInp", "change", async e => {
   const f = e.target.files[0];
   if (!f || !activeRoom) return;
   if (f.size > 50 * 1024 * 1024) return alert("الفيديو خاص يكون أقل من 50MB!");
@@ -3021,10 +3095,10 @@ $("#chatVidInp").onchange = async e => {
     showToast("✅ تم إرسال الفيديو فـ الشات!");
   } catch (err) { alert("فشل رفع الفيديو: " + err.message); }
   e.target.value = "";
-};
+});
 
 let chatRec = null;
-$("#chatVocalBtn").onclick = async () => {
+safeOn("#chatVocalBtn", "click", async () => {
   if (chatRec && chatRec.state === "recording") return chatRec.stop();
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -3041,24 +3115,27 @@ $("#chatVocalBtn").onclick = async () => {
     chatRec.start();
     $("#chatVocalBtn").textContent = "⏹️";
   } catch (e) { alert("عطي صلاحية الميكرو!"); }
-};
+});
 
 // =====================================================
 // 🏠 المنشورات + ميزات Instagram (Double-Tap Like, Save Bookmark) + الريلز
 // =====================================================
-let type = "text", file = null, recorder = null, posts = [], filter = "all", term = "", activeHashtag = "";
 const ACCEPT = { pdf: "application/pdf", image: "image/*", video: "video/*", reel: "video/*", audio: "audio/*" };
 const MAX = 60 * 1024 * 1024;
 
 function setType(t) {
   type = t; file = null; stopRec();
   document.querySelectorAll("#types .chip").forEach(b => b.classList.toggle("on", b.dataset.t === t));
-  $("#fileBox").hidden = (t === "text");
-  $("#recBtn").hidden = (t !== "audio");
-  $("#file").accept = ACCEPT[t] || "";
-  $("#file").value = ""; $("#fileName").textContent = ""; $("#preview").innerHTML = "";
+  if ($("#fileBox")) $("#fileBox").hidden = (t === "text");
+  if ($("#recBtn")) $("#recBtn").hidden = (t !== "audio");
+  if ($("#file")) {
+    $("#file").accept = ACCEPT[t] || "";
+    $("#file").value = "";
+  }
+  if ($("#fileName")) $("#fileName").textContent = "";
+  if ($("#preview")) $("#preview").innerHTML = "";
 }
-$("#types").onclick = e => { const b = e.target.closest("[data-t]"); if (b) setType(b.dataset.t); };
+safeOn("#types", "click", e => { const b = e.target.closest("[data-t]"); if (b) setType(b.dataset.t); });
 
 function setFile(f) {
   if (f.size > MAX) return alert("الحد الأقصى 60MB");
@@ -3069,10 +3146,10 @@ function setFile(f) {
   else if (type === "audio") $("#preview").innerHTML = `<audio controls src="${url}"></audio>`;
   else $("#preview").innerHTML = "";
 }
-$("#file").onchange = e => e.target.files[0] && setFile(e.target.files[0]);
+safeOn("#file", "change", e => e.target.files[0] && setFile(e.target.files[0]));
 
 function stopRec() { if (recorder && recorder.state !== "inactive") recorder.stop(); }
-$("#recBtn").onclick = async () => {
+safeOn("#recBtn", "click", async () => {
   if (recorder && recorder.state === "recording") return recorder.stop();
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -3088,9 +3165,9 @@ $("#recBtn").onclick = async () => {
     recorder.start();
     $("#recBtn").textContent = "⏹️ إيقاف";
   } catch (e) { alert("عطي صلاحية الميكرو!"); }
-};
+});
 
-$("#post").onclick = async () => {
+safeOn("#post", "click", async () => {
   if (!ready || !uid) return;
   const text = $("#text").value.trim();
   if (type === "text" ? !text : !file) return alert("كتب شي حاجة أو ختار ملف!");
@@ -3117,17 +3194,17 @@ $("#post").onclick = async () => {
     showToast("👑 تم النشر فـ VYROX بنجاح!");
   } catch (err) { alert("مشكل فالنشر: " + err.message); }
   btn.disabled = false; $("#prog").hidden = true; $("#progBar").style.width = 0;
-};
+});
 
-$("#filters").onclick = e => {
+safeOn("#filters", "click", e => {
   const b = e.target.closest("[data-f]");
   if (!b) return;
   pauseAllPlayingMedia(null);
   filter = b.dataset.f;
   document.querySelectorAll("#filters .chip").forEach(x => x.classList.toggle("on", x === b));
   renderFeed();
-};
-$("#search").oninput = e => { term = e.target.value.trim().toLowerCase(); renderFeed(); };
+});
+safeOn("#search", "input", e => { term = e.target.value.trim().toLowerCase(); renderFeed(); });
 
 function setHashtagFilter(tag) {
   activeHashtag = tag.toLowerCase();
@@ -3136,7 +3213,7 @@ function setHashtagFilter(tag) {
   renderTrendingHashtags();
   renderFeed();
 }
-$("#clearHashtagBtn").onclick = () => setHashtagFilter("");
+safeOn("#clearHashtagBtn", "click", () => setHashtagFilter(""));
 
 function renderTrendingHashtags() {
   const counts = {};
@@ -3148,10 +3225,10 @@ function renderTrendingHashtags() {
     <button type="button" class="hashtag-chip ${activeHashtag === tag ? "on" : ""}" data-trend-tag="${esc(tag)}">${esc(tag)} <small>(${cnt})</small></button>
   `).join("") : `<span class="muted" style="font-size:.8rem">دير #هاشتاق فـ الفيديو ديالك باش يبان هنا!</span>`;
 }
-$("#trendingHashtags").onclick = e => {
+safeOn("#trendingHashtags", "click", e => {
   const b = e.target.closest("[data-trend-tag]");
   if (b) setHashtagFilter(activeHashtag === b.dataset.trendTag ? "" : b.dataset.trendTag);
-};
+});
 
 const BADGE = { text: "نص", pdf: "PDF", image: "صورة", video: "🎬 فيديو", reel: "📱 Reel", audio: "أوديو" };
 const open = new Set();
@@ -3229,8 +3306,7 @@ function renderFeed() {
   if (currentTab === "profile") renderProfileTab();
 }
 
-// Double-tap على الصور فـ المنشورات باش يدير ❤️ بحال Instagram
-$("#feed").addEventListener("dblclick", e => {
+safeOn("#feed", "dblclick", e => {
   const mediaBox = e.target.closest("[data-dbl-like]");
   if (!mediaBox) return;
   const id = mediaBox.dataset.dblLike;
@@ -3295,7 +3371,7 @@ function renderReelsFeed() {
 }
 
 let lastTapTime = 0, singleTapTimer = null;
-$("#reelsContainer").addEventListener("click", e => {
+safeOn("#reelsContainer", "click", e => {
   if (e.target.closest("button") || e.target.closest("a") || e.target.closest("[data-a]")) return;
   const slide = e.target.closest(".ig-reel-slide");
   if (!slide) return;
@@ -3319,8 +3395,8 @@ function openReelCommentsDrawer(postId) {
   $("#reelCmList").innerHTML = cms.length ? cms.map(c => `<div class="cm"><b>@${esc(c.author)}</b>: ${formatRichText(c.text)}</div>`).join("") : `<div class="muted" style="text-align:center;padding:16px">كون أول واحد يعلق!</div>`;
   $("#reelCommentsDrawer").hidden = false;
 }
-$("#closeReelCmBtn").onclick = () => { $("#reelCommentsDrawer").hidden = true; activeReelCommentPostId = null; };
-$("#reelCmForm").onsubmit = async e => {
+safeOn("#closeReelCmBtn", "click", () => { $("#reelCommentsDrawer").hidden = true; activeReelCommentPostId = null; });
+safeOn("#reelCmForm", "submit", async e => {
   e.preventDefault();
   if (!activeReelCommentPostId) return;
   const inp = $("#reelCmInp"), t = inp.value.trim();
@@ -3328,7 +3404,7 @@ $("#reelCmForm").onsubmit = async e => {
   inp.value = "";
   await db.collection("posts").doc(activeReelCommentPostId).update({ comments: firebase.firestore.FieldValue.arrayUnion({ author: name, text: t, ts: Date.now(), uid }) });
   setTimeout(() => openReelCommentsDrawer(activeReelCommentPostId), 200);
-};
+});
 
 async function handlePostAction(e) {
   const tagLink = e.target.closest(".hashtag-link");
@@ -3380,42 +3456,17 @@ async function handlePostAction(e) {
   }
 }
 
-$("#feed").onclick = handlePostAction;
-$("#profPostsList").onclick = handlePostAction;
-$("#reelsContainer").onclick = handlePostAction;
-
-// Auth & Online Presence Heartbeat
-document.querySelectorAll("[data-m]").forEach(b => b.onclick = () => {
-  mode = b.dataset.m; document.querySelectorAll("[data-m]").forEach(x => x.classList.toggle("on", x === b));
-  $("#authBtn").textContent = mode === "login" ? "دخول إلى VYROX 👑" : "إنشاء حساب فـ VYROX 👑";
-});
-
-$("#authForm").onsubmit = async e => {
-  e.preventDefault();
-  const err = $("#authErr"); err.textContent = "";
-  if (!$("#agreeChk").checked) return err.textContent = "وافق على القوانين أولاً!";
-  const u = $("#u").value.trim().toLowerCase(), p = $("#pw").value;
-  if (!/^[a-z0-9_]{3,20}$/.test(u)) return err.textContent = "الاسم بالحروف الإنجليزية أو أرقام (3-20)";
-  try {
-    if (mode === "signup") {
-      const c = await auth.createUserWithEmailAndPassword(u + "@darkpower.app", p);
-      await c.user.updateProfile({ displayName: u });
-      await db.collection("users").doc(c.user.uid).set({
-        uid: c.user.uid, username: u, bio: "", sparkNote: "", avatarUrl: "",
-        giftsEarned: 0, walletBalance: 0, walletTransactions: [], customStickers: [], savedPosts: [],
-        following: [], followers: [], friends: [], isOnline: true, lastSeenMs: Date.now()
-      });
-    } else {
-      await auth.signInWithEmailAndPassword(u + "@darkpower.app", p);
-    }
-  } catch (x) { err.textContent = AUTH_ERR[x.code] || x.message; }
-};
+safeOn("#feed", "click", handlePostAction);
+safeOn("#profPostsList", "click", handlePostAction);
+safeOn("#reelsContainer", "click", handlePostAction);
 
 let presenceTimer = null;
 async function updateMyOnlinePresence(onlineState = true) {
   if (!ready || !uid) return;
   try {
     await db.collection("users").doc(uid).set({
+      uid,
+      username: name,
       isOnline: onlineState,
       lastSeenMs: Date.now()
     }, { merge: true });
@@ -3426,26 +3477,31 @@ window.addEventListener("beforeunload", () => {
   if (uid && ready) db.collection("users").doc(uid).update({ isOnline: false, lastSeenMs: Date.now() }).catch(()=>{});
 });
 
-$("#outBtn").onclick = async () => {
+safeOn("#outBtn", "click", async () => {
   clearInterval(presenceTimer);
   await updateMyOnlinePresence(false);
   if (isHostingLive) stopMyLiveStream();
   if (inVideoCall) endVideoCall(true);
   auth.signOut();
-};
-
-auth.onAuthStateChanged(async user => {
-  $("#auth").hidden = !!user; $("#appRoot").hidden = !user;
-  if (user) {
-    uid = user.uid; viewedProfileUid = uid; name = (user.displayName || user.email.split("@")[0]).toLowerCase();
-    $("#nameLbl").textContent = name;
-    await updateMyOnlinePresence(true);
-    clearInterval(presenceTimer);
-    presenceTimer = setInterval(() => updateMyOnlinePresence(true), 35000);
-    listenAll();
-    setTimeout(handlePendingQrInvites, 900);
-  }
 });
+
+if (auth) {
+  auth.onAuthStateChanged(async user => {
+    $("#auth").hidden = !!user;
+    $("#appRoot").hidden = !user;
+    if (user) {
+      uid = user.uid;
+      viewedProfileUid = uid;
+      name = (user.displayName || user.email.split("@")[0]).toLowerCase();
+      $("#nameLbl").textContent = name;
+      await updateMyOnlinePresence(true);
+      clearInterval(presenceTimer);
+      presenceTimer = setInterval(() => updateMyOnlinePresence(true), 35000);
+      listenAll();
+      setTimeout(handlePendingQrInvites, 900);
+    }
+  });
+}
 
 let initialRoomsLoad = true;
 const roomTimestamps = {};
